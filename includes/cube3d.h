@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/03/29 15:43:21 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/03/30 18:47:46 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,31 @@
 **	 Structures
 **	=============
 */
+typedef struct	s_rgb
+{
+	int	r;
+	int	g;
+	int	b;
+}				t_rgb;
 
 typedef struct	s_map
 {
 	char	**map;
 	int		height;
 	int		width;
+	char	*NO;
+	char	*SO;
+	char	*WE;
+	char	*EA;
+	t_rgb	F_rgb;
+	t_rgb	C_rgb;
 }				t_map;
 
 typedef struct	s_mlx
 {
 	t_map	map;
+	void	*mlx_ptr;
+	void	*win_ptr;
 }				t_mlx;
 
 /*
@@ -58,13 +72,25 @@ typedef struct	s_mlx
 /*
 **	Main.c
 */
+int		main(int argc, char**argv);
 
 /*
 **	Parse.c
 */
 void	ft_parse(t_mlx *cube, char *map);
 void	map_init(t_mlx *cube);
-void	map_size(t_mlx *cube, char *map);
+void	map_info(t_mlx *cube, char *map);
+void	scan_file(t_mlx *cube, char *line);
+void	save_path(t_mlx *cube, char *dir, char *path);
+
+
+/*
+**	error_handling.c
+*/
+void	ft_error(char *msg, t_mlx *cube);
+void	ft_exit(t_mlx *cube);
+
+
 
 
 # endif

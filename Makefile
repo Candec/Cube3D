@@ -3,11 +3,11 @@ NAME = cube_3d
 # MAKEFLAGS	+= --quiet
 
 LIBFT 		= libft_ext/libft.a
-LIBMLX 		= minilibx-linux/libmlx.a
+LIBMLX 		= libraries/minilibx-linux/libmlx.a
 CFLAGS 		= -g -Wall -Wextra -Werror
 # CFLAGS 		= -I/usr/include -Imlx_linux -O3 -g
-IFLAGS		= -I minilibx-linux -Ilmlx -I/includes
-LFLAGS		= -L minilibx-linux -lmlx 
+IFLAGS		= -I libraries/minilibx-linux -Ilmlx -I/includes
+LFLAGS		= -L libraries/minilibx-linux -lmlx 
 # LFLAGS		= -I ./mlx_linux -L ./mlx_linux -lmlx -Ilmlx -lXext -lX11
 AR = ar rcsv
 OBJ_DIR = obj
@@ -19,6 +19,7 @@ HEADER =	cube3d.h\
 
 SRC =		main.c\
 			parse.c\
+			error_handling.c\
 
 all: $(NAME)
 
@@ -26,7 +27,7 @@ $(NAME): $(OBJ)
 	@echo $(ANSI_B_BGREEN) "compile libft_ext" $(ANSI_RESET)$(ANSI_F_BBLACK)
 	$(MAKE) all -C libft_ext
 	@echo $(ANSI_B_BGREEN) "compile libmlx" $(ANSI_RESET)$(ANSI_F_BBLACK)
-	$(MAKE) -C minilibx-linux
+	$(MAKE) -C libraries/minilibx-linux
 	@echo $(ANSI_RESET) ""
 	@echo $(ANSI_B_BGREEN) "compile executable" $(ANSI_RESET)$(ANSI_F_BBLACK)
 	clang $(CFLAGS) $(IFLAGS) $(OBJ) $(LIBFT) $(LFLAGS) -o $(NAME)
