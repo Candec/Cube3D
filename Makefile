@@ -1,22 +1,24 @@
 NAME = cube_3d
 
+# MAKEFLAGS	+= --quiet
+
 LIBFT 		= libft_ext/libft.a
-LIBMLX 		= minilibx_mms_20200219/libmlx.a
+LIBMLX 		= minilibx-linux/libmlx.a
 CFLAGS 		= -g -Wall -Wextra -Werror
 # CFLAGS 		= -I/usr/include -Imlx_linux -O3 -g
-IFLAGS		= -I minilibx_mms_20200219 -Ilmlx -I/includes
-LFLAGS		= -L minilibx_mms_20200219 -lmlx 
+IFLAGS		= -I minilibx-linux -Ilmlx -I/includes
+LFLAGS		= -L minilibx-linux -lmlx 
 # LFLAGS		= -I ./mlx_linux -L ./mlx_linux -lmlx -Ilmlx -lXext -lX11
 AR = ar rcsv
 OBJ_DIR = obj
 SRC_DIR = src
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
-MAP = ./map.ber
 
-HEADER = cube3d.h
+HEADER =	cube3d.h\
+			mlx.h\
 
-SRC =	main.c\
-		parse.c\
+SRC =		main.c\
+			parse.c\
 
 all: $(NAME)
 
@@ -24,7 +26,7 @@ $(NAME): $(OBJ)
 	@echo $(ANSI_B_BGREEN) "compile libft_ext" $(ANSI_RESET)$(ANSI_F_BBLACK)
 	$(MAKE) all -C libft_ext
 	@echo $(ANSI_B_BGREEN) "compile libmlx" $(ANSI_RESET)$(ANSI_F_BBLACK)
-	$(MAKE) -C minilibx_mms_20200219
+	$(MAKE) -C minilibx-linux
 	@echo $(ANSI_RESET) ""
 	@echo $(ANSI_B_BGREEN) "compile executable" $(ANSI_RESET)$(ANSI_F_BBLACK)
 	clang $(CFLAGS) $(IFLAGS) $(OBJ) $(LIBFT) $(LFLAGS) -o $(NAME)
@@ -38,13 +40,13 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(addprefix includes/,$(HEADER))
 
 clean:
 	@echo $(ANSI_B_RED) "clean" $(ANSI_RESET)$(ANSI_F_BRED)
-	$(MAKE) clean -C libft
+	$(MAKE) clean -C libft_ext
 	rm -rf $(OBJ_DIR)
 	@echo $(ANSI_RESET) ""
 
 fclean: clean
 	@echo $(ANSI_B_RED) "fclean" $(ANSI_RESET)$(ANSI_F_BRED)
-	$(MAKE) fclean -C libft
+	$(MAKE) fclean -C libft_ext
 	rm -f $(NAME)
 	@echo $(ANSI_RESET) ""
 
@@ -61,17 +63,17 @@ ANSI_F_BBLACK = "\033[30;1m"
 
 
 lib:
-	$(MAKE) -C libft
+	$(MAKE) -C libft_ext
 
 norm:
 	@echo $(ANSI_B_RED) "norminette v3" $(ANSI_RESET)
-	$(MAKE) norm -C libft
+	$(MAKE) norm -C libft_ext
 	@norminette $(addprefix inc/,$(HEADER)) \
 		$(addprefix src/,$(SRC))
 
 libnorm:
 	@echo $(ANSI_B_RED) "libft norminette" $(ANSI_RESET)
-	$(MAKE) norm -C libft
+	$(MAKE) norm -C libft_ext
 
 run: all
 	@echo $(ANSI_B_RED) "Running Game" $(ANSI_RESET)
