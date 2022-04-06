@@ -84,7 +84,7 @@ run: all
 runv: all
 	@echo $(ANSI_B_RED) "Valgrind RESULT" $(ANSI_RESET)
 	#valgrind -q --leak-check=full --track-origins=yes --show-leak-kinds=all ./$(NAME)
-	valgrind --leak-check=full --show-leak-kinds=all -s ./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all -s ./$(NAME) maps/map.cub
 
 test: all
 	@echo $(ANSI_B_RED) "Running test" $(ANSI_RESET)

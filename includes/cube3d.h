@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/03/30 18:47:46 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/03/31 18:00:36 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,17 @@
 */
 typedef struct	s_rgb
 {
-	int	r;
-	int	g;
-	int	b;
+	bool	fill;
+	int		r;
+	int		g;
+	int		b;
 }				t_rgb;
 
 typedef struct	s_map
 {
 	char	**map;
-	int		height;
-	int		width;
+	size_t	height;
+	size_t	width;
 	char	*NO;
 	char	*SO;
 	char	*WE;
@@ -82,6 +83,12 @@ void	map_init(t_mlx *cube);
 void	map_info(t_mlx *cube, char *map);
 void	scan_file(t_mlx *cube, char *line);
 void	save_path(t_mlx *cube, char *dir, char *path);
+void	save_rgb(t_rgb *rgb, char *rgb_code);
+void	scan_map(t_mlx *cube, char *line);
+int		ft_char_is_valid(char c);
+int		info_complete(t_mlx *cube);
+void	print_arr(char **arr);
+
 
 
 /*
