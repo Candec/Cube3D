@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/03/31 18:00:36 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/04/08 20:17:26 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ void	scan_map(t_mlx *cube, char *line);
 int		ft_char_is_valid(char c);
 int		info_complete(t_mlx *cube);
 void	print_arr(char **arr);
+int		ft_add_str_to_arr(t_mlx *cube, char *str);
+
 
 
 

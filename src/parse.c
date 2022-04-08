@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 17:51:05 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/04/06 13:11:34 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/04/08 20:46:43 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	scan_map(t_mlx *cube, char *line)
 {
 	if (cube->map.width < ft_strlen(line))
 		cube->map.width = ft_strlen(line);
-	if (!ft_add_str_to_arr(cube->map.map, line))
+	if (ft_add_str_to_arr(cube, line))
 		ft_error("COULDN'T ALLOCATE MAP LINE", cube);
 }
 
@@ -136,67 +136,80 @@ int	ft_char_is_valid(char c)
 	return (1);
 }
 
-int	ft_frmtrx(char **str)
+// char	**ft_arr_strdup(char **from, char **to)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (from && from[i])
+// 	{
+// 		to[i] = ft_strdup(from[i]);
+// 		if (!to[i])
+// 		{
+// 			ft_clean_arr(to);
+// 			free(to);
+// 			return (NULL);
+// 		}
+// 		i++;
+// 	}
+// 	return (to);
+// }
+
+// char	**ft_add_str_to_arr(char **arr, char *str)
+// {
+// 	char	**tmp;
+// 	int		i;
+
+// 	i = 0;
+// 	while (arr && arr[i])
+// 		i++;
+// 	if (str)
+// 		i++;
+// 	tmp = malloc(sizeof(char *) * (i + 1));
+// 	if (!tmp)
+// 		return (NULL);
+// 	tmp[i] = NULL;
+// 	if (str)
+// 	{
+// 		tmp[i - 1] = ft_strdup(str);
+// 		if (!tmp[i - 1])
+// 		{
+// 			free(tmp);
+// 			return (NULL);
+// 		}
+// 	}
+// 	return (ft_arr_strdup(arr, tmp));
+// }
+
+int	ft_add_str_to_arr(t_mlx *cube, char *str)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	while (--i + 1)
-		free(str[i]);
-	free(str);
-	return (0);
-}
-
-char	**ft_arr_strdup(char **from, char **to)
-{
-	int	i;
-
-	i = 0;
-	while (from && from[i])
-	{
-		to[i] = ft_strdup(from[i]);
-		if (!to[i])
-		{
-			ft_clean_arr(to);
-			free(to);
-			return (NULL);
-		}
-		i++;
-	}
-	return (to);
-}
-
-char	**ft_add_str_to_arr(char **arr, char *str)
-{
-	char	**tmp;
 	int		i;
+	int		j;
+	char	**new;
 
 	i = 0;
-	while (arr && arr[i])
+	while (cube->map.map && cube->map.map[i])
 		i++;
-	if (str)
-		i++;
-	tmp = malloc(sizeof(char *) * (i + 1));
-	if (!tmp)
-		return (NULL);
-	tmp[i] = NULL;
-	if (str)
+	new = malloc(sizeof(char*) * (i + 2));
+	if (!new)
+		return (1);
+	j = 0;
+	while (cube->map.map && (j < i))
 	{
-		tmp[i - 1] = ft_strdup(str);
-		if (!tmp[i - 1])
-		{
-			free(tmp);
-			return (NULL);
-		}
+		new[j] = (cube->map.map[j]);
+		j++;
 	}
-	return (ft_arr_strdup(arr, tmp));
+	new[i] = str;
+	new[i + 1] = NULL;
+	if (cube->map.map)
+		free(cube->map.map);
+	cube->map.map = new;
+	return (0);
 }
 
 void	ft_clean_arr(char **arr)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	if (arr != NULL)
