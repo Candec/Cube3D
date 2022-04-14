@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 17:51:05 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/04/08 20:46:43 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/04/14 16:25:18 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,8 +186,11 @@ int	ft_add_str_to_arr(t_mlx *cube, char *str)
 	int		i;
 	int		j;
 	char	**new;
+	char	*n_str;
 
 	i = 0;
+	n_str = malloc(sizeof(char) * ft_strlen(str));
+	ft_strcpy(n_str, str, 0, ft_strlen(str));
 	while (cube->map.map && cube->map.map[i])
 		i++;
 	new = malloc(sizeof(char*) * (i + 2));
@@ -199,7 +202,7 @@ int	ft_add_str_to_arr(t_mlx *cube, char *str)
 		new[j] = (cube->map.map[j]);
 		j++;
 	}
-	new[i] = str;
+	new[i] = n_str;
 	new[i + 1] = NULL;
 	if (cube->map.map)
 		free(cube->map.map);
