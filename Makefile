@@ -88,5 +88,5 @@ runv: all
 
 test: all
 	@echo $(ANSI_B_RED) "Running test" $(ANSI_RESET)
-	clang -I ./mlx_linux -L ./mlx_linux -lmlx -Ilmlx -lXext -lX11 mlx_linux/libmlx.a test.c  libft/libft.a mlx_linux/libmlx.a -o windows_test
+	clang -I ./libraries/mlx_linux -L ./libraries/mlx_linux -lmlx -Ilmlx -lXext -lX11 libraries/mlx_linux/libmlx.a test.c libft_ext/libft.a libraries/mlx_linux/libmlx.a -o windows_test
 	./windows_test

@@ -1,0 +1,4 @@
+Dependencies
+//////////////////////
+For WSLg with Xserver installed:
+sudo apt install libx11-dev libxext-dev libbsd-dev clang
