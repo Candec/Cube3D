@@ -10,7 +10,6 @@
 
 ## Please use configure script
 
-
 INC	=%%%%
 
 UNAME = $(shell uname)

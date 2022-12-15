@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez- <jibanez-@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:09 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/03/31 09:06:05 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/12/15 12:03:04 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ int	main(int argc, char *argv[])
 	if (argc == 2)
 	{
 		ft_parse(&cube, argv[1]);
-		// ft_print_map(cube);
+		ft_print_arr(cube.map.map);
 		// ft_play(cube);
+		ft_exit(&cube);
 	}
 	else
 	{

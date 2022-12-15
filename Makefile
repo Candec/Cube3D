@@ -1,6 +1,6 @@
 NAME = cube_3d
 
-# MAKEFLAGS	+= --quiet
+MAKEFLAGS	+= --quiet
 
 LIBFT 		= libft_ext/libft.a
 LIBMLX 		= libraries/minilibx-linux/libmlx.a

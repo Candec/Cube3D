@@ -1,6 +1,0 @@
-[submodule "libft_ext"]
-	path = libft_ext
-	url = https://github.com/Candec/libft_ext
-[submodule "minilibx-linux"]
-	path = minilibx-linux
-	url = git@github.com:42Paris/minilibx-linux.git

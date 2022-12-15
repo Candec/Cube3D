@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez- <jibanez-@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 17:51:05 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/04/14 16:25:18 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/12/15 13:20:49 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ void	map_init(t_mlx *cube)
 	cube->map.F_rgb.g = -1;
 	cube->map.F_rgb.b = -1;
 	cube->map.F_rgb.fill = FALSE;
+	cube->map.NO = NULL;
+	cube->map.SO = NULL;
+	cube->map.WE = NULL;
+	cube->map.EA = NULL;
 	cube->map.map = ft_calloc(sizeof(char **), 0);
 }
 
@@ -60,7 +64,6 @@ void	map_info(t_mlx *cube, char *map)
 		free(line);
 		line = NULL;
 	}
-	print_arr(cube->map.map);
 	close(fd);
 }
 
@@ -107,7 +110,6 @@ void	save_rgb(t_rgb *rgb, char *rgb_code)
 	rgb->r = ft_atoi(rgb_decoded[0]);
 	rgb->g = ft_atoi(rgb_decoded[1]);
 	rgb->b = ft_atoi(rgb_decoded[2]);
-
 	if ((rgb->r < 0 || rgb->r > 255)
 		|| (rgb->g < 0 || rgb->g > 255)
 		|| (rgb->b < 0 || rgb->b > 255))
@@ -124,7 +126,7 @@ void	scan_map(t_mlx *cube, char *line)
 {
 	if (cube->map.width < ft_strlen(line))
 		cube->map.width = ft_strlen(line);
-	if (ft_add_str_to_arr(cube, line))
+	if (ft_add_str_to_arr(line, &cube->map.map))
 		ft_error("COULDN'T ALLOCATE MAP LINE", cube);
 }
 
@@ -136,79 +138,34 @@ int	ft_char_is_valid(char c)
 	return (1);
 }
 
-// char	**ft_arr_strdup(char **from, char **to)
+// int	ft_add_str_to_arr(t_mlx *cube, char *str)
 // {
-// 	int	i;
-
-// 	i = 0;
-// 	while (from && from[i])
-// 	{
-// 		to[i] = ft_strdup(from[i]);
-// 		if (!to[i])
-// 		{
-// 			ft_clean_arr(to);
-// 			free(to);
-// 			return (NULL);
-// 		}
-// 		i++;
-// 	}
-// 	return (to);
-// }
-
-// char	**ft_add_str_to_arr(char **arr, char *str)
-// {
-// 	char	**tmp;
 // 	int		i;
+// 	int		j;
+// 	char	**new_arr;
+// 	char	*n_str;
 
 // 	i = 0;
-// 	while (arr && arr[i])
+// 	n_str = malloc(sizeof(char) * ft_strlen(str));
+// 	ft_strcpy(n_str, str, 0, ft_strlen(str));
+// 	while (cube->map.map && cube->map.map[i])
 // 		i++;
-// 	if (str)
-// 		i++;
-// 	tmp = malloc(sizeof(char *) * (i + 1));
-// 	if (!tmp)
-// 		return (NULL);
-// 	tmp[i] = NULL;
-// 	if (str)
+// 	new_arr = malloc(sizeof(char *) * (i + 2));
+// 	if (!new_arr)
+// 		return (1);
+// 	j = 0;
+// 	while (cube->map.map && (j < i))
 // 	{
-// 		tmp[i - 1] = ft_strdup(str);
-// 		if (!tmp[i - 1])
-// 		{
-// 			free(tmp);
-// 			return (NULL);
-// 		}
+// 		new_arr[j] = (cube->map.map[j]);
+// 		j++;
 // 	}
-// 	return (ft_arr_strdup(arr, tmp));
+// 	new_arr[i] = n_str;
+// 	new_arr[i + 1] = NULL;
+// 	if (cube->map.map)
+// 		free(cube->map.map);
+// 	cube->map.map = new_arr;
+// 	return (0);
 // }
-
-int	ft_add_str_to_arr(t_mlx *cube, char *str)
-{
-	int		i;
-	int		j;
-	char	**new;
-	char	*n_str;
-
-	i = 0;
-	n_str = malloc(sizeof(char) * ft_strlen(str));
-	ft_strcpy(n_str, str, 0, ft_strlen(str));
-	while (cube->map.map && cube->map.map[i])
-		i++;
-	new = malloc(sizeof(char*) * (i + 2));
-	if (!new)
-		return (1);
-	j = 0;
-	while (cube->map.map && (j < i))
-	{
-		new[j] = (cube->map.map[j]);
-		j++;
-	}
-	new[i] = n_str;
-	new[i + 1] = NULL;
-	if (cube->map.map)
-		free(cube->map.map);
-	cube->map.map = new;
-	return (0);
-}
 
 void	ft_clean_arr(char **arr)
 {
@@ -220,28 +177,18 @@ void	ft_clean_arr(char **arr)
 		while (arr[i] != NULL)
 			free(arr[i++]);
 	}
-	free(arr);
+	// free(arr);
 	arr = NULL;
 }
 
 int	info_complete(t_mlx *cube)
 {
-	if (!cube->map.NO || !cube->map.SO || !cube->map.WE || !cube->map.EA)
-		return (1);
-	if (cube->map.F_rgb.fill && cube->map.C_rgb.fill)
+	if (cube->map.NO
+		&& cube->map.SO
+		&& cube->map.WE
+		&& cube->map.EA
+		&& cube->map.F_rgb.fill
+		&& cube->map.C_rgb.fill)
 		return (1);
 	return (0);
-}
-
-void	print_arr(char **arr)
-{
-	size_t	i;
-
-	i = 0;
-	
-	while (arr[i])
-	{
-		printf("%s\n", arr[i]);
-		i++;
-	}
 }

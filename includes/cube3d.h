@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez- <jibanez-@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/04/08 20:17:26 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/12/15 13:33:30 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,6 @@ void	save_rgb(t_rgb *rgb, char *rgb_code);
 void	scan_map(t_mlx *cube, char *line);
 int		ft_char_is_valid(char c);
 int		info_complete(t_mlx *cube);
-void	print_arr(char **arr);
-int		ft_add_str_to_arr(t_mlx *cube, char *str);
-
-
-
 
 /*
 **	error_handling.c

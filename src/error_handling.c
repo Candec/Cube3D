@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez- <jibanez-@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 16:09:33 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/03/31 09:03:47 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/12/15 11:54:33 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ void	ft_error(char *msg, t_mlx *cube)
 
 void	ft_exit(t_mlx *cube)
 {
-	//clean memory
+	ft_clean_arr(cube->map.map);
+	ft_free(cube->map.NO);
+	ft_free(cube->map.SO);
+	ft_free(cube->map.EA);
+	ft_free(cube->map.WE);
 	(void)cube;
 	exit(EXIT_FAILURE);
 }
