@@ -8,6 +8,7 @@ CFLAGS 		= -g -Wall -Wextra -Werror
 # CFLAGS 		= -I/usr/include -Imlx_linux -O3 -g
 IFLAGS		= -I libraries/minilibx-linux -Ilmlx -I/includes
 LFLAGS		= -L libraries/minilibx-linux -lmlx 
+FFLAGS		= -fsanitize=address
 # LFLAGS		= -I ./mlx_linux -L ./mlx_linux -lmlx -Ilmlx -lXext -lX11
 AR = ar rcsv
 OBJ_DIR = obj
@@ -85,6 +86,10 @@ runv: all
 	@echo $(ANSI_B_RED) "Valgrind RESULT" $(ANSI_RESET)
 	#valgrind -q --leak-check=full --track-origins=yes --show-leak-kinds=all ./$(NAME)
 	valgrind --leak-check=full --show-leak-kinds=all -s ./$(NAME) maps/map.cub
+
+fsan: all
+	@echo $(ANSI_B_RED) "fsanitize=address" $(ANSI_RESET)
+	./$(NAME) 
 
 test: all
 	@echo $(ANSI_B_RED) "Running test" $(ANSI_RESET)

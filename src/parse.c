@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez- <jibanez-@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 17:51:05 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/12/15 13:20:49 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/12/15 15:45:06 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ void	save_rgb(t_rgb *rgb, char *rgb_code)
 		rgb->g = 42;
 		rgb->b = 42;
 	}
+	ft_clean_arr(rgb_decoded);
+	rgb_decoded = NULL;
 	rgb->fill = TRUE;
 }
 
@@ -171,13 +173,13 @@ void	ft_clean_arr(char **arr)
 {
 	size_t	i;
 
-	i = 0;
+	i = -1;
 	if (arr != NULL)
 	{
-		while (arr[i] != NULL)
-			free(arr[i++]);
+		while (arr[++i] != NULL)
+			free(arr[i]);
 	}
-	// free(arr);
+	free(arr);
 	arr = NULL;
 }
 
