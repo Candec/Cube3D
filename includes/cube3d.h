@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez- <jibanez-@student.42    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/12/15 13:33:30 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/12/19 02:23:09 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,6 @@
 **	 Structures
 **	=============
 */
-typedef struct	s_rgb
-{
-	bool	fill;
-	int		r;
-	int		g;
-	int		b;
-}				t_rgb;
 
 typedef struct	s_map
 {
@@ -73,28 +66,32 @@ typedef struct	s_mlx
 /*
 **	Main.c
 */
-int		main(int argc, char**argv);
+// int		main(int argc, char**argv);
+void	init(t_mlx *cube);
+void	parse(t_mlx *cube, char *map);
+
 
 /*
 **	Parse.c
 */
-void	ft_parse(t_mlx *cube, char *map);
-void	map_init(t_mlx *cube);
-void	map_info(t_mlx *cube, char *map);
+void	info(t_mlx *cube, char *map);
 void	scan_file(t_mlx *cube, char *line);
 void	save_path(t_mlx *cube, char *dir, char *path);
-void	save_rgb(t_rgb *rgb, char *rgb_code);
 void	scan_map(t_mlx *cube, char *line);
-int		ft_char_is_valid(char c);
 int		info_complete(t_mlx *cube);
+
+/*
+**	Check.c
+*/
+void	validate_chr(t_mlx *cube);
+void	validate_map(t_mlx *cube);
+bool	check_h(t_mlx *cube, size_t i, size_t j);
+bool	check_v(t_mlx *cube, size_t i, size_t j);
 
 /*
 **	error_handling.c
 */
-void	ft_error(char *msg, t_mlx *cube);
-void	ft_exit(t_mlx *cube);
-
-
-
+void	error(char *msg, t_mlx *cube);
+void	quit(t_mlx *cube);
 
 # endif

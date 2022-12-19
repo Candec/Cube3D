@@ -20,6 +20,7 @@ HEADER =	cube3d.h\
 
 SRC =		main.c\
 			parse.c\
+			check.c\
 			error_handling.c\
 
 all: $(NAME)
