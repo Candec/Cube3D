@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:09 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/12/19 02:17:39 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/12/20 00:04:25 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	init(t_mlx *cube)
 	cube->map.WE = NULL;
 	cube->map.EA = NULL;
 	cube->map.map = ft_calloc(sizeof(char **), 0);
+	cube->mlx_ptr = FALSE;
+	cube->win_ptr = FALSE;
 }
 
 void	parse(t_mlx *cube, char *map)
@@ -40,6 +42,14 @@ void	parse(t_mlx *cube, char *map)
 	validate_map(cube);
 }
 
+void	play(t_mlx *cube)
+{
+	start_mlx_and_window(cube);
+	// mlx_hook(data->win_ptr, 02, 1L << 2, &handle_keypress, data);
+	mlx_hook(cube->win_ptr, 17, (1L << 17), &quit, cube);
+	mlx_loop(cube->mlx_ptr);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_mlx	cube;
@@ -48,8 +58,7 @@ int	main(int argc, char *argv[])
 	{
 		init(&cube);
 		parse(&cube, argv[1]);
-		// ft_print_arr(cube.map.map);
-		// ft_play(cube);
+		play(&cube);
 		quit(&cube);
 	}
 	else

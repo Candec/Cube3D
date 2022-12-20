@@ -7,7 +7,7 @@ LIBMLX 		= libraries/minilibx-linux/libmlx.a
 CFLAGS 		= -g -Wall -Wextra -Werror
 # CFLAGS 		= -I/usr/include -Imlx_linux -O3 -g
 IFLAGS		= -I libraries/minilibx-linux -Ilmlx -I/includes
-LFLAGS		= -L libraries/minilibx-linux -lmlx 
+LFLAGS		= -L libraries/minilibx-linux -lmlx -lXext -lX11
 FFLAGS		= -fsanitize=address
 # LFLAGS		= -I ./mlx_linux -L ./mlx_linux -lmlx -Ilmlx -lXext -lX11
 AR = ar rcsv
@@ -21,6 +21,7 @@ HEADER =	cube3d.h\
 SRC =		main.c\
 			parse.c\
 			check.c\
+			play.c\
 			error_handling.c\
 
 all: $(NAME)

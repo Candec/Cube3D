@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/12/19 02:23:09 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/12/20 00:02:01 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ typedef struct	s_mlx
 {
 	t_map	map;
 	void	*mlx_ptr;
+	bool	mlx_init;
 	void	*win_ptr;
+	bool	win_init;
 }				t_mlx;
 
 /*
@@ -69,6 +71,7 @@ typedef struct	s_mlx
 // int		main(int argc, char**argv);
 void	init(t_mlx *cube);
 void	parse(t_mlx *cube, char *map);
+void	play(t_mlx *cube);
 
 
 /*
@@ -89,9 +92,15 @@ bool	check_h(t_mlx *cube, size_t i, size_t j);
 bool	check_v(t_mlx *cube, size_t i, size_t j);
 
 /*
+**	Play.c
+*/
+void	start_mlx_and_window(t_mlx *cube);
+
+
+/*
 **	error_handling.c
 */
 void	error(char *msg, t_mlx *cube);
-void	quit(t_mlx *cube);
+int		quit(t_mlx *cube);
 
 # endif
