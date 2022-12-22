@@ -1,7 +1,7 @@
-NO ./pathToTheNorthTexture
-SO ./pathToTheSouthTexture
-WE ./pathToTheWestTexture
-EA ./pathToTheEastTexture
+NO ./assets/r.xpm
+SO ./assets/g.xpm
+WE ./assets/b.xpm
+EA ./assets/y.xpm
 
 F 255,255,0
 C 1,1,1

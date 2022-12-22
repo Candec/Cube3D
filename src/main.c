@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez- <jibanez-@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:09 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/12/20 00:04:25 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/12/22 16:40:46 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	play(t_mlx *cube)
 {
 	start_mlx_and_window(cube);
 	// mlx_hook(data->win_ptr, 02, 1L << 2, &handle_keypress, data);
-	mlx_hook(cube->win_ptr, 17, (1L << 17), &quit, cube);
+	mlx_hook(cube->win_ptr, DestroyNotify, StructureNotifyMask, &quit, cube);
 	mlx_loop(cube->mlx_ptr);
 }
 

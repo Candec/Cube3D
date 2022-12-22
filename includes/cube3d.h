@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez- <jibanez-@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/12/20 00:02:01 by jibanez-         ###   ########.fr       */
+/*   Updated: 2022/12/22 16:08:43 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,16 @@
 
 /*
 **	=============
+**	 Macros
+**	=============
+*/
+
+# ifndef SQ_S
+#  define SQ_S 128
+# endif
+
+/*
+**	=============
 **	 Structures
 **	=============
 */
@@ -53,10 +63,14 @@ typedef struct	s_map
 typedef struct	s_mlx
 {
 	t_map	map;
-	void	*mlx_ptr;
 	bool	mlx_init;
-	void	*win_ptr;
 	bool	win_init;
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*img_NO;
+	void	*img_SO;
+	void	*img_WE;
+	void	*img_EA;
 }				t_mlx;
 
 /*
@@ -95,6 +109,8 @@ bool	check_v(t_mlx *cube, size_t i, size_t j);
 **	Play.c
 */
 void	start_mlx_and_window(t_mlx *cube);
+int		xpm_to_image_wrapper(t_mlx *data, void* img, char *filename);
+
 
 
 /*
