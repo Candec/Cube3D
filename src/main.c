@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez- <jibanez-@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:09 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/09 18:25:03 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/09 19:21:34 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	play(t_mlx *cube)
 {
 	start_mlx_and_window(cube);
 	mlx_hook(cube->win_ptr, KeyPress, KeyPressMask, &keypress, cube);
-	mlx_hook(cube->win_ptr, 0, NoEventMask, &draw, cube);
+	// mlx_hook(cube->win_ptr, 0, NoEventMask, &draw, cube);
 	mlx_hook(cube->win_ptr, DestroyNotify, StructureNotifyMask, &quit, cube);
 	mlx_loop(cube->mlx_ptr);
 }
