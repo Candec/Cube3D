@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez- <jibanez-@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:09 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/12/22 16:40:46 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/09 15:37:17 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,21 @@ void	init(t_mlx *cube)
 {
 	cube->map.height = 0;
 	cube->map.width = 0;
-	cube->map.C_rgb.r = -1;
-	cube->map.C_rgb.g = -1;
-	cube->map.C_rgb.b = -1;
-	cube->map.C_rgb.fill = FALSE;
-	cube->map.F_rgb.r = -1;
-	cube->map.F_rgb.g = -1;
-	cube->map.F_rgb.b = -1;
-	cube->map.F_rgb.fill = FALSE;
-	cube->map.NO = NULL;
-	cube->map.SO = NULL;
-	cube->map.WE = NULL;
-	cube->map.EA = NULL;
+	cube->map.c_rgb.r = -1;
+	cube->map.c_rgb.g = -1;
+	cube->map.c_rgb.b = -1;
+	cube->map.c_rgb.fill = FALSE;
+	cube->map.f_rgb.r = -1;
+	cube->map.f_rgb.g = -1;
+	cube->map.f_rgb.b = -1;
+	cube->map.f_rgb.fill = FALSE;
+	cube->map.no = NULL;
+	cube->map.so = NULL;
+	cube->map.we = NULL;
+	cube->map.ea = NULL;
 	cube->map.map = ft_calloc(sizeof(char **), 0);
-	cube->mlx_ptr = FALSE;
-	cube->win_ptr = FALSE;
+	cube->win = FALSE;
+	cube->p.e = FALSE;
 }
 
 void	parse(t_mlx *cube, char *map)
@@ -45,7 +45,7 @@ void	parse(t_mlx *cube, char *map)
 void	play(t_mlx *cube)
 {
 	start_mlx_and_window(cube);
-	// mlx_hook(data->win_ptr, 02, 1L << 2, &handle_keypress, data);
+	mlx_hook(cube->win_ptr, KeyPress, KeyPressMask, &keypress, cube);
 	mlx_hook(cube->win_ptr, DestroyNotify, StructureNotifyMask, &quit, cube);
 	mlx_loop(cube->mlx_ptr);
 }

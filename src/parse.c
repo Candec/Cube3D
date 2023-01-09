@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez- <jibanez-@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 17:51:05 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/12/19 01:14:00 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/09 15:38:13 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,28 +44,28 @@ void	scan_file(t_mlx *cube, char *line)
 {
 	if (!ft_strncmp(line, "NO", 2))
 	{
-		cube->map.NO = malloc(sizeof(char *) * ft_strlen(line + 3));
-		save_path(cube, cube->map.NO, line + 3);
+		cube->map.no = malloc(sizeof(char *) * ft_strlen(line + 3));
+		save_path(cube, cube->map.no, line + 3);
 	}
 	else if (!ft_strncmp(line, "SO", 2))
 	{
-		cube->map.SO = malloc(sizeof(char *) * ft_strlen(line + 3));
-		save_path(cube, cube->map.SO, line + 3);
+		cube->map.so = malloc(sizeof(char *) * ft_strlen(line + 3));
+		save_path(cube, cube->map.so, line + 3);
 	}
 	else if (!ft_strncmp(line, "WE", 2))
 	{
-		cube->map.WE = malloc(sizeof(char *) * ft_strlen(line + 3));
-		save_path(cube, cube->map.WE, line + 3);
+		cube->map.we = malloc(sizeof(char *) * ft_strlen(line + 3));
+		save_path(cube, cube->map.so, line + 3);
 	}
 	else if (!ft_strncmp(line, "EA", 2))
 	{
-		cube->map.EA = malloc(sizeof(char *) * ft_strlen(line + 3));
-		save_path(cube, cube->map.EA, line + 3);
+		cube->map.ea = malloc(sizeof(char *) * ft_strlen(line + 3));
+		save_path(cube, cube->map.ea, line + 3);
 	}
 	else if (!ft_strncmp(line, "F", 1))
-		ft_save_rgb(&cube->map.F_rgb, line + 2);
+		ft_save_rgb(&cube->map.f_rgb, line + 2);
 	else if (!ft_strncmp(line, "C", 1))
-		ft_save_rgb(&cube->map.C_rgb, line + 2);
+		ft_save_rgb(&cube->map.c_rgb, line + 2);
 }
 
 void	save_path(t_mlx *cube, char *dir, char *path)
@@ -85,12 +85,12 @@ void	scan_map(t_mlx *cube, char *line)
 
 int	info_complete(t_mlx *cube)
 {
-	if (cube->map.NO
-		&& cube->map.SO
-		&& cube->map.WE
-		&& cube->map.EA
-		&& cube->map.F_rgb.fill
-		&& cube->map.C_rgb.fill)
+	if (cube->map.no
+		&& cube->map.so
+		&& cube->map.we
+		&& cube->map.ea
+		&& cube->map.f_rgb.fill
+		&& cube->map.c_rgb.fill)
 		return (1);
 	return (0);
 }

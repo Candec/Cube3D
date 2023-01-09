@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez- <jibanez-@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/12/22 15:42:19 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/09 15:38:47 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,48 @@ int	xpm_to_image_wrapper(t_mlx *data, void *img, char *filename)
 	return (1);
 }
 
+void	load_img(t_mlx *cube)
+{
+	bool	err;
+
+	err = FALSE;
+	if (!xpm_to_image_wrapper(cube, cube->img_no, cube->map.no))
+		err = TRUE;
+	if (!xpm_to_image_wrapper(cube, cube->img_so, cube->map.so))
+		err = TRUE;
+	if (!xpm_to_image_wrapper(cube, cube->img_ea, cube->map.ea))
+		err = TRUE;
+	if (!xpm_to_image_wrapper(cube, cube->img_we, cube->map.we))
+		err = TRUE;
+	if (err)
+		error("COULDN'T LOAD IMG\n", cube);
+}
+
 void	start_mlx_and_window(t_mlx *cube)
 {
 	bool	err;
 
-	err = 1;
+	err = TRUE;
 	cube->mlx_ptr = mlx_init();
 	if (!cube->mlx_ptr)
-		err = 0;
-	cube->mlx_init = TRUE;
-	cube->win_ptr = mlx_new_window(cube->mlx_ptr, 1920, 1080, "Cube_3D");
+		err = FALSE;
+	cube->win_ptr = mlx_new_window(cube->mlx_ptr, 640, 360, "Cube_3d");
 	if (!cube->win_ptr)
-		err = 0;
-	cube->win_init = TRUE;
-	err = xpm_to_image_wrapper(cube, cube->img_NO, cube->map.NO);
-	err = xpm_to_image_wrapper(cube, cube->img_SO, cube->map.SO);
-	err = xpm_to_image_wrapper(cube, cube->img_EA, cube->map.EA);
-	err = xpm_to_image_wrapper(cube, cube->img_WE, cube->map.WE);
+		err = FALSE;
 	if (!err)
-		error("COULDN'T LOAD IMAGES OR CREATE WINDOW\n", cube);
+		error("COULDN'T CREATE WINDOW\n", cube);
+	cube->win = TRUE;
+}
+
+int	keypress(int keysym, t_mlx *cube)
+{
+	if (keysym == ESC)
+		quit(cube);
+	printf("%d\n", keysym);
+	// if (cube->map.player_escape == TRUE)
+	// 	return (0);
+	// else if (keysym == MOVE_UP|| keysym == MOVE_DOWN
+	// 	|| keysym == MOVE_LEFT || keysym == MOVE_RIGHT)
+		// move(data, keysym);
+	return (0);
 }

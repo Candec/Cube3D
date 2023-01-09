@@ -6,14 +6,18 @@
 /*   By: jibanez- <jibanez- <jibanez-@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/12/22 16:08:43 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/09 16:27:33 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef CUBE3D_H
-#  define CUBE3D_H
+#ifndef CUBE3D_H
+# define CUBE3D_H
 
+# include <math.h>
 # include <mlx.h>
+# include <variables.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 # include <stdio.h>
 # include <errno.h>
 # include <fcntl.h>
@@ -25,12 +29,6 @@
 # include <sys/wait.h>
 # include "../libft_ext/libft.h"
 
-# if __Linux__
-# include <X11/X.h>
-# include <X11/keysym.h>
-# include "../minilibx/mlx.h"
-# endif
-
 /*
 **	=============
 **	 Macros
@@ -41,36 +39,67 @@
 #  define SQ_S 128
 # endif
 
+# ifndef WIDTH
+#  define WIDTH 640
+# endif
+
+# ifndef HEIGHT
+#  define HEIGHT 360
+# endif
+
 /*
 **	=============
 **	 Structures
 **	=============
 */
 
-typedef struct	s_map
+typedef struct s_raycast
+{
+	double	x;
+	double	y;
+	double	dirx;
+	double	diry;
+	double	planex;
+	double	planey;
+	double	raydirx;
+	double	raydiry;
+	double	deltadisx;
+	double	deltadisy;
+	int		stepx;
+	int		stepy;
+	double	sidedisx;
+	double	sidedisy;
+	double	camerax;
+	bool	e;
+	bool	hit;
+}				t_raycast;
+
+typedef struct s_map
 {
 	char	**map;
 	size_t	height;
 	size_t	width;
-	char	*NO;
-	char	*SO;
-	char	*WE;
-	char	*EA;
-	t_rgb	F_rgb;
-	t_rgb	C_rgb;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	t_rgb	f_rgb;
+	t_rgb	c_rgb;
 }				t_map;
 
-typedef struct	s_mlx
+typedef struct s_mlx
 {
-	t_map	map;
-	bool	mlx_init;
-	bool	win_init;
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*img_NO;
-	void	*img_SO;
-	void	*img_WE;
-	void	*img_EA;
+	t_map		map;
+	t_raycast	p;
+	bool		win;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*img_no;
+	void		*img_so;
+	void		*img_we;
+	void		*img_ea;
+	double		time;
+	double		oldtime;
 }				t_mlx;
 
 /*
@@ -87,7 +116,6 @@ void	init(t_mlx *cube);
 void	parse(t_mlx *cube, char *map);
 void	play(t_mlx *cube);
 
-
 /*
 **	Parse.c
 */
@@ -100,6 +128,7 @@ int		info_complete(t_mlx *cube);
 /*
 **	Check.c
 */
+void	set_p(size_t i, size_t j, t_mlx *cube);
 void	validate_chr(t_mlx *cube);
 void	validate_map(t_mlx *cube);
 bool	check_h(t_mlx *cube, size_t i, size_t j);
@@ -109,14 +138,15 @@ bool	check_v(t_mlx *cube, size_t i, size_t j);
 **	Play.c
 */
 void	start_mlx_and_window(t_mlx *cube);
-int		xpm_to_image_wrapper(t_mlx *data, void* img, char *filename);
-
-
+void	load_img(t_mlx *cube);
+int		xpm_to_image_wrapper(t_mlx *data, void *img, char *filename);
+int		keypress(int keysym, t_mlx *cube);
 
 /*
 **	error_handling.c
 */
 void	error(char *msg, t_mlx *cube);
+void	unload(t_mlx *cube);
 int		quit(t_mlx *cube);
 
-# endif
+#endif
