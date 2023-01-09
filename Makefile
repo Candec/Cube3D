@@ -22,6 +22,7 @@ SRC =		main.c\
 			parse.c\
 			check.c\
 			play.c\
+			draw.c\
 			error.c\
 
 all: $(NAME)

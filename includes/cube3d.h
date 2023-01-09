@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez- <jibanez-@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/09 16:27:33 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/09 18:22:37 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,14 @@ void	start_mlx_and_window(t_mlx *cube);
 void	load_img(t_mlx *cube);
 int		xpm_to_image_wrapper(t_mlx *data, void *img, char *filename);
 int		keypress(int keysym, t_mlx *cube);
+int		draw(t_mlx *cube);
+
+/*
+**	Draw.c
+*/
+int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
+void	draw_wall(t_mlx *cube);
+
 
 /*
 **	error_handling.c

@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez- <jibanez-@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/09 15:38:47 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/09 18:24:32 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,13 @@ int	keypress(int keysym, t_mlx *cube)
 	// else if (keysym == MOVE_UP|| keysym == MOVE_DOWN
 	// 	|| keysym == MOVE_LEFT || keysym == MOVE_RIGHT)
 		// move(data, keysym);
+	return (0);
+}
+
+int	draw(t_mlx *cube)
+{
+	// draw_back(cube);
+	write(1, "a\n", 2);
+	draw_wall(cube);
 	return (0);
 }
