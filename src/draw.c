@@ -6,69 +6,32 @@
 /*   By: jibanez- <jibanez- <jibanez-@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/09 18:18:11 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:51:18 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-int	encode_rgb(uint8_t red, uint8_t green, uint8_t blue)
+void	add_pixel(t_img *frame, int rgb, int x, int y)
 {
-	return (red << 16 | green << 8 | blue);
+	frame->data[y * frame->size_l + x] = rgb;
 }
 
-void	dda(t_mlx *cube)
+void	draw_bg(t_mlx *cube)
 {
-	while (cube->p.x < WIDTH)
+	int x;
+	int y;
+
+	x = -1;
+	y = -1;
+	while (++y < HEIGHT)
 	{
-		cube->p.camerax = 2 * cube->p.x / WIDTH - 1;
-		cube->p.raydirx = cube->p.dirx * cube->p.camerax;
-		cube->p.raydiry = cube->p.diry * cube->p.camerax;
-		cube->p.deltadisx = ft_ternary_double(cube->p.raydirx == 0,
-				1e30, ft_abs(1 / cube->p.raydirx));
-		cube->p.deltadisx = ft_ternary_double(cube->p.raydirx == 0,
-				1e30, ft_abs(1 / cube->p.raydirx));
-
-		if (cube->p.raydirx < 0)
+		while (++x < WIDTH)
 		{
-			cube->p.stepx = -1;
-			cube->p.sidedisx = 0.0;
-		}
-		else
-		{
-			cube->p.stepx = 1;
-			cube->p.sidedisx = cube->p.deltadisx;
-		}
-		if (cube->p.raydiry < 0)
-		{
-			cube->p.stepy = -1;
-			cube->p.sidedisy = 0.0;
-		}
-		else
-		{
-			cube->p.stepy = 1;
-			cube->p.sidedisy = cube->p.deltadisy;
-		}
-	}
-}
-
-void	draw_wall(t_mlx *cube)
-{
-	int h;
-	int w;
-
-	h = -1;
-	w = -1;
-	while (++h < HEIGHT)
-	{
-		while (++w < WIDTH)
-		{
-			if (h > HEIGHT / 2)
-				mlx_pixel_put(cube->mlx_ptr, cube->win_ptr, w, h,
-					encode_rgb(cube->map.c_rgb.r, cube->map.c_rgb.g, cube->map.c_rgb.b));
+			if (y > HEIGHT / 2)
+				add_pixel(&cube->frame, cube->map.c_rgb.int_rgb, x, y);
 			else
-				mlx_pixel_put(cube->mlx_ptr, cube->win_ptr, w, h,
-					encode_rgb(cube->map.f_rgb.r, cube->map.f_rgb.g, cube->map.f_rgb.b));
+				add_pixel(&cube->frame, cube->map.f_rgb.int_rgb, x, y);
 		}
 	}
 }

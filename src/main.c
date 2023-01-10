@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez- <jibanez-@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:09 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/09 19:21:34 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:43:56 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	init(t_mlx *cube)
 	cube->map.ea = NULL;
 	cube->map.map = ft_calloc(sizeof(char **), 0);
 	cube->win = FALSE;
-	cube->p.e = FALSE;
 }
 
 void	parse(t_mlx *cube, char *map)
@@ -45,9 +44,10 @@ void	parse(t_mlx *cube, char *map)
 void	play(t_mlx *cube)
 {
 	start_mlx_and_window(cube);
-	mlx_hook(cube->win_ptr, KeyPress, KeyPressMask, &keypress, cube);
-	// mlx_hook(cube->win_ptr, 0, NoEventMask, &draw, cube);
-	mlx_hook(cube->win_ptr, DestroyNotify, StructureNotifyMask, &quit, cube);
+	mlx_hook(cube->win_ptr, KeyPress, KeyPressMask, keypress, cube);
+	mlx_hook(cube->win_ptr, DestroyNotify, StructureNotifyMask, quit, cube);
+	draw_frame(cube);
+	// mlx_loop_hook(cube->win_ptr, draw_frame, cube);
 	mlx_loop(cube->mlx_ptr);
 }
 

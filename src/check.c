@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez- <jibanez-@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 01:03:26 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/09 15:36:14 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/10 11:04:42 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,6 @@ void	set_p(size_t i, size_t j, t_mlx *cube)
 		error(">1 PLAYERS DETECTED\n", cube);
 	cube->p.x = i;
 	cube->p.y = j;
-	cube->p.dirx = 0.0;
-	cube->p.diry = 0.0;
-	cube->p.planex = 0.0;
-	cube->p.planey = 0.66;
-	if (cube->map.map[i][j] == 'N')
-		cube->p.dirx = 1.0;
-	if (cube->map.map[i][j] == 'S')
-		cube->p.dirx = -1.0;
-	if (cube->map.map[i][j] == 'E')
-		cube->p.diry = 1.0;
-	if (cube->map.map[i][j] == 'W')
-		cube->p.diry = -1.0;
-	cube->p.e = TRUE;
 }
 
 void	validate_chr(t_mlx *cube)

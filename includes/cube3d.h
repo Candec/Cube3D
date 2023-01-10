@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez- <jibanez-@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/09 18:22:37 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:51:24 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@
 **	=============
 */
 
-typedef struct s_raycast
+typedef struct s_player
 {
 	double	x;
 	double	y;
@@ -61,18 +61,21 @@ typedef struct s_raycast
 	double	diry;
 	double	planex;
 	double	planey;
-	double	raydirx;
-	double	raydiry;
-	double	deltadisx;
-	double	deltadisy;
-	int		stepx;
-	int		stepy;
-	double	sidedisx;
-	double	sidedisy;
-	double	camerax;
+
 	bool	e;
-	bool	hit;
-}				t_raycast;
+}				t_player;
+
+typedef struct s_img
+{
+	void	*img;
+	int		*data;
+
+	int		size_l;
+	int		bpp;
+	int		endian;
+	int		img_width;
+	int		img_height;
+}				t_img;
 
 typedef struct s_map
 {
@@ -90,7 +93,9 @@ typedef struct s_map
 typedef struct s_mlx
 {
 	t_map		map;
-	t_raycast	p;
+	t_img		frame;
+	t_player	p;
+
 	bool		win;
 	void		*mlx_ptr;
 	void		*win_ptr;
@@ -98,8 +103,6 @@ typedef struct s_mlx
 	void		*img_so;
 	void		*img_we;
 	void		*img_ea;
-	double		time;
-	double		oldtime;
 }				t_mlx;
 
 /*
@@ -141,13 +144,13 @@ void	start_mlx_and_window(t_mlx *cube);
 void	load_img(t_mlx *cube);
 int		xpm_to_image_wrapper(t_mlx *data, void *img, char *filename);
 int		keypress(int keysym, t_mlx *cube);
-int		draw(t_mlx *cube);
+int		draw_frame(t_mlx *cube);
 
 /*
 **	Draw.c
 */
-int		encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
-void	draw_wall(t_mlx *cube);
+void	add_pixel(t_img *frame, int rgb, int x, int y);
+void	draw_bg(t_mlx *cube);
 
 
 /*

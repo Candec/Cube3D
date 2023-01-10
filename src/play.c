@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez- <jibanez-@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/09 18:24:32 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:36:23 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,14 @@ int	keypress(int keysym, t_mlx *cube)
 	return (0);
 }
 
-int	draw(t_mlx *cube)
+int	draw_frame(t_mlx *cube)
 {
-	// draw_back(cube);
-	write(1, "a\n", 2);
-	draw_wall(cube);
+	cube->frame.img_width = WIDTH;
+	cube->frame.img_height = HEIGHT;
+	cube->frame.img = mlx_new_image(cube->mlx_ptr, WIDTH, HEIGHT);
+	cube->frame.data = (int *)mlx_get_data_addr(&cube->frame.img,
+		&cube->frame.bpp, &cube->frame.size_l, &cube->frame.endian);
+	draw_bg(cube);
+	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->frame.img, 0, 0);
 	return (0);
 }
