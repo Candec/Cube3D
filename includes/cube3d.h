@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez- <jibanez-@student.42    +#+  +:+       +#+        */
+/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/10 14:51:24 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/19 14:42:32 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,28 @@
 #  define SQ_S 128
 # endif
 
+# ifndef WIN_WIDTH
+#  define WIN_WIDTH 1366
+# endif
+
+# ifndef WIN_HEIGHT
+#  define WIN_HEIGHT 768
+# endif
+
 # ifndef WIDTH
 #  define WIDTH 640
 # endif
 
 # ifndef HEIGHT
 #  define HEIGHT 360
+# endif
+
+# ifndef TILE_SIZE
+#  define TILE_SIZE 64
+# endif
+
+# ifndef WALL_HEIGHT
+#  define WALL_HEIGHT 64
 # endif
 
 /*
@@ -61,6 +77,9 @@ typedef struct s_player
 	double	diry;
 	double	planex;
 	double	planey;
+	double	height;
+	double	fov;
+	double	position;
 
 	bool	e;
 }				t_player;
