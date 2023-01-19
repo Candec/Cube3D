@@ -1,4 +1,4 @@
-NAME = cube_3d
+NAME = cube3D
 
 MAKEFLAGS	+= --quiet
 
