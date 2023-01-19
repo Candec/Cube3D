@@ -10,6 +10,8 @@ CFLAGS 		= -g -Wall -Wextra -Werror
 # CFLAGS 		= -I/usr/include -Imlx_linux -O3 -g
 IFLAGS		= -I libraries/minilibx-linux -Ilmlx -I/includes
 LFLAGS		= -L libraries/minilibx-linux -lmlx -lXext -lX11
+IFLAGS_D	= -I libraries/minilibx_opengl -Ilmlx -I/includes
+LFLAGS_D	= -L libraries/minilibx_opengl -lmlx -framework OpenGL -framework AppKit
 FFLAGS		= -fsanitize=address
 # LFLAGS		= -I ./mlx_linux -L ./mlx_linux -lmlx -Ilmlx -lXext -lX11
 AR = ar rcsv
@@ -31,9 +33,12 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 ifeq ($(OS),Darwin)
-	@make -s -C libft_ext
-	@make -s -C minilibx_opengl
-	@$(CC) $(CFLAGS) $(SRCS) $(LIB) minilibx_opengl/libmlx.a $(MAC) -o $(FDF)
+	$(MAKE) all -C libft_ext
+	$(MAKE) -C libraries/minilibx_opengl
+	@echo $(ANSI_RESET) ""
+	@echo $(ANSI_B_BGREEN) "compile executable" $(ANSI_RESET)$(ANSI_F_BBLACK)
+	clang $(CFLAGS) $(IFLAGS_D) $(OBJ) $(LIBFT) $(LFLAGS_D) -o $(NAME)
+	@echo $(ANSI_RESET) ""
 endif
 ifeq ($(OS),Linux)
 	@echo $(ANSI_B_BGREEN) "compile libft_ext" $(ANSI_RESET)$(ANSI_F_BBLACK)
