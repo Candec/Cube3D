@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/19 14:47:16 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/19 15:21:51 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,17 @@ void	draw_bg(t_mlx *cube)
 			else
 				add_pixel(&cube->frame, cube->map.f_rgb.int_rgb, x, y);
 		}
+	}
+}
+
+void	draw_wall(t_mlx *cube, int x, int y, int height)
+{
+	int i;
+
+	i = -1;
+	printf("cube->map.c_rgb.int_rgb: %d\n", cube->map.c_rgb.int_rgb);
+	while (++i < height)
+	{
+		add_pixel(&cube->frame, cube->map.c_rgb.int_rgb, x, y + i);
 	}
 }

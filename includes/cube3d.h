@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/19 14:42:32 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/19 15:23:03 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,32 @@
 
 # ifndef WALL_HEIGHT
 #  define WALL_HEIGHT 64
+# endif
+
+/*
+**	=================
+**	 Keyboard Macros
+**	=================
+*/
+
+# ifndef ESCAPE
+#  define ESCAPE 53
+# endif
+
+# ifndef FORWARD
+#  define FORWARD 65362
+# endif
+
+# ifndef BACKWARD
+#  define BACKWARD 65364
+# endif
+
+# ifndef LEFT
+#  define LEFT 65361
+# endif
+
+# ifndef RIGHT
+#  define RIGHT 65363
 # endif
 
 /*
@@ -170,6 +196,7 @@ int		draw_frame(t_mlx *cube);
 */
 void	add_pixel(t_img *frame, int rgb, int x, int y);
 void	draw_bg(t_mlx *cube);
+void	draw_wall(t_mlx *cube, int x, int y, int height);
 
 
 /*
