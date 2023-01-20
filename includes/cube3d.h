@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/19 15:23:03 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/20 17:35:52 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@
 # endif
 
 # ifndef WIN_WIDTH
-#  define WIN_WIDTH 1366
+#  define WIN_WIDTH 1920
 # endif
 
 # ifndef WIN_HEIGHT
-#  define WIN_HEIGHT 768
+#  define WIN_HEIGHT 1200
 # endif
 
 # ifndef WIDTH
@@ -62,6 +62,37 @@
 # ifndef WALL_HEIGHT
 #  define WALL_HEIGHT 64
 # endif
+
+/*
+**	=================
+**	 Color Macros
+**	=================
+*/
+
+# ifndef RED
+#  define RED 0xFF0000
+# endif
+
+# ifndef GREEN
+#  define GREEN 0x00FF00
+# endif
+
+# ifndef BLUE
+#  define BLUE 0x0000FF
+# endif
+
+# ifndef WHITE
+#  define WHITE 0xFFFFFF
+# endif
+
+# ifndef YELLOW
+#  define YELLOW 0xFFFF00
+# endif
+
+# ifndef BLACK
+#  define BLACK 0x000000
+# endif
+
 
 /*
 **	=================
@@ -97,8 +128,8 @@
 
 typedef struct s_player
 {
-	double	x;
-	double	y;
+	double	posx;
+	double	posy;
 	double	dirx;
 	double	diry;
 	double	planex;
@@ -127,6 +158,8 @@ typedef struct s_map
 	char	**map;
 	size_t	height;
 	size_t	width;
+	int		rows;
+	int		cols;
 	char	*no;
 	char	*so;
 	char	*we;
@@ -139,7 +172,7 @@ typedef struct s_mlx
 {
 	t_map		map;
 	t_img		frame;
-	t_player	p;
+	t_player	player;
 
 	bool		win;
 	void		*mlx_ptr;
@@ -149,6 +182,12 @@ typedef struct s_mlx
 	void		*img_we;
 	void		*img_ea;
 }				t_mlx;
+
+typedef struct s_game
+{
+	t_mlx		cube;
+}				t_game;
+
 
 /*
 **	=============
@@ -197,6 +236,8 @@ int		draw_frame(t_mlx *cube);
 void	add_pixel(t_img *frame, int rgb, int x, int y);
 void	draw_bg(t_mlx *cube);
 void	draw_wall(t_mlx *cube, int x, int y, int height);
+void	draw_player(t_mlx *cube, int x, int y, int height);
+void	draw_square(t_mlx *cube, int x, int y, int height, int color);
 
 
 /*
@@ -205,5 +246,16 @@ void	draw_wall(t_mlx *cube, int x, int y, int height);
 void	error(char *msg, t_mlx *cube);
 void	unload(t_mlx *cube);
 int		quit(t_mlx *cube);
+
+/*
+**	player.c
+*/
+void	init_player_dir(t_mlx *cube, char c);
+void	init_player(t_mlx *cube);
+
+/*
+**	map.c
+*/
+void	draw_map_2D(t_mlx *game);
 
 #endif

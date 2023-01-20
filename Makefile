@@ -28,6 +28,8 @@ SRC =		main.c\
 			play.c\
 			draw.c\
 			error.c\
+			player.c\
+			map.c\
 
 all: $(NAME)
 

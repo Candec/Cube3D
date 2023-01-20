@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez- <jibanez-@student.42    +#+  +:+       +#+        */
+/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 01:03:26 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/10 11:04:42 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/20 16:01:53 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	set_p(size_t i, size_t j, t_mlx *cube)
 {
-	if (cube->p.e)
+	if (cube->player.e)
 		error(">1 PLAYERS DETECTED\n", cube);
-	cube->p.x = i;
-	cube->p.y = j;
+	cube->player.posx = i;
+	cube->player.posy = j;
 }
 
 void	validate_chr(t_mlx *cube)
