@@ -3,25 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   variables.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez- <jibanez-@student.42    +#+  +:+       +#+        */
+/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 16:42:40 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/12/22 16:43:21 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/20 22:42:01 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "cube3d.h"
 
 #ifndef VARIABLES_H
 # define VARIABLES_H
 
-# define ESC			65307	// ESQ
-# define MOVE_UP		119		// W
-# define MOVE_DOWN		115		// S
-# define MOVE_LEFT		97		// A
-# define MOVE_RIGHT		100		// D
-# define LOOK_UP		65362	// ↑
-# define LOOK_DOWN		65364	// ↓
-# define LOOK_LEFT		65361	// ←
-# define LOOK_RIGHT		65363	// →
-# define TOGGLE_MOUSE	113		// Q
-
+#if defined(__linux__)
+	# define ESC			65307	// ESQ
+	# define MOVE_UP		119		// W
+	# define MOVE_DOWN		115		// S
+	# define MOVE_LEFT		97		// A
+	# define MOVE_RIGHT		100		// D
+	# define LOOK_UP		65362	// ↑
+	# define LOOK_DOWN		65364	// ↓
+	# define LOOK_LEFT		65361	// ←
+	# define LOOK_RIGHT		65363	// →
+	# define TOGGLE_MOUSE	113		// Q
+#elif defined(__APPLE__)
+	# define ESC			53		// ESQ
+	# define MOVE_UP		13		// W
+	# define MOVE_DOWN		0		// S
+	# define MOVE_LEFT		1		// A
+	# define MOVE_RIGHT		2		// D
+	# define LOOK_UP		126		// ↑
+	# define LOOK_DOWN		125		// ↓
+	# define LOOK_LEFT		123		// ←
+	# define LOOK_RIGHT		124		// →
+	# define TOGGLE_MOUSE	12		// Q
+#endif
 #endif
