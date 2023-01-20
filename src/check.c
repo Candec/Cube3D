@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 01:03:26 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/20 16:01:53 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/20 18:29:47 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	validate_chr(t_mlx *cube)
 		}
 	}
 	cube->map.height = i;
-	cube->map.width = j;
 }
 
 void	validate_map(t_mlx *cube)

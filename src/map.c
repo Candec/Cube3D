@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:08:49 by tpereira          #+#    #+#             */
-/*   Updated: 2023/01/20 17:37:09 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/20 18:32:01 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	print_map(t_mlx *cube)
 	int	y;
 
 	y = 0;
-	while (y != (int)cube->map.width)
+	while (y != (int)cube->map.height)
 	{
 		x = 0;
-		while (x != (int)cube->map.height)
+		while (x != (int)cube->map.width)
 		{
 			printf("%c", cube->map.map[y][x]);
 			x++;
@@ -38,21 +38,20 @@ void	draw_map_2D(t_mlx *cube)
 
 	y = 0;
 	print_map(cube);
-	while (y != (int)cube->map.width)
+	while (y != (int)cube->map.height)
 	{
 		x = 0;
-		while (x != (int)cube->map.height)
+		while (x != (int)cube->map.width)
 		{
 			if (cube->map.map[y][x] == '1')
 				draw_square(cube, x * 32, y * 32, 32, WHITE);
-			else if (cube->map.map[y][x] == '0')
+			else if (cube->map.map[y][x] == ' ')
 				draw_square(cube, x * 32, y * 32, 32, BLACK);
+			else if (cube->map.map[y][x] == '0')
+				draw_square(cube, x * 32, y * 32, 32, BLUE);
 			else if (cube->map.map[y][x] == 'N' || cube->map.map[y][x] == 'S' 
 				|| cube->map.map[y][x] == 'E' || cube->map.map[y][x] == 'W')
-			{
-				printf("Player\n");
 				draw_square(cube, x * 32, y * 32, 32, YELLOW);
-			}
 			x++;
 		}
 		y++;
