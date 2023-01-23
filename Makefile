@@ -27,10 +27,11 @@ SRC =		main.c\
 			check.c\
 			play.c\
 			draw.c\
+			draw_utils.c\
 			error.c\
 			player.c\
 			map.c\
-
+			
 all: $(NAME)
 
 $(NAME): $(OBJ)

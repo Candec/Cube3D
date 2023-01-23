@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/20 17:35:52 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/23 09:53:17 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,6 +238,7 @@ void	draw_bg(t_mlx *cube);
 void	draw_wall(t_mlx *cube, int x, int y, int height);
 void	draw_player(t_mlx *cube, int x, int y, int height);
 void	draw_square(t_mlx *cube, int x, int y, int height, int color);
+void	blackout(t_mlx *cube);
 
 
 /*
@@ -252,6 +253,7 @@ int		quit(t_mlx *cube);
 */
 void	init_player_dir(t_mlx *cube, char c);
 void	init_player(t_mlx *cube);
+void	draw_player_2D(t_mlx *cube);
 
 /*
 **	map.c

@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 16:42:40 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/20 22:42:01 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/23 10:04:43 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 #elif defined(__APPLE__)
 	# define ESC			53		// ESQ
 	# define MOVE_UP		13		// W
-	# define MOVE_DOWN		0		// S
-	# define MOVE_LEFT		1		// A
+	# define MOVE_DOWN		1		// S
+	# define MOVE_LEFT		0		// A
 	# define MOVE_RIGHT		2		// D
 	# define LOOK_UP		126		// ↑
 	# define LOOK_DOWN		125		// ↓

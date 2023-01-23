@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:08:49 by tpereira          #+#    #+#             */
-/*   Updated: 2023/01/20 18:53:55 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/23 10:21:44 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	draw_map_2D(t_mlx *cube)
 	int	y;
 
 	y = 0;
+	blackout(cube);
 	print_map(cube);
 	while (y != (int)cube->map.height)
 	{
@@ -51,7 +52,35 @@ void	draw_map_2D(t_mlx *cube)
 				draw_square(cube, x * 32, y * 32, 32, BLUE);
 			else if (cube->map.map[y][x] == 'N' || cube->map.map[y][x] == 'S' 
 				|| cube->map.map[y][x] == 'E' || cube->map.map[y][x] == 'W')
-				draw_square(cube, x * 32, y * 32, 32, YELLOW);
+			{
+				cube->player.posx = x;
+				cube->player.posy = y;
+				//draw_square(cube, x * 32, y * 32, 32, YELLOW);
+			}
+			x++;
+		}
+		y++;
+	}
+	draw_player_2D(cube);
+}
+
+void	draw_player_2D(t_mlx *cube)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	//blackout(cube);
+	while (y != (int)cube->map.height)
+	{
+		x = 0;
+		while (x != (int)cube->map.width)
+		{
+			if (cube->map.map[y][x] != '1' && cube->map.map[y][x] != ' ')
+			{
+				if (cube->player.posx == x && cube->player.posy == y)
+					draw_square(cube, x * 32, y * 32, 32, YELLOW);
+			}
 			x++;
 		}
 		y++;
