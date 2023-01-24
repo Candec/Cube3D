@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/23 10:58:45 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/24 13:17:16 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void	move_player(t_mlx *cube, int keysym)
 		draw_square(cube, x * 32, y * 32, 32, BLUE);
 	if (cube->map.map[(int)cube->player.posy][(int)cube->player.posx] == 'N')    //add more chars later
 		draw_square(cube, x * 32, y * 32, 32, BLUE);
-	
 }
 
 void	player(t_mlx *cube, int keysym)

@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:08:49 by tpereira          #+#    #+#             */
-/*   Updated: 2023/01/23 11:04:48 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/24 13:20:37 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,7 @@ void	draw_player_2D(t_mlx *cube)
 			if (cube->map.map[y][x] != '1' && cube->map.map[y][x] != ' ')
 			{
 				if (cube->player.posx == x && cube->player.posy == y)
-				{
-					draw_square(cube, (x * 32) + 8, (y * 32) + 8, 16, YELLOW);
-					//draw_line(cube, (x * 32) + 16, (y * 32) + 16, (x * 32) + 16 + (cube->player.dirx * 16), (y * 32) + 16 + (cube->player.diry * 16), RED);
-				}
+					draw_square(cube, (x * 32) + 12, (y * 32) + 12, 8, YELLOW);
 			}
 			x++;
 		}

@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/23 11:01:16 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/24 13:14:24 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,6 +245,7 @@ void	draw_player(t_mlx *cube, int x, int y, int height);
 void	draw_square(t_mlx *cube, int x, int y, int height, int color);
 void	blackout(t_mlx *cube);
 void	draw_line(t_mlx *cube, int x1, int y1, int x2, int y2, int color);
+void	draw_circle(t_mlx *cube, int x, int y, int radius, int color);
 
 /*
 **	error_handling.c

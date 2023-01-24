@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/23 11:01:02 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/24 13:11:26 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,20 @@ void	draw_wall(t_mlx *cube, int x, int y, int height)
 	}
 }
 
-void	draw_player(t_mlx *cube, int x, int y, int height)
+void	draw_circle(t_mlx *cube, int x, int y, int radius, int color)
 {
 	int i;
 	int j;
 
 	i = -1;
-	while (++i < height)
+	while (++i < radius)
 	{
 		j = -1;
-		while (++j < height)
-			add_pixel(&cube->frame, 0x00FF0000, x + i, y + j);
+		while (++j < radius)
+		{
+			if (i * i + j * j < radius * radius)
+				add_pixel(&cube->frame, color, x, y);
+		}
 	}
 }
 
