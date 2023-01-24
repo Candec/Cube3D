@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/23 10:34:07 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/23 10:58:45 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,20 @@ void	move_player(t_mlx *cube, int keysym)
 	}
 	if (cube->map.map[(int)cube->player.posy][(int)cube->player.posx] == '0')
 		draw_square(cube, x * 32, y * 32, 32, BLUE);
+	if (cube->map.map[(int)cube->player.posy][(int)cube->player.posx] == 'N')    //add more chars later
+		draw_square(cube, x * 32, y * 32, 32, BLUE);
+	
+}
+
+void	player(t_mlx *cube, int keysym)
+{
+	if (keysym == MOVE_UP || keysym == MOVE_DOWN
+		|| keysym == MOVE_LEFT || keysym == MOVE_RIGHT)
+		move_player(cube, keysym);
+	if (keysym == LOOK_LEFT)
+		cube->player.dirx -= 0.1;
+	if (keysym == LOOK_RIGHT)
+		cube->player.dirx += 0.1;
 	draw_player_2D(cube);
 }
 
@@ -86,7 +100,7 @@ int	keypress(int keysym, t_mlx *cube)
 	if (keysym == ESC)
 		quit(cube);
 	printf("%d\n", keysym);
-	move_player(cube, keysym);
+	player(cube, keysym);
 	// if (cube->map.player_escape == TRUE)
 	// 	return (0);
 	// else if (keysym == MOVE_UP|| keysym == MOVE_DOWN

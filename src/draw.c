@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/20 17:30:53 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/23 11:01:02 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,29 @@ void	draw_player(t_mlx *cube, int x, int y, int height)
 		j = -1;
 		while (++j < height)
 			add_pixel(&cube->frame, 0x00FF0000, x + i, y + j);
+	}
+}
+
+void	draw_line(t_mlx *cube, int x1, int y1, int x2, int y2, int color)
+{
+	int dx;
+	int dy;
+	int i;
+	int e;
+
+	dx = x2 - x1;
+	dy = y2 - y1;
+	i = 1;
+	e = (dx > dy ? dx : -dy) / 2;
+	while (x1 != x2 || y1 != y2)
+	{
+		add_pixel(&cube->frame, color, x1, y1);
+		e = e - (dx > dy ? dy : -dx);
+		if (e < 0)
+		{
+			e = e + (dx > dy ? dx : -dy);
+			x1 = x1 + (dx > 0 ? i : -i);
+			y1 = y1 + (dy > 0 ? i : -i);
+		}
 	}
 }

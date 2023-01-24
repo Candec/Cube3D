@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/23 09:53:17 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/23 11:01:16 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,10 @@
 
 # ifndef WALL_HEIGHT
 #  define WALL_HEIGHT 64
+# endif
+
+# ifndef PI
+#  define PI 3.14159265358979323846
 # endif
 
 /*
@@ -132,6 +136,7 @@ typedef struct s_player
 	double	posy;
 	double	dirx;
 	double	diry;
+	double	angle;
 	double	planex;
 	double	planey;
 	double	height;
@@ -239,7 +244,7 @@ void	draw_wall(t_mlx *cube, int x, int y, int height);
 void	draw_player(t_mlx *cube, int x, int y, int height);
 void	draw_square(t_mlx *cube, int x, int y, int height, int color);
 void	blackout(t_mlx *cube);
-
+void	draw_line(t_mlx *cube, int x1, int y1, int x2, int y2, int color);
 
 /*
 **	error_handling.c
