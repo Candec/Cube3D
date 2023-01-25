@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:28:31 by tpereira          #+#    #+#             */
-/*   Updated: 2023/01/20 16:01:41 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/25 08:32:01 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,15 @@ void	init_player(t_mlx *cube)
 	int	j;
 
 	i = 0;
-	while (i < cube->map.rows)
+	while (i < (int)cube->map.height)
 	{
 		j = 0;
-		while (j < cube->map.cols)
+		while (j < (int)cube->map.width)
 		{
 			if (ft_strchr("NSEW", cube->map.map[i][j]))
 			{
-				cube->player.posx = j + 0.5;
-				cube->player.posy = i + 0.5;
+				cube->player.posx = j + 0.4 - 3;
+				cube->player.posy = (i * 2) - 1 + 0.4;
 				cube->player.dirx = 0;
 				cube->player.diry = 0;
 				cube->player.planex = 0;

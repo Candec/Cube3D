@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:09 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/24 13:14:45 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/25 06:21:21 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	parse(t_mlx *cube, char *map)
 	info(cube, map);
 	validate_chr(cube);
 	validate_map(cube);
+	init_player(cube);
 }
 
 void	play(t_mlx *cube)

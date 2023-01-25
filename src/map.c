@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:08:49 by tpereira          #+#    #+#             */
-/*   Updated: 2023/01/24 13:20:37 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/25 08:32:43 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,27 +35,29 @@ void	draw_map_2D(t_mlx *cube)
 {
 	int	x;
 	int	y;
+	int xo;
+	int yo;
 
 	y = 0;
 	blackout(cube);
 	print_map(cube);
 	while (y != (int)cube->map.height)
 	{
+		yo = y * 32;
 		x = 0;
 		while (cube->map.map[y][x] != '\0' && x != (int)cube->map.width)
 		{
+			xo = x * 32;
 			if (cube->map.map[y][x] == '1')
-				draw_square(cube, x * 32, y * 32, 32, WHITE);
+				draw_square(cube, (xo), (yo), 30, WHITE);
 			else if (cube->map.map[y][x] == ' ')
-				draw_square(cube, x * 32, y * 32, 32, GREEN);
+				draw_square(cube, (xo), (yo), 30, GREEN);
 			else if (cube->map.map[y][x] == '0')
-				draw_square(cube, x * 32, y * 32, 32, BLUE);
+				draw_square(cube, (xo), (yo), 30, BLUE);
 			else if (cube->map.map[y][x] == 'N' || cube->map.map[y][x] == 'S' 
-				|| cube->map.map[y][x] == 'E' || cube->map.map[y][x] == 'W')
+					|| cube->map.map[y][x] == 'E' || cube->map.map[y][x] == 'W')
 			{
-				cube->player.posx = x;
-				cube->player.posy = y;
-				//draw_square(cube, x * 32, y * 32, 32, YELLOW);
+				draw_square(cube, (xo), (yo), 30, BLUE);
 			}
 			x++;
 		}
@@ -68,19 +70,19 @@ void	draw_player_2D(t_mlx *cube)
 {
 	int	x;
 	int	y;
+	double xo;
+	double yo;
 
 	y = 0;
-	//blackout(cube);
 	while (y != (int)cube->map.height)
 	{
+		yo = cube->player.posy * 32;
 		x = 0;
 		while (x != (int)cube->map.width)
 		{
+			xo = cube->player.posx * 32;
 			if (cube->map.map[y][x] != '1' && cube->map.map[y][x] != ' ')
-			{
-				if (cube->player.posx == x && cube->player.posy == y)
-					draw_square(cube, (x * 32) + 12, (y * 32) + 12, 8, YELLOW);
-			}
+				draw_square(cube, xo + 0.5, yo + 0.5, 8, YELLOW);
 			x++;
 		}
 		y++;

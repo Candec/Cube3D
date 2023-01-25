@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/24 13:17:16 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/25 08:35:30 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,28 +58,24 @@ void	start_mlx_and_window(t_mlx *cube)
 
 void	move_player(t_mlx *cube, int keysym)
 {
-	int x;
-	int y;
+	double x;
+	double y;
 
 	x = cube->player.posx;
 	y = cube->player.posy;
 	if (keysym == MOVE_UP)
-		cube->player.posy--;
+		cube->player.posy -= 0.1;
 	if (keysym == MOVE_DOWN)
-		cube->player.posy++;
+		cube->player.posy += 0.1;
 	if (keysym == MOVE_LEFT)
-		cube->player.posx--;
+		cube->player.posx -= 0.1;
 	if (keysym == MOVE_RIGHT)
-		cube->player.posx++;
+		cube->player.posx += 0.1;
 	if (cube->map.map[(int)cube->player.posy][(int)cube->player.posx] == '1')
 	{
 		cube->player.posx = x;
 		cube->player.posy = y;
 	}
-	if (cube->map.map[(int)cube->player.posy][(int)cube->player.posx] == '0')
-		draw_square(cube, x * 32, y * 32, 32, BLUE);
-	if (cube->map.map[(int)cube->player.posy][(int)cube->player.posx] == 'N')    //add more chars later
-		draw_square(cube, x * 32, y * 32, 32, BLUE);
 }
 
 void	player(t_mlx *cube, int keysym)
@@ -91,7 +87,7 @@ void	player(t_mlx *cube, int keysym)
 		cube->player.dirx -= 0.1;
 	if (keysym == LOOK_RIGHT)
 		cube->player.dirx += 0.1;
-	draw_player_2D(cube);
+	draw_map_2D(cube);
 }
 
 int	keypress(int keysym, t_mlx *cube)
