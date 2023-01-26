@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/26 12:13:21 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/26 15:53:38 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	player(t_mlx *cube, int keysym)
 		cube->player.angle += 0.1;
 	fix_angle(&cube->player.angle);
 	cube->player.dirx = cos(cube->player.angle) * 50;
-	cube->player.diry = -sin(cube->player.angle) * 50;
+	cube->player.diry = sin(cube->player.angle) * 50;
 	draw_map_2D(cube);
 }
 
