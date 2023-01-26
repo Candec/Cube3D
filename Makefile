@@ -8,8 +8,8 @@ LIBFT 		= libft_ext/libft.a
 LIBMLX 		= libraries/minilibx-linux/libmlx.a
 CFLAGS 		= -g -Wall -Wextra -Werror
 # CFLAGS 		= -I/usr/include -Imlx_linux -O3 -g
-IFLAGS		= -I libraries/minilibx-linux -Ilmlx -I/includes
-LFLAGS		= -L libraries/minilibx-linux -lmlx -lXext -lX11
+IFLAGS		= -I libraries/minilibx-linux -Ilmlx -I/includes -Imath
+LFLAGS		= -L libraries/minilibx-linux -lmlx -lXext -lX11 -lm
 IFLAGS_D	= -I libraries/minilibx_opengl -Ilmlx -I/includes
 LFLAGS_D	= -L libraries/minilibx_opengl -lmlx -framework OpenGL -framework AppKit
 FFLAGS		= -fsanitize=address
