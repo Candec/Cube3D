@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:08:49 by tpereira          #+#    #+#             */
-/*   Updated: 2023/01/26 22:32:18 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/26 22:39:50 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	draw_player_2D(t_mlx *cube)
 				draw_square(cube, xo, yo, 8, YELLOW);
 				printf("dirx = %f, diry = %f\n", cube->player.dirx, cube->player.diry);
 				//draw_square(cube, xo + 4 + cube->player.dirx * 3, yo + 4 + cube->player.diry * 3, 8, RED);
-				draw_line(cube, xo + 4, yo + 4, xo + 4 + cube->player.dirx * 15, yo + 4 + cube->player.diry * 15, RED);
+				draw_line(cube, xo + 2, yo + 2, xo + cube->player.dirx * 10, yo + cube->player.diry * 10, RED);
 			}
 			x++;
 		}
