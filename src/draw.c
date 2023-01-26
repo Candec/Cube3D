@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/24 13:11:26 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/26 11:25:16 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	add_pixel(t_img *frame, int rgb, int x, int y)
 {
+	//printf("x: %d, y: %d\n", x, y);
 	frame->data[y * WIN_WIDTH + x] = rgb;
 }
 
@@ -79,26 +80,21 @@ void	draw_circle(t_mlx *cube, int x, int y, int radius, int color)
 	}
 }
 
-void	draw_line(t_mlx *cube, int x1, int y1, int x2, int y2, int color)
+void	draw_line(t_mlx *cube, float x1, float y1, float x2, float y2, int color)
 {
-	int dx;
-	int dy;
-	int i;
-	int e;
+	float dx;
+	float dy;
+	float x;
+	float y;
 
 	dx = x2 - x1;
 	dy = y2 - y1;
-	i = 1;
-	e = (dx > dy ? dx : -dy) / 2;
-	while (x1 != x2 || y1 != y2)
+	x = x1;
+	y = y1;
+	while (x < x2)
 	{
-		add_pixel(&cube->frame, color, x1, y1);
-		e = e - (dx > dy ? dy : -dx);
-		if (e < 0)
-		{
-			e = e + (dx > dy ? dx : -dy);
-			x1 = x1 + (dx > 0 ? i : -i);
-			y1 = y1 + (dy > 0 ? i : -i);
-		}
+		add_pixel(&cube->frame, color, x, y);
+		x += dx / dy;
+		y++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:08:49 by tpereira          #+#    #+#             */
-/*   Updated: 2023/01/25 08:32:43 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/26 11:23:26 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,21 @@ void	draw_player_2D(t_mlx *cube)
 	y = 0;
 	while (y != (int)cube->map.height)
 	{
-		yo = cube->player.posy * 32;
 		x = 0;
+		yo = cube->player.posy * 32;
 		while (x != (int)cube->map.width)
 		{
 			xo = cube->player.posx * 32;
-			if (cube->map.map[y][x] != '1' && cube->map.map[y][x] != ' ')
+			if (cube->map.map[y][x] == '0')
+			{
+				printf("x: %d, y: %d, dirx: %f, diry: %f, angle: %f\n", x, y, cube->player.dirx, cube->player.diry, cube->player.angle);
 				draw_square(cube, xo + 0.5, yo + 0.5, 8, YELLOW);
+				printf("dirx = %f, diry = %f\n", cube->player.dirx, cube->player.diry);
+				draw_square(cube, xo + 4 + cube->player.dirx, yo + 4 + cube->player.diry, 8, RED);
+				draw_line(cube, xo + 4, yo + 4, xo + 4 + cube->player.dirx, yo + 4 + cube->player.diry, RED);
+				// draw_line(cube, xo + 4 + cube->player.dirx, yo + 4 + cube->player.diry, xo + 4, yo + 4, RED);
+				// draw_line(cube, xo + 4, yo + 4, xo + 4 + cube->player.dirx * 50, yo + 4 + cube->player.diry * 50, RED);
+			}
 			x++;
 		}
 		y++;

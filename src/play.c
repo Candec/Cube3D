@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/25 08:35:30 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/26 12:13:21 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,12 @@ void	player(t_mlx *cube, int keysym)
 		|| keysym == MOVE_LEFT || keysym == MOVE_RIGHT)
 		move_player(cube, keysym);
 	if (keysym == LOOK_LEFT)
-		cube->player.dirx -= 0.1;
+		cube->player.angle -= 0.1;
 	if (keysym == LOOK_RIGHT)
-		cube->player.dirx += 0.1;
+		cube->player.angle += 0.1;
+	fix_angle(&cube->player.angle);
+	cube->player.dirx = cos(cube->player.angle) * 50;
+	cube->player.diry = -sin(cube->player.angle) * 50;
 	draw_map_2D(cube);
 }
 

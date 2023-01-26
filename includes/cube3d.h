@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/24 13:14:24 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/25 22:28:46 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,6 @@
 
 # ifndef WALL_HEIGHT
 #  define WALL_HEIGHT 64
-# endif
-
-# ifndef PI
-#  define PI 3.14159265358979323846
 # endif
 
 /*
@@ -132,16 +128,16 @@
 
 typedef struct s_player
 {
-	double	posx;
-	double	posy;
-	double	dirx;
-	double	diry;
-	double	angle;
-	double	planex;
-	double	planey;
-	double	height;
-	double	fov;
-	double	position;
+	float	posx;
+	float	posy;
+	float	dirx;
+	float	diry;
+	float	angle;
+	float	planex;
+	float	planey;
+	float	height;
+	float	fov;
+	float	position;
 
 	bool	e;
 }				t_player;
@@ -244,8 +240,10 @@ void	draw_wall(t_mlx *cube, int x, int y, int height);
 void	draw_player(t_mlx *cube, int x, int y, int height);
 void	draw_square(t_mlx *cube, int x, int y, int height, int color);
 void	blackout(t_mlx *cube);
-void	draw_line(t_mlx *cube, int x1, int y1, int x2, int y2, int color);
+void	draw_line(t_mlx *cube, float x1, float y1, float x2, float y2, int color);
 void	draw_circle(t_mlx *cube, int x, int y, int radius, int color);
+void	bresenham(t_mlx *cube, int x, int y, int x1, int y1);
+void	draw_fov(t_mlx *cube);
 
 /*
 **	error_handling.c
@@ -266,4 +264,9 @@ void	draw_player_2D(t_mlx *cube);
 */
 void	draw_map_2D(t_mlx *game);
 
+/*
+**	Math.c
+*/
+float	deg_to_rad(float deg);
+int		fix_angle(float *angle);
 #endif

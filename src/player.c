@@ -6,33 +6,37 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:28:31 by tpereira          #+#    #+#             */
-/*   Updated: 2023/01/25 08:32:01 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/26 12:13:01 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-void	init_player_dir(t_mlx *game, char c)
+void	init_player_dir(t_mlx *cube, char c)
 {
 	if (c == 'N')
 	{
-		game->player.dirx = -1;
-		game->player.planey = 0.66;
+		cube->player.angle = M_PI / 2;
+		cube->player.dirx = cos(cube->player.angle) * 50;
+		cube->player.diry = sin(cube->player.angle) * 50;
 	}
 	else if (c == 'S')
 	{
-		game->player.dirx = 1;
-		game->player.planey = -0.66;
+		cube->player.angle = (3 * M_PI) / 2;
+		cube->player.dirx = cos(cube->player.angle) * 50;
+		cube->player.diry = sin(cube->player.angle) * 50;
 	}
 	else if (c == 'E')
 	{
-		game->player.diry = 1;
-		game->player.planex = 0.66;
+		cube->player.angle = 2 * M_PI;
+		cube->player.dirx = cos(cube->player.angle) * 50;
+		cube->player.diry = sin(cube->player.angle) * 50;
 	}
 	else if (c == 'W')
 	{
-		game->player.diry = -1;
-		game->player.planex = -0.66;
+		cube->player.angle = M_PI;
+		cube->player.dirx = cos(cube->player.angle) * 50;
+		cube->player.diry = sin(cube->player.angle) * 50;
 	}
 }
 
@@ -49,10 +53,12 @@ void	init_player(t_mlx *cube)
 		{
 			if (ft_strchr("NSEW", cube->map.map[i][j]))
 			{
+				printf("c = %c\n\n", cube->map.map[i][j]);
 				cube->player.posx = j + 0.4 - 3;
 				cube->player.posy = (i * 2) - 1 + 0.4;
 				cube->player.dirx = 0;
 				cube->player.diry = 0;
+				cube->player.angle = 0;
 				cube->player.planex = 0;
 				cube->player.planey = 0;
 				init_player_dir(cube, cube->map.map[i][j]);
