@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:28:31 by tpereira          #+#    #+#             */
-/*   Updated: 2023/01/26 16:30:08 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/26 17:07:27 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,32 @@ void	init_player_dir(t_mlx *cube, char c)
 	if (c == 'N')
 	{
 		cube->player.angle = M_PI / 2;
-		cube->player.dirx = cos(cube->player.angle) * 50;
-		cube->player.diry = -sin(cube->player.angle) * 50;
+		cube->player.dirx = cos(cube->player.angle) * 5;
+		cube->player.diry = sin(cube->player.angle) * 5;
 	}
 	else if (c == 'S')
 	{
 		cube->player.angle = (3 * M_PI) / 2;
-		cube->player.dirx = cos(cube->player.angle) * 50;
-		cube->player.diry = -sin(cube->player.angle) * 50;
+		cube->player.dirx = cos(cube->player.angle) * 5;
+		cube->player.diry = sin(cube->player.angle) * 5;
 	}
 	else if (c == 'E')
 	{
 		cube->player.angle = 2 * M_PI;
-		cube->player.dirx = cos(cube->player.angle) * 50;
-		cube->player.diry = -sin(cube->player.angle) * 50;
+		cube->player.dirx = cos(cube->player.angle) * 5;
+		cube->player.diry = sin(cube->player.angle) * 5;
 	}
 	else if (c == 'W')
 	{
 		cube->player.angle = M_PI;
-		cube->player.dirx = cos(cube->player.angle) * 50;
-		cube->player.diry = -sin(cube->player.angle) * 50;
+		cube->player.dirx = cos(cube->player.angle) * 5;
+		cube->player.diry = sin(cube->player.angle) * 5;
 	}
 	else
 	{
 		cube->player.angle = M_PI;
-		cube->player.dirx = cos(cube->player.angle) * 50;
-		cube->player.diry = -sin(cube->player.angle) * 50;
+		cube->player.dirx = cos(cube->player.angle) * 5;
+		cube->player.diry = sin(cube->player.angle) * 5;
 	}
 }
 
@@ -60,11 +60,11 @@ void	init_player(t_mlx *cube)
 			if (ft_strchr("NSEW", cube->map.map[i][j]))
 			{
 				printf("c = %c\n\n", cube->map.map[i][j]);
-				cube->player.posx = j + 0.4 - 3;
+				cube->player.posx = j - 3 + 0.4;
 				cube->player.posy = (i * 2) - 1 + 0.4;
-				cube->player.dirx = 0;
-				cube->player.diry = 0;
-				cube->player.angle = 0;
+				cube->player.angle = 1.5;
+				cube->player.dirx = cos(cube->player.angle) * 5;
+				cube->player.diry = sin(cube->player.angle) * 5;
 				cube->player.planex = 0;					// what should we use this for? Is it the same as dirx?
 				cube->player.planey = 0;
 				init_player_dir(cube, cube->map.map[i][j]);

@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/25 22:28:46 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/26 17:11:19 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@
 # endif
 
 # ifndef WIN_WIDTH
-#  define WIN_WIDTH 1920
+#  define WIN_WIDTH 1366
 # endif
 
 # ifndef WIN_HEIGHT
-#  define WIN_HEIGHT 1200
+#  define WIN_HEIGHT 768
 # endif
 
 # ifndef WIDTH
@@ -242,7 +242,7 @@ void	draw_square(t_mlx *cube, int x, int y, int height, int color);
 void	blackout(t_mlx *cube);
 void	draw_line(t_mlx *cube, float x1, float y1, float x2, float y2, int color);
 void	draw_circle(t_mlx *cube, int x, int y, int radius, int color);
-void	bresenham(t_mlx *cube, int x, int y, int x1, int y1);
+void	bresenham(t_mlx *cube, float x1, float y1, int color);
 void	draw_fov(t_mlx *cube);
 
 /*
