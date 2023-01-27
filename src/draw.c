@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/27 09:48:40 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/27 16:13:34 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	add_pixel(t_img *frame, int rgb, int x, int y)
 {
 	//printf("x: %d, y: %d\n", x, y);
+	if (y < 0 || x < 0|| y > WIN_HEIGHT || x > WIN_WIDTH)
+		return ;
 	frame->data[y * WIN_WIDTH + x] = rgb;
 }
 
