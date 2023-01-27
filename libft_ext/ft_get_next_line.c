@@ -6,12 +6,11 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 10:48:14 by jibanez-          #+#    #+#             */
-/*   Updated: 2022/03/28 16:38:58 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/27 01:12:06 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
 
 static char	*strjoin_gnl(char const *s1, char const *s2)
 {

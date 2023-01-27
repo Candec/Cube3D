@@ -6,5 +6,6 @@
         "cstring": "c",
         "history.h": "c"
     },
-    "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools"
+	"C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools",
+	"C_Cpp.errorSquiggles": "disabled"
 }
