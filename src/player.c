@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:28:31 by tpereira          #+#    #+#             */
-/*   Updated: 2023/01/27 08:37:36 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/27 09:25:06 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	init_player(t_mlx *cube)
 				cube->player.posx = j + 0.4;
 				cube->player.posy = i + 0.4;
 				cube->player.angle = 1.5;
+				cube->player.fov = 0.66;
 				cube->player.dirx = cos(cube->player.angle) * 5;
 				cube->player.diry = sin(cube->player.angle) * 5;
 				cube->player.planex = 0;					// what should we use this for? Is it the same as dirx?

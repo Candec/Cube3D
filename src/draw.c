@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/26 22:33:01 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/27 09:48:40 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,23 +63,6 @@ void	draw_wall(t_mlx *cube, int x, int y, int height)
 	}
 }
 
-void	draw_circle(t_mlx *cube, int x, int y, int radius, int color)
-{
-	int i;
-	int j;
-
-	i = -1;
-	while (++i < radius)
-	{
-		j = -1;
-		while (++j < radius)
-		{
-			if (i * i + j * j < radius * radius)
-				add_pixel(&cube->frame, color, x, y);
-		}
-	}
-}
-
 void	draw_line(t_mlx *cube, float x, float y, float x2, float y2, int color)
 {
 	float dx;
@@ -104,5 +87,42 @@ void	draw_line(t_mlx *cube, float x, float y, float x2, float y2, int color)
 		x += xinc;
 		y += yinc;
 		i++;
+	}
+}
+
+void	draw_rays_2D(t_mlx *cube)
+{
+	int r;
+	int mp;
+	int dof;
+	float rx;
+	float ry;
+	float ra;
+	float xo;
+	float yo;
+
+	r = -1;
+	while (++r < WIN_WIDTH)
+	{
+		ra = cube->player.angle - cube->player.fov / 2 + (cube->player.fov / WIN_WIDTH) * r;
+		dof = 0;
+		rx = cube->player.posx;
+		ry = cube->player.posy;
+		xo = cos(ra) * 10;
+		yo = sin(ra) * 10;
+		while (dof < 8)
+		{
+			rx += xo;
+			ry += yo;
+			mp = (int)rx / (TILE_SIZE / 2) + (int)ry / (TILE_SIZE / 2) * cube->map.width;
+			if (ft_strcmp(cube->map.map[mp], "1"))
+			{
+				if (cube->map.map[mp][0] != '\0')
+					dof = 8;
+			}
+			else
+				dof += 1;
+		}
+		draw_line(cube, cube->player.posx * (TILE_SIZE / 2), cube->player.posy * (TILE_SIZE / 2), rx * (TILE_SIZE / 2), ry  * (TILE_SIZE / 2), GREEN);
 	}
 }

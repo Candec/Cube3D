@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_square_array.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:08:14 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/27 01:26:17 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/27 10:40:41 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ char	*ft_charstr(char c, size_t size)
 	char	*c_str;
 
 	i = -1;
-	c_str = ft_malloc(sizeof(char *) + 1);
+	str = ft_calloc(sizeof(char *), 1);
+	c_str = ft_calloc(sizeof(char *), 1);
 	c_str[0] = c;
 	c_str[1] = '\0';
 	while (++i < size)
