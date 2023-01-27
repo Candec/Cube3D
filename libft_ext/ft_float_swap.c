@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math.c                                             :+:      :+:    :+:   */
+/*   ft_float_swap.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/25 14:27:33 by tpereira          #+#    #+#             */
-/*   Updated: 2023/01/26 16:47:51 by tpereira         ###   ########.fr       */
+/*   Created: 2023/01/26 21:34:23 by tpereira          #+#    #+#             */
+/*   Updated: 2023/01/26 21:43:22 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "libft.h"
 
-float	deg_to_rad(float deg)
+void	ft_float_swap(float *a, float *b)
 {
-	return (deg * (M_PI / 180));
-}
+	float *c;
 
-int	fix_angle(float *angle)
-{
-	if (*angle < 0)
-		*angle += 2 * M_PI;
-	else if (*angle >= 2 * M_PI)
-		*angle -= 2 * M_PI;
-	return (0);
+	c = a;
+	*a = *b;
+	b = c;
 }

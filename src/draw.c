@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/26 11:25:16 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/26 22:33:01 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,21 +80,29 @@ void	draw_circle(t_mlx *cube, int x, int y, int radius, int color)
 	}
 }
 
-void	draw_line(t_mlx *cube, float x1, float y1, float x2, float y2, int color)
+void	draw_line(t_mlx *cube, float x, float y, float x2, float y2, int color)
 {
 	float dx;
 	float dy;
-	float x;
-	float y;
+	float step;
+	float xinc;
+	float yinc;
+	float i;
 
-	dx = x2 - x1;
-	dy = y2 - y1;
-	x = x1;
-	y = y1;
-	while (x < x2)
+	dx = x2 - x;
+	dy = y2 - y;
+	if (fabs(dx) > fabs(dy))
+		step = fabs(dx);
+	else
+		step = fabs(dy);
+	xinc = dx / step;
+	yinc = dy / step;
+	i = 1;
+	while (i <= step)
 	{
-		add_pixel(&cube->frame, color, x, y);
-		x += dx / dy;
-		y++;
+		add_pixel(&cube->frame, color, round(x), round(y));
+		x += xinc;
+		y += yinc;
+		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 15:48:17 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/27 01:13:31 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/27 09:48:08 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,5 +164,6 @@ void			ft_square_array(char ***arr, char c);
 char			*ft_charstr(char c, size_t size);
 size_t			ft_arr_height(char ***arr);
 size_t			ft_arr_width(char ***arr);
+void			ft_float_swap(float *a, float *b);
 
 #endif
