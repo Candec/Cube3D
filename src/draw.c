@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/27 18:02:17 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/30 15:38:25 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	draw_wall(t_mlx *cube, int x, int y, int height)
 	}
 }
 
-void	draw_line(t_mlx *cube, float x, float y, float x2, float y2)
+void	draw_line(t_mlx *cube, float x, float y, float x2, float y2, int color)
 {
 	float dx;
 	float dy;
@@ -82,7 +82,7 @@ void	draw_line(t_mlx *cube, float x, float y, float x2, float y2)
 	i = 1;
 	while (i <= step)
 	{
-		add_pixel(&cube->frame, GREEN, round(x), round(y));
+		add_pixel(&cube->frame, color, round(x), round(y));
 		x += xinc;
 		y += yinc;
 		i++;
@@ -113,7 +113,7 @@ void	draw_rays_2D(t_mlx *cube)
 		{
 			rx += xo;
 			ry += yo;
-			mp = (int)rx / (TILE_SIZE / 2) + (int)ry / (TILE_SIZE / 2) * cube->map.width;
+			mp = (int)rx / TILE_SIZE + (int)ry / TILE_SIZE * cube->map.width;
 			if (ft_strcmp(cube->map.map[mp], "1"))
 			{
 				if (cube->map.map[mp][0] != '\0')
@@ -122,6 +122,6 @@ void	draw_rays_2D(t_mlx *cube)
 			else
 				dof += 1;
 		}
-		draw_line(cube, cube->player.posx * (TILE_SIZE / 2), cube->player.posy * (TILE_SIZE / 2), rx * (TILE_SIZE / 2), ry  * (TILE_SIZE / 2));
+		draw_line(cube, cube->player.posx * TILE_SIZE, cube->player.posy * TILE_SIZE, rx * TILE_SIZE, ry  * TILE_SIZE, YELLOW);
 	}
 }
