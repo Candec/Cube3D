@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:09 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/27 00:57:14 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/30 10:12:44 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,15 @@ int	main(int argc, char *argv[])
 {
 	t_mlx	cube;
 
-	if (argc == 2)
-	{
-		init(&cube);
-		parse(&cube, argv[1]);
-		play(&cube);
-		quit(&cube);
-	}
-	else
+	if (argc != 2)
 	{
 		write(1, "INVALID NUMBER OF ARGUMENTS\n", 29);
 		return (1);
 	}
+	init(&cube);
+	parse(&cube, argv[1]);
+	play(&cube);
+	quit(&cube);
+
 	return (0);
 }

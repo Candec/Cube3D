@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/27 08:50:35 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/27 18:03:01 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,7 +240,7 @@ void	draw_wall(t_mlx *cube, int x, int y, int height);
 void	draw_player(t_mlx *cube, int x, int y, int height);
 void	draw_square(t_mlx *cube, int x, int y, int height, int color);
 void	blackout(t_mlx *cube);
-void	draw_line(t_mlx *cube, float x1, float y1, float x2, float y2, int color);
+void	draw_line(t_mlx *cube, float x1, float y1, float x2, float y2);
 void	draw_circle(t_mlx *cube, int x, int y, int radius, int color);
 void	bresenham(t_mlx *cube, float x1, float y1, int color);
 void	draw_fov(t_mlx *cube);

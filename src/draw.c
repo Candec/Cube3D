@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/27 16:13:34 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/27 18:02:17 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	draw_wall(t_mlx *cube, int x, int y, int height)
 	}
 }
 
-void	draw_line(t_mlx *cube, float x, float y, float x2, float y2, int color)
+void	draw_line(t_mlx *cube, float x, float y, float x2, float y2)
 {
 	float dx;
 	float dy;
@@ -74,18 +74,15 @@ void	draw_line(t_mlx *cube, float x, float y, float x2, float y2, int color)
 	float yinc;
 	float i;
 
-	dx = x2 - x;
-	dy = y2 - y;
-	if (fabs(dx) > fabs(dy))
-		step = fabs(dx);
-	else
-		step = fabs(dy);
-	xinc = dx / step;
-	yinc = dy / step;
+	dx = fabs(x2 - x);
+	dy = fabs(y2 - y);
+	step = ft_ternary_float(dx > dy, dx, dy);
+	xinc = (x2 - x) / step;
+	yinc = (y2 - y) / step;
 	i = 1;
 	while (i <= step)
 	{
-		add_pixel(&cube->frame, color, round(x), round(y));
+		add_pixel(&cube->frame, GREEN, round(x), round(y));
 		x += xinc;
 		y += yinc;
 		i++;
@@ -125,6 +122,6 @@ void	draw_rays_2D(t_mlx *cube)
 			else
 				dof += 1;
 		}
-		draw_line(cube, cube->player.posx * (TILE_SIZE / 2), cube->player.posy * (TILE_SIZE / 2), rx * (TILE_SIZE / 2), ry  * (TILE_SIZE / 2), GREEN);
+		draw_line(cube, cube->player.posx * (TILE_SIZE / 2), cube->player.posy * (TILE_SIZE / 2), rx * (TILE_SIZE / 2), ry  * (TILE_SIZE / 2));
 	}
 }

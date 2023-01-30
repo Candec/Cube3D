@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:08:49 by tpereira          #+#    #+#             */
-/*   Updated: 2023/01/27 09:09:26 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/27 17:29:40 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,12 @@ void	draw_player_2D(t_mlx *cube)
 	double xo;
 	double yo;
 
-	y = 0;
-	while (y != (int)cube->map.height)
+	y = -1;
+	while (++y != (int)cube->map.height)
 	{
-		x = 0;
+		x = -1;
 		yo = cube->player.posy * (TILE_SIZE / 2);
-		while (x != (int)cube->map.width)
+		while (++x != (int)cube->map.width)
 		{
 			xo = cube->player.posx * (TILE_SIZE / 2);
 			if (cube->map.map[y][x] == '0')
@@ -86,9 +86,7 @@ void	draw_player_2D(t_mlx *cube)
 				//draw_square(cube, xo + 4 + cube->player.dirx * 3, yo + 4 + cube->player.diry * 3, 8, RED);
 				//draw_line(cube, xo + cube->player.dirx * 10, yo + cube->player.diry * 10, xo + 2, yo + 2, RED);
 			}
-			x++;
 		}
-		y++;
 	}
 	draw_rays_2D(cube);
 	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->frame.img, 0, 0);
