@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/30 19:10:43 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:22:35 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,36 +99,16 @@ void	draw_rays_2D(t_mlx *cube)
 	float ra;
 	float xo;
 	float yo;
-	float mx;
-	float my;
-	float a_tan;
 
 	r = -1;
 	while (++r < WIN_WIDTH)
 	{
 		ra = cube->player.angle;
-		a_tan = -1 / tan(ra);
 		dof = 0;
-		if (ra > M_PI)
-		{
-			ry = (((int)cube->player.posy >> 6) << 6) - 0.0001;
-			rx = (cube->player.posy - ry) * a_tan + cube->player.posx;
-			yo = -1 * (TILE_SIZE / 2);
-			xo = -yo * a_tan;
-		}
-		if (ra < M_PI)
-		{
-			ry = (((int)cube->player.posy >> 6) << 6) + (TILE_SIZE / 2);
-			rx = (cube->player.posy - ry) * a_tan + cube->player.posx;
-			yo = TILE_SIZE / 2;
-			xo = -yo * a_tan;
-		}
-		if (ra == 0 || ra == M_PI)
-		{
-			rx = cube->player.posx;
-			ry = cube->player.posy;
-			dof = 8;
-		}
+		rx = cube->player.posx;
+		ry = cube->player.posy;
+		xo = cos(ra) * 10;
+		yo = sin(ra) * 10;
 		while (dof < 8)
 		{
 			rx += xo;
@@ -146,6 +126,6 @@ void	draw_rays_2D(t_mlx *cube)
 				ry += yo;
 			}
 		}
-		draw_line(cube, cube->player.posx * TILE_SIZE, cube->player.posy * TILE_SIZE, rx * TILE_SIZE, ry  * TILE_SIZE, YELLOW);
+		draw_line(cube, cube->player.posx * TILE_SIZE, cube->player.posy * TILE_SIZE, rx * TILE_SIZE, ry  * TILE_SIZE, RED);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:09 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/30 10:12:44 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/30 21:22:40 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	parse(t_mlx *cube, char *map)
 	info(cube, map);
 	validate_chr(cube);
 	validate_map(cube);
-	ft_square_array(&cube->map.map, ',');
+	ft_square_array(&cube->map.map, ' ');
 	init_player(cube);
 }
 
