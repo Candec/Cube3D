@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:08:49 by tpereira          #+#    #+#             */
-/*   Updated: 2023/01/30 15:37:26 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/30 22:04:36 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,7 @@ void	draw_player_2D(t_mlx *cube)
 			xo = cube->player.posx * TILE_SIZE;
 			if (cube->map.map[y][x] == '0')
 			{
-				printf("x: %d, y: %d, cos(angle): %f, sin(angle): %f, angle: %f\n", x, y, cos(cube->player.angle), sin(cube->player.angle), cube->player.angle);
 				draw_square(cube, xo, yo, 8, YELLOW);
-				printf("dirx = %f, diry = %f\n", cube->player.dirx, cube->player.diry);
 				//draw_square(cube, xo + 4 + cube->player.dirx * 3, yo + 4 + cube->player.diry * 3, 8, RED);
 				//draw_line(cube, xo + cube->player.dirx * 10, yo + cube->player.diry * 10, xo + 2, yo + 2, RED);
 			}

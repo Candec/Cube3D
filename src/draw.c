@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/30 21:22:35 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/30 22:15:37 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ void	draw_line(t_mlx *cube, float x, float y, float x2, float y2, int color)
 void	draw_rays_2D(t_mlx *cube)
 {
 	int r;
-	int mp;
 	int dof;
 	float rx;
 	float ry;
@@ -103,28 +102,34 @@ void	draw_rays_2D(t_mlx *cube)
 	r = -1;
 	while (++r < WIN_WIDTH)
 	{
-		ra = cube->player.angle;
+		ra = cube->player.angle - (cube->player.fov / 2) + ((float)r / (float)WIN_WIDTH) * cube->player.fov;
 		dof = 0;
 		rx = cube->player.posx;
 		ry = cube->player.posy;
-		xo = cos(ra) * 10;
-		yo = sin(ra) * 10;
+		xo = cos(ra) * 5;
+		yo = sin(ra) * 5;
+		rx += xo;
+		ry += yo;
+		printf("cube->player.posx: %f, cube->player.posy: %f, xo: %f, yo: %f\n", cube->player.posx, cube->player.posy, xo, yo);
 		while (dof < 8)
 		{
-			rx += xo;
-			ry += yo;
-			mp = (int)rx / TILE_SIZE + (int)ry / TILE_SIZE * cube->map.width;
-			if (ft_strcmp(cube->map.map[mp], "1"))
+			if (rx > 0 && ry > 0 && rx < cube->map.width && ry < cube->map.height)
 			{
-				if (cube->map.map[mp][0] != '\0')
+				if (cube->map.map[(int)(ry)][(int)(rx)] == '1')
+				{
+					printf("rx: %d, ry: %d\n", (int)rx, (int)ry);
+					printf("map[ry][rx]: %c\n", cube->map.map[(int)(ry)][(int)(rx)]);
 					dof = 8;
+				}
+				else
+				{
+					dof += 1;
+					rx += xo;
+					ry += yo;
+				}
 			}
 			else
-			{
-				dof += 1;
-				rx += xo;
-				ry += yo;
-			}
+				dof = 8;
 		}
 		draw_line(cube, cube->player.posx * TILE_SIZE, cube->player.posy * TILE_SIZE, rx * TILE_SIZE, ry  * TILE_SIZE, RED);
 	}
