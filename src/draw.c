@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/27 16:13:34 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/30 12:54:56 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,29 +102,56 @@ void	draw_rays_2D(t_mlx *cube)
 	float ra;
 	float xo;
 	float yo;
+	float mx;
+	float my;
+	float a_tan;
 
 	r = -1;
 	while (++r < WIN_WIDTH)
 	{
-		ra = cube->player.angle - cube->player.fov / 2 + (cube->player.fov / WIN_WIDTH) * r;
+		ra = cube->player.angle;
+		a_tan = -1 / tan(ra);
 		dof = 0;
-		rx = cube->player.posx;
-		ry = cube->player.posy;
-		xo = cos(ra) * 10;
-		yo = sin(ra) * 10;
+		if (ra > M_PI)
+		{
+			ry = (((int)cube->player.posy >> 6) << 6) - 0.0001;
+			rx = (cube->player.posy - ry) * a_tan + cube->player.posx;
+			yo = -1 * (TILE_SIZE / 2);
+			xo = -yo * a_tan;
+		}
+		if (ra < M_PI)
+		{
+			ry = (((int)cube->player.posy >> 6) << 6) + (TILE_SIZE / 2);
+			rx = (cube->player.posy - ry) * a_tan + cube->player.posx;
+			yo = TILE_SIZE / 2;
+			xo = -yo * a_tan;
+		}
+		if (ra == 0 || ra == M_PI)
+		{
+			rx = cube->player.posx;
+			ry = cube->player.posy;
+			dof = 8;
+		}
 		while (dof < 8)
 		{
-			rx += xo;
-			ry += yo;
-			mp = (int)rx / (TILE_SIZE / 2) + (int)ry / (TILE_SIZE / 2) * cube->map.width;
+			mx = (int)rx >> 3;
+			my = (int)ry >> 3;
+			mp = my * cube->map.width + mx;
+			printf("mp: %d\n cube->map.width: %d\n cube->map.map[mp]: %s\n cube->map.map[mp][0]: %c\n dof: %d\n mx: %f\n my: %f\n", mp, (int)cube->map.width, cube->map.map[mp], (int)cube->map.map[mp][0], dof, mx, my);
+			if ((size_t)mp < cube->map.width * cube->map.height && ft_strcmp(cube->map.map[mp], "1"))
+				dof = 8;
 			if (ft_strcmp(cube->map.map[mp], "1"))
 			{
 				if (cube->map.map[mp][0] != '\0')
 					dof = 8;
 			}
 			else
+			{
 				dof += 1;
+				rx += xo;
+				ry += yo;
+			}
 		}
-		draw_line(cube, cube->player.posx * (TILE_SIZE / 2), cube->player.posy * (TILE_SIZE / 2), rx * (TILE_SIZE / 2), ry  * (TILE_SIZE / 2), GREEN);
+		draw_line(cube, cube->player.posx * (TILE_SIZE / 2) + 2, cube->player.posy * (TILE_SIZE / 2) + 2, rx * (TILE_SIZE / 2), ry  * (TILE_SIZE / 2), GREEN);
 	}
 }
