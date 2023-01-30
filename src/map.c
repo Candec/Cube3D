@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:08:49 by tpereira          #+#    #+#             */
-/*   Updated: 2023/01/27 09:09:26 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/30 15:37:26 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,19 @@ void	draw_map_2D(t_mlx *cube)
 	print_map(cube);
 	while (y != (int)cube->map.height)
 	{
-		yo = y * (TILE_SIZE / 2);
+		yo = y * TILE_SIZE;
 		x = 0;
 		while (cube->map.map[y][x] != '\0' && x != (int)cube->map.width)
 		{
-			xo = x * (TILE_SIZE / 2);
+			xo = x * TILE_SIZE;
 			if (cube->map.map[y][x] == '1')
-				draw_square(cube, (xo), (yo), (TILE_SIZE / 2) - 2, WHITE);
+				draw_square(cube, (xo), (yo), TILE_SIZE - 1, WHITE);
 			else if (cube->map.map[y][x] == '0')
-				draw_square(cube, (xo), (yo), (TILE_SIZE / 2) - 2, BLUE);
+				draw_square(cube, (xo), (yo), TILE_SIZE - 1, BLUE);
 			else if (ft_strchr("NSEW", cube->map.map[y][x]))
-				draw_square(cube, (xo), (yo), (TILE_SIZE / 2) - 2, BLUE);
+				draw_square(cube, (xo), (yo), TILE_SIZE - 1, BLUE);
 			else
-				draw_square(cube, (xo), (yo), (TILE_SIZE / 2) - 2, GREEN);
+				draw_square(cube, (xo), (yo), TILE_SIZE - 1, GREEN);
 			x++;
 		}
 		y++;
@@ -70,14 +70,14 @@ void	draw_player_2D(t_mlx *cube)
 	double xo;
 	double yo;
 
-	y = 0;
-	while (y != (int)cube->map.height)
+	y = -1;
+	while (++y != (int)cube->map.height)
 	{
-		x = 0;
-		yo = cube->player.posy * (TILE_SIZE / 2);
-		while (x != (int)cube->map.width)
+		x = -1;
+		yo = cube->player.posy * TILE_SIZE;
+		while (++x != (int)cube->map.width)
 		{
-			xo = cube->player.posx * (TILE_SIZE / 2);
+			xo = cube->player.posx * TILE_SIZE;
 			if (cube->map.map[y][x] == '0')
 			{
 				printf("x: %d, y: %d, cos(angle): %f, sin(angle): %f, angle: %f\n", x, y, cos(cube->player.angle), sin(cube->player.angle), cube->player.angle);
@@ -86,9 +86,7 @@ void	draw_player_2D(t_mlx *cube)
 				//draw_square(cube, xo + 4 + cube->player.dirx * 3, yo + 4 + cube->player.diry * 3, 8, RED);
 				//draw_line(cube, xo + cube->player.dirx * 10, yo + cube->player.diry * 10, xo + 2, yo + 2, RED);
 			}
-			x++;
 		}
-		y++;
 	}
 	draw_rays_2D(cube);
 	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->frame.img, 0, 0);

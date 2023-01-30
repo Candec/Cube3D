@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/27 08:21:45 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/30 15:39:03 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,15 @@ void	move_player(t_mlx *cube, int keysym)
 	x = cube->player.posx;
 	y = cube->player.posy;
 	if (keysym == MOVE_UP)
-		cube->player.posy -= 0.1;
+	{
+		cube->player.posy += cube->player.diry / TILE_SIZE;
+		cube->player.posx += cube->player.dirx / TILE_SIZE;
+	}
 	if (keysym == MOVE_DOWN)
-		cube->player.posy += 0.1;
+	{
+		cube->player.posy -= cube->player.diry / TILE_SIZE;
+		cube->player.posx -= cube->player.dirx / TILE_SIZE;
+	}
 	if (keysym == MOVE_LEFT)
 		cube->player.posx -= 0.1;
 	if (keysym == MOVE_RIGHT)
@@ -84,9 +90,9 @@ void	player(t_mlx *cube, int keysym)
 		|| keysym == MOVE_LEFT || keysym == MOVE_RIGHT)
 		move_player(cube, keysym);
 	if (keysym == LOOK_LEFT)
-		cube->player.angle -= 0.05;
+		cube->player.angle -= 0.1;
 	if (keysym == LOOK_RIGHT)
-		cube->player.angle += 0.05;
+		cube->player.angle += 0.1;
 	fix_angle(&cube->player.angle);
 	cube->player.dirx = cos(cube->player.angle) * 5;
 	cube->player.diry = sin(cube->player.angle) * 5;

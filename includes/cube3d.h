@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/27 08:50:35 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/30 15:32:20 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@
 # endif
 
 # ifndef TILE_SIZE
-#  define TILE_SIZE 64
+#  define TILE_SIZE 32
 # endif
 
 # ifndef WALL_HEIGHT
@@ -91,33 +91,6 @@
 
 # ifndef BLACK
 #  define BLACK 0x000000
-# endif
-
-
-/*
-**	=================
-**	 Keyboard Macros
-**	=================
-*/
-
-# ifndef ESCAPE
-#  define ESCAPE 53
-# endif
-
-# ifndef FORWARD
-#  define FORWARD 65362
-# endif
-
-# ifndef BACKWARD
-#  define BACKWARD 65364
-# endif
-
-# ifndef LEFT
-#  define LEFT 65361
-# endif
-
-# ifndef RIGHT
-#  define RIGHT 65363
 # endif
 
 /*

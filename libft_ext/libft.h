@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 15:48:17 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/27 09:48:08 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/27 17:54:43 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ int				ft_file_format(char *file, char *file_format);
 void			ft_clean_arr(char **arr);
 int64_t			ft_ternary64(int flag, int64_t a, int64_t b);
 double			ft_ternary_double(int flag, double a, double b);
+float			ft_ternary_float(int flag, float a, float b);
 int8_t			ft_set8(int8_t *a, int8_t b);
 int16_t			ft_set16(int16_t *a, int16_t b);
 int32_t			ft_set32(int32_t *a, int32_t b);

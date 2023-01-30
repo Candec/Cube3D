@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/30 12:54:56 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/30 19:10:43 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,11 @@ void	draw_line(t_mlx *cube, float x, float y, float x2, float y2, int color)
 	float yinc;
 	float i;
 
-	dx = x2 - x;
-	dy = y2 - y;
-	if (fabs(dx) > fabs(dy))
-		step = fabs(dx);
-	else
-		step = fabs(dy);
-	xinc = dx / step;
-	yinc = dy / step;
+	dx = fabs(x2 - x);
+	dy = fabs(y2 - y);
+	step = ft_ternary_float(dx > dy, dx, dy);
+	xinc = (x2 - x) / step;
+	yinc = (y2 - y) / step;
 	i = 1;
 	while (i <= step)
 	{
@@ -134,12 +131,9 @@ void	draw_rays_2D(t_mlx *cube)
 		}
 		while (dof < 8)
 		{
-			mx = (int)rx >> 3;
-			my = (int)ry >> 3;
-			mp = my * cube->map.width + mx;
-			printf("mp: %d\n cube->map.width: %d\n cube->map.map[mp]: %s\n cube->map.map[mp][0]: %c\n dof: %d\n mx: %f\n my: %f\n", mp, (int)cube->map.width, cube->map.map[mp], (int)cube->map.map[mp][0], dof, mx, my);
-			if ((size_t)mp < cube->map.width * cube->map.height && ft_strcmp(cube->map.map[mp], "1"))
-				dof = 8;
+			rx += xo;
+			ry += yo;
+			mp = (int)rx / TILE_SIZE + (int)ry / TILE_SIZE * cube->map.width;
 			if (ft_strcmp(cube->map.map[mp], "1"))
 			{
 				if (cube->map.map[mp][0] != '\0')
@@ -152,6 +146,6 @@ void	draw_rays_2D(t_mlx *cube)
 				ry += yo;
 			}
 		}
-		draw_line(cube, cube->player.posx * (TILE_SIZE / 2) + 2, cube->player.posy * (TILE_SIZE / 2) + 2, rx * (TILE_SIZE / 2), ry  * (TILE_SIZE / 2), GREEN);
+		draw_line(cube, cube->player.posx * TILE_SIZE, cube->player.posy * TILE_SIZE, rx * TILE_SIZE, ry  * TILE_SIZE, YELLOW);
 	}
 }
