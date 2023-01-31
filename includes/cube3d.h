@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/31 12:52:06 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/31 14:48:48 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@
 # endif
 
 # ifndef TILE_SIZE
-#  define TILE_SIZE 32
+#  define TILE_SIZE 48
 # endif
 
 # ifndef WALL_HEIGHT

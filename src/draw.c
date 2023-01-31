@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/31 12:39:47 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/31 15:56:52 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,22 +151,15 @@ void	draw_rays_2D(t_mlx *cube)
 	{
 		ra = cube->player.angle -(cube->player.fov / 2) + ((float)r / (float)WIN_WIDTH) * cube->player.fov;
 		dof = 0;
-		if (ra < M_PI)
-		{
-			printf("ra < M_PI\n");
-			ry = ((cube->player.posy / TILE_SIZE) * TILE_SIZE) - 0.0001;
-			rx = (cube->player.posy - ry) * (-1 / tan(ra)) + cube->player.posx;
-			xo = cos(ra) * -0.01;
-			yo = sin(ra) * -0.01;
-		}
-		ry = ((cube->player.posy / TILE_SIZE) * TILE_SIZE) - 0.0001;
+		ry = ((cube->player.posy / (TILE_SIZE - 1)) * (TILE_SIZE - 1)) - 0.0001;
 		rx = (cube->player.posy - ry) * (-1 / tan(ra)) + cube->player.posx;
-		xo = cos(ra) * 0.01;
-		yo = sin(ra) * 0.01;
+		xo = cos(ra) * 0.001;
+		yo = sin(ra) * 0.001;
 		while (dof < INT_MAX)
 		{
 			if (rx > 0 && ry > 0 && rx < cube->map.width && ry < cube->map.height)
 			{
+				//printf("cube->map.map[(int)floor(ry)][(int)floor(rx)]: %c\n", cube->map.map[(int)floor(ry)][(int)floor(rx)]);
 				if (cube->map.map[(int)floor(ry)][(int)floor(rx)] == '1')
 					dof = INT_MAX;
 				else
