@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/31 11:24:54 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/31 12:16:54 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,6 @@ int	draw_frame(t_mlx *cube)
 	//draw_bg(cube);
 	//draw_wall(cube, 500, 500, 100);
 	draw_map_2D(cube);
-	//draw_player_2D(cube);
-	// draw_square(cube, 0, 0, 100, 0x00FF0000);
 	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->frame.img, 0, 0);
 	return (0);
 }
