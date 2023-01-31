@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/31 12:28:27 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/31 12:52:06 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,18 @@ typedef struct s_game
 	t_mlx		cube;
 }				t_game;
 
+typedef struct s_raycast
+{
+	t_coord	end;
+	t_coord	dir;
+	t_coord	grid;
+	t_coord	len;
+	t_coord	step;
+	t_coord	step_size;
+	t_coord	intersection;
+	double	distance;
+	bool	reach_end;
+}				t_raycast;
 
 /*
 **	=============
@@ -255,4 +267,10 @@ void	draw_map_2D(t_mlx *game);
 */
 float	deg_to_rad(float deg);
 int		fix_angle(float *angle);
+
+/*
+**	dda.c
+*/
+t_coord	dda(t_mlx *cube, double x, double y);
+
 #endif

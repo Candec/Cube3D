@@ -6,70 +6,71 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 02:00:19 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/31 02:01:10 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/31 11:24:59 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "c3d.h"
 
-t_coord	dda(t_mlx *cube, size_t x, size_t y)
+static void	init_dda(t_mlx *c, t_raycast *r, double x, double y)
 {
-	t_coord	endcell;
-	t_coord	ray_dir;
-	t_coord	cur_grid;
-	t_coord	ray_len;
-	t_coord	ray_step;
-	t_coord	ray_unit_step_size;
-	t_coord	intersection;
-	double	distance;
-	bool	reach_end;
+	r.distance = 0.0;
+	r.reach_end = false;
+	r.end = ft_coord(x, y);
+	r.dir = ft_coord(r.end.x - c->player.pos.x, r.end.y - c->player.pos.y);
+	r.step_size = ft_coord(sqrt(1 + ft_powd((r.dir.y / r.dir.x), 2.0)),
+			sqrt(1 + ft_powd((r.dir.x / r.dir.y), 2.0)));
+	r.grid = ft_coord(c->player.pos.x, c->player.pos.y);
+}
 
-	endcell = ft_init_coord(x, y);
-	ray_dir = ft_init_coord(endcell.x - cube->player.pos.x,
-			endcell.y - cube->player.pos.y);
-	ray_unit_step_size = ft_init_coord(sqrt(1 + ft_powd((ray_dir.y / ray_dir.x), 2.0)),
-			sqrt(1 + ft_powd((ray_dir.x / ray_dir.y), 2.0)));
-	cur_grid = ft_init_coord(cube->player.pos.x, cube->player.pos.y);
-	if (ray_dir.x < 0)
+static void	dir_dda(t_mlx *c, t_raycast *r)
+{
+	if (r.dir.x < 0)
 	{
-		ray_step.x = -1;
-		ray_len.x = (cube->player.pos.x - cur_grid.x) * ray_unit_step_size.x;
+		r.step.x = -1;
+		r.len.x = (c->player.pos.x - r.grid.x) * r.step_size.x;
 	}
 	else
 	{
-		ray_step.x = 1;
-		ray_len.x = ((cur_grid.x + 1) - cube->player.pos.x) * ray_unit_step_size.x;
+		r.step.x = 1;
+		r.len.x = ((r.grid.x + 1) - c->player.pos.x) * r.step_size.x;
 	}
-	if (ray_dir.y < 0)
+	if (r.dir.y < 0)
 	{
-		ray_step.y = -1;
-		ray_len.y = (cube->player.pos.y - cur_grid.y) * ray_unit_step_size.y;
+		r.step.y = -1;
+		r.len.y = (c->player.pos.y - r.grid.y) * r.step_size.y;
 	}
 	else
 	{
-		ray_step.y = 1;
-		ray_len.y = ((cur_grid.y + 1) - cube->player.pos.y) * ray_unit_step_size.y;
+		r.step.y = 1;
+		r.len.y = ((r.grid.y + 1) - c->player.pos.y) * r.step_size.y;
 	}
-	reach_end = false;
-	distance = 0.0;
-	while (!reach_end)
+}
+
+t_coord	dda(t_mlx *c, double x, double y)
+{
+	t_raycast *r;
+
+	init_dda(c, r, x, y);
+	dir_dda(c, r);
+	while (!r.reach_end)
 	{
-		if (ray_len.x < ray_len.y)
+		if (r.len.x < r.len.y)
 		{
-			cur_grid.x += ray_step.x;
-			distance = ray_len.x;
-			ray_len.x += ray_unit_step_size.x;
+			r.grid.x += r.step.x;
+			r.distance = r.len.x;
+			r.len.x += r.step_size.x;
 		}
 		else
 		{
-			cur_grid.y += ray_step.y;
-			distance = ray_len.y;
-			ray_len.y += ray_unit_step_size.y;
+			r.grid.y += r.step.y;
+			r.distance = r.len.y;
+			r.len.y += r.step_size.y;
 		}
-		if (ft_strncmp(&cube->map.map[(int)cur_grid.y][(int)cur_grid.x], "1", 1))
-			reach_end = true;
+		if (ft_strncmp(&c->map.map[(int)r.grid.y][(int)r.grid.x], "1", 1))
+			r.reach_end = true;
 	}
-	intersection.x = cube->player.pos.x + ray_dir.x * distance;
-	intersection.y = cube->player.pos.y + ray_dir.y * distance;
-	return (intersection);
+	r.intersection = ft_coord(c->player.pos.x + r.dir.x * r.distance,
+		c->player.pos.y + r.dir.y * r.distance);
+	return (r.intersection);
 }
