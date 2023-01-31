@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/31 14:48:48 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/31 18:08:07 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@
 # endif
 
 # ifndef TILE_SIZE
-#  define TILE_SIZE 48
+#  define TILE_SIZE 32
 # endif
 
 # ifndef WALL_HEIGHT
@@ -111,7 +111,7 @@
 
 typedef struct s_player
 {
-	t_coord pos;
+	t_coord	pos;
 	float	posx;
 	float	posy;
 	float	dirx;

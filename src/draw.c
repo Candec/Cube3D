@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/31 15:56:52 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/31 18:33:14 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,14 +123,17 @@ void	raycaster_3D(t_mlx *cube, float dist, float angle, int r)
 			dof = INT_MAX;
 	}
 	dist = distance(cube->player.posx, cube->player.posy, ray_x, ray_y);
-	wall_height = (TILE_SIZE / dist) * cube->player.dirx;	// not working properly - needs to be fixed
+	wall_height = (TILE_SIZE / dist) * WALL_HEIGHT;
 	wall_top = (WIN_HEIGHT / 2) - (wall_height / 2);
 	wall_bottom = (WIN_HEIGHT / 2) + (wall_height / 2);
 	wall_color = GREEN;
-	if (angle > 0 && angle < M_PI)
+	if (angle > 0)
 		wall_color = BLUE;
+	else if (angle < M_PI)
+		wall_color = RED;
 	else
 		wall_color = YELLOW;
+	//draw_bg(cube);
 	draw_line(cube, r, 0, r, wall_top, 0x000000);
 	draw_line(cube, r, wall_top, r, wall_bottom, wall_color);
 	draw_line(cube, r, wall_bottom, r, WIN_HEIGHT, 0x000000);
@@ -159,7 +162,6 @@ void	draw_rays_2D(t_mlx *cube)
 		{
 			if (rx > 0 && ry > 0 && rx < cube->map.width && ry < cube->map.height)
 			{
-				//printf("cube->map.map[(int)floor(ry)][(int)floor(rx)]: %c\n", cube->map.map[(int)floor(ry)][(int)floor(rx)]);
 				if (cube->map.map[(int)floor(ry)][(int)floor(rx)] == '1')
 					dof = INT_MAX;
 				else
@@ -172,7 +174,7 @@ void	draw_rays_2D(t_mlx *cube)
 			else
 				dof = INT_MAX;
 		}
-		draw_line(cube, (cube->player.posx * TILE_SIZE) + TILE_SIZE / 8, (cube->player.posy * TILE_SIZE) + TILE_SIZE / 8, rx * TILE_SIZE, ry  * TILE_SIZE, RED);
-		//raycaster_3D(cube, distance(cube->player.posx, cube->player.posy, rx, ry), ra, r);
+		draw_line(cube, (cube->player.posx * TILE_SIZE) + TILE_SIZE / 8, (cube->player.posy * TILE_SIZE) + TILE_SIZE / 8, rx * TILE_SIZE, ry * TILE_SIZE, RED);
+		raycaster_3D(cube, distance(cube->player.posx, cube->player.posy, rx, ry), ra, r);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/31 12:16:54 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/31 18:28:50 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,15 @@ void	move_player(t_mlx *cube, int keysym)
 	}
 }
 
+void draw_loop(t_mlx *cube)
+{
+	blackout(cube);
+	draw_map_2D(cube);
+	draw_player_2D(cube);
+	draw_rays_2D(cube);
+	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->frame.img, 0, 0);
+}
+
 void	player(t_mlx *cube, int keysym)
 {
 	if (keysym == MOVE_UP || keysym == MOVE_DOWN
@@ -96,14 +105,14 @@ void	player(t_mlx *cube, int keysym)
 	fix_angle(&cube->player.angle);
 	cube->player.dirx = cos(cube->player.angle) * 5;
 	cube->player.diry = sin(cube->player.angle) * 5;
-	draw_map_2D(cube);
+	draw_loop(cube);
 }
 
 int	keypress(int keysym, t_mlx *cube)
 {
 	if (keysym == ESC)
 		quit(cube);
-	printf("%d\n", keysym);
+	//printf("%d\n", keysym);
 	player(cube, keysym);
 	// if (cube->map.player_escape == TRUE)
 	// 	return (0);
@@ -113,6 +122,7 @@ int	keypress(int keysym, t_mlx *cube)
 	return (0);
 }
 
+
 int	draw_frame(t_mlx *cube)
 {
 	cube->frame.img_width = WIN_WIDTH;
@@ -121,8 +131,8 @@ int	draw_frame(t_mlx *cube)
 	cube->frame.data = (int *)mlx_get_data_addr(cube->frame.img, &cube->frame.bpp, &cube->frame.size_l, &cube->frame.endian);
 	//draw_bg(cube);
 	//draw_wall(cube, 500, 500, 100);
-	draw_map_2D(cube);
-	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->frame.img, 0, 0);
+	draw_loop(cube);
+	// draw_map_2D(cube);
 	return (0);
 }
 
