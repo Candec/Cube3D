@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/30 17:37:03 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/31 02:06:58 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@
 # endif
 
 # ifndef TILE_SIZE
-#  define TILE_SIZE 64
+#  define TILE_SIZE 32
 # endif
 
 # ifndef WALL_HEIGHT
@@ -91,33 +91,6 @@
 
 # ifndef BLACK
 #  define BLACK 0x000000
-# endif
-
-
-/*
-**	=================
-**	 Keyboard Macros
-**	=================
-*/
-
-# ifndef ESCAPE
-#  define ESCAPE 53
-# endif
-
-# ifndef FORWARD
-#  define FORWARD 65362
-# endif
-
-# ifndef BACKWARD
-#  define BACKWARD 65364
-# endif
-
-# ifndef LEFT
-#  define LEFT 65361
-# endif
-
-# ifndef RIGHT
-#  define RIGHT 65363
 # endif
 
 /*
@@ -241,7 +214,7 @@ void	draw_wall(t_mlx *cube, int x, int y, int height);
 void	draw_player(t_mlx *cube, int x, int y, int height);
 void	draw_square(t_mlx *cube, int x, int y, int height, int color);
 void	blackout(t_mlx *cube);
-void	draw_line(t_mlx *cube, float x1, float y1, float x2, float y2);
+void	draw_line(t_mlx *cube, float x1, float y1, float x2, float y2, int color);
 void	draw_circle(t_mlx *cube, int x, int y, int radius, int color);
 void	bresenham(t_mlx *cube, float x1, float y1, int color);
 void	draw_fov(t_mlx *cube);
