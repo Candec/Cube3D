@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 15:48:17 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/31 00:41:31 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/31 11:13:23 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,6 @@ void			ft_float_swap(float *a, float *b);
 double			ft_double_min(double a, double b);
 double			ft_double_max(double a, double b);
 double			ft_powd(double n, double p);
-t_coord			ft_init_coord(double x, double y);
+t_coord			ft_coord(double x, double y);
 
 #endif
