@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:08:49 by tpereira          #+#    #+#             */
-/*   Updated: 2023/01/27 17:29:40 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/31 02:01:01 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,3 +91,14 @@ void	draw_player_2D(t_mlx *cube)
 	draw_rays_2D(cube);
 	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->frame.img, 0, 0);
 }
+
+// void	draw_wall_3d(t_mlx *cube)
+// {
+// 	int	y;
+
+// 	y = 0;
+// 	while (y++ < HEIGHT)
+// 	{
+
+// 	}
+// }

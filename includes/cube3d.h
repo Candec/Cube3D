@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/27 18:03:01 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/30 17:37:03 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@
 
 typedef struct s_player
 {
+	t_coord pos;
 	float	posx;
 	float	posy;
 	float	dirx;
