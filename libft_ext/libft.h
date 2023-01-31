@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 15:48:17 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/27 17:54:43 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/31 00:41:31 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <stdarg.h>
 # include <fcntl.h>
 # include <stdbool.h>
+# include <math.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 128
@@ -65,6 +66,13 @@ typedef struct s_rgb
 	int		b;
 	int		int_rgb;
 }				t_rgb;
+
+typedef struct s_coord
+{
+	double	x;
+	double	y;
+}				t_coord;
+
 
 /*
 **First half
@@ -166,5 +174,9 @@ char			*ft_charstr(char c, size_t size);
 size_t			ft_arr_height(char ***arr);
 size_t			ft_arr_width(char ***arr);
 void			ft_float_swap(float *a, float *b);
+double			ft_double_min(double a, double b);
+double			ft_double_max(double a, double b);
+double			ft_powd(double n, double p);
+t_coord			ft_init_coord(double x, double y);
 
 #endif

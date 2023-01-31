@@ -33,6 +33,7 @@ SRC =		main.c\
 			map.c\
 			bresenham.c\
 			math.c\
+			dda.c\
 			
 all: $(NAME)
 
