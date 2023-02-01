@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/31 11:15:57 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/31 18:08:07 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,16 @@
 #  define WIN_HEIGHT 768
 # endif
 
+// TIAGO WIDESCREEN RESOLUTION SETTINGS
+
+// # ifndef WIN_WIDTH
+// #  define WIN_WIDTH 2560
+// # endif
+
+// # ifndef WIN_HEIGHT
+// #  define WIN_HEIGHT 1440
+// # endif
+
 # ifndef WIDTH
 #  define WIDTH 640
 # endif
@@ -60,7 +70,7 @@
 # endif
 
 # ifndef WALL_HEIGHT
-#  define WALL_HEIGHT 64
+#  define WALL_HEIGHT 32
 # endif
 
 /*
@@ -101,7 +111,7 @@
 
 typedef struct s_player
 {
-	t_coord pos;
+	t_coord	pos;
 	float	posx;
 	float	posy;
 	float	dirx;
@@ -231,6 +241,7 @@ void	draw_circle(t_mlx *cube, int x, int y, int radius, int color);
 void	bresenham(t_mlx *cube, float x1, float y1, int color);
 void	draw_fov(t_mlx *cube);
 void	draw_rays_2D(t_mlx *cube);
+float	distance(float x1, float y1, float x2, float y2);
 
 /*
 **	error_handling.c

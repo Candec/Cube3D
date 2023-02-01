@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:08:49 by tpereira          #+#    #+#             */
-/*   Updated: 2023/01/31 11:34:01 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/01/31 18:28:48 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ void	draw_map_2D(t_mlx *cube)
 	int yo;
 
 	y = 0;
-	blackout(cube);
-	print_map(cube);
+	//print_map(cube);
 	while (y != (int)cube->map.height)
 	{
 		yo = y * TILE_SIZE;
@@ -60,7 +59,6 @@ void	draw_map_2D(t_mlx *cube)
 		}
 		y++;
 	}
-	draw_player_2D(cube);
 }
 
 void	draw_player_2D(t_mlx *cube)
@@ -70,7 +68,6 @@ void	draw_player_2D(t_mlx *cube)
 	double xo;
 	double yo;
 
-	draw_rays_2D(cube);
 	y = -1;
 	while (++y != (int)cube->map.height)
 	{
@@ -80,14 +77,9 @@ void	draw_player_2D(t_mlx *cube)
 		{
 			xo = cube->player.posx * TILE_SIZE;
 			if (cube->map.map[y][x] == '0')
-			{
-				draw_square(cube, xo, yo, 8, YELLOW);
-				//draw_square(cube, xo + 4 + cube->player.dirx * 3, yo + 4 + cube->player.diry * 3, 8, RED);
-				//draw_line(cube, xo + cube->player.dirx * 10, yo + cube->player.diry * 10, xo + 2, yo + 2, RED);
-			}
+				draw_square(cube, xo, yo, TILE_SIZE / 4, YELLOW);
 		}
 	}
-	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->frame.img, 0, 0);
 }
 
 // void	draw_wall_3d(t_mlx *cube)
@@ -100,3 +92,4 @@ void	draw_player_2D(t_mlx *cube)
 
 // 	}
 // }
+
