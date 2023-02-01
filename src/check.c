@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 01:03:26 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/30 17:38:06 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/02/01 02:23:44 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ void	set_p(size_t i, size_t j, t_mlx *cube)
 		error(">1 PLAYERS DETECTED\n", cube);
 	cube->player.posx = i;
 	cube->player.posy = j;
-	cube->player.pos.x = (double)i;
-	cube->player.pos.y = (double)j;
+	cube->player.pos.x = (double)j;
+	cube->player.pos.y = (double)i;
+	printf("x: %f - y: %f\n", cube->player.pos.x, cube->player.pos.y);
 }
 
 void	validate_chr(t_mlx *cube)
@@ -49,7 +50,7 @@ void	validate_map(t_mlx *cube)
 	while (cube->map.map[++i])
 	{
 		j = -1;
-		while (cube->map.map[++j])
+		while (cube->map.map[i][++j])
 		{
 			if (ft_strchr("0NSEW", cube->map.map[i][j]))
 			{

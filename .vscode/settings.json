@@ -5,7 +5,8 @@
 		"minishell.h": "c",
 		"cstring": "c",
 		"history.h": "c",
-		"cmath": "c"
+		"cmath": "c",
+		"cube3d.h": "c"
 	},
 	"C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools",
 	"C_Cpp.errorSquiggles": "disabled"
