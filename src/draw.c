@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/02 10:49:51 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/02/02 12:08:31 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void	draw_rays_2D(t_mlx *c)
 		ray->angle = c->player.angle -(c->player.fov / 2) + ((double)ray->row / (double)WIN_WIDTH) * c->player.fov;
 		ray->pos.y = ((c->player.pos.y / (TILE_SIZE - 1)) * (TILE_SIZE - 1)) - 0.0001;
 		ray->pos.x = (c->player.pos.y - ray->pos.y) * (-1 / tan(ray->angle)) + c->player.pos.x;
-		ray->step = ft_coord(cos(ray->angle) * 0.001, sin(ray->angle) * 0.001);
+		ray->step = ft_coord(cos(ray->angle) * 0.002, sin(ray->angle) * 0.002);
 		while (!ray->hit)
 		{
 			if (ray->pos.x > 0 && ray->pos.y > 0 && ray->pos.x < c->map.width && ray->pos.y < c->map.height)
@@ -168,7 +168,7 @@ void	draw_rays_2D(t_mlx *c)
 				ray->hit = true;
 		}
 		draw_line(c, (c->player.pos.x * TILE_SIZE) + TILE_SIZE / 8, (c->player.pos.y * TILE_SIZE) + TILE_SIZE / 8, ray->pos.x * TILE_SIZE, ray->pos.y * TILE_SIZE, RED);
-		raycaster_3D(c, distance(c->player.posx, c->player.posy, ray->pos.x, ray->pos.y), ray->angle, ray->row);
+		raycaster_3D(c, distance(c->player.pos.x, c->player.pos.y, ray->pos.x, ray->pos.y), ray->angle, ray->row);
 		free(ray);
 	}
 }
