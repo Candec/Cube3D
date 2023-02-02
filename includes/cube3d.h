@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/31 18:08:07 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/02 00:24:04 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,15 +175,11 @@ typedef struct s_game
 
 typedef struct s_raycast
 {
-	t_coord	end;
-	t_coord	dir;
-	t_coord	grid;
-	t_coord	len;
+	int	row;
+	t_coord	pos;
 	t_coord	step;
-	t_coord	step_size;
-	t_coord	intersection;
-	double	distance;
-	bool	reach_end;
+	double	angle;
+	bool	hit;
 }				t_raycast;
 
 /*
@@ -236,12 +232,12 @@ void	draw_wall(t_mlx *cube, int x, int y, int height);
 void	draw_player(t_mlx *cube, int x, int y, int height);
 void	draw_square(t_mlx *cube, int x, int y, int height, int color);
 void	blackout(t_mlx *cube);
-void	draw_line(t_mlx *cube, float x1, float y1, float x2, float y2, int color);
+void	draw_line(t_mlx *cube, double x1, double y1, double x2, double y2, int color);
 void	draw_circle(t_mlx *cube, int x, int y, int radius, int color);
 void	bresenham(t_mlx *cube, float x1, float y1, int color);
 void	draw_fov(t_mlx *cube);
 void	draw_rays_2D(t_mlx *cube);
-float	distance(float x1, float y1, float x2, float y2);
+double	distance(double x1, double y1, double x2, double y2);
 
 /*
 **	error_handling.c

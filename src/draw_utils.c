@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 22:47:09 by tpereira          #+#    #+#             */
-/*   Updated: 2023/01/31 11:58:11 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/01 16:27:42 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	blackout(t_mlx *cube)
 	}
 }
 
-float	distance(float x1, float y1, float x2, float y2)
+double	distance(double x1, double y1, double x2, double y2)
 {
-	float distance;
+	double distance;
 
 	distance = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
 	return (distance);

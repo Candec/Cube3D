@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:08:49 by tpereira          #+#    #+#             */
-/*   Updated: 2023/01/31 18:28:48 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/02 10:37:42 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ void	draw_player_2D(t_mlx *cube)
 	while (++y != (int)cube->map.height)
 	{
 		x = -1;
-		yo = cube->player.posy * TILE_SIZE;
+		yo = cube->player.pos.y * TILE_SIZE;
 		while (++x != (int)cube->map.width)
 		{
-			xo = cube->player.posx * TILE_SIZE;
+			xo = cube->player.pos.x * TILE_SIZE;
 			if (cube->map.map[y][x] == '0')
 				draw_square(cube, xo, yo, TILE_SIZE / 4, YELLOW);
 		}

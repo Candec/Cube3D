@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   play.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/31 18:28:50 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/02 10:36:12 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,26 +61,26 @@ void	move_player(t_mlx *cube, int keysym)
 	double x;
 	double y;
 
-	x = cube->player.posx;
-	y = cube->player.posy;
+	x = cube->player.pos.x;
+	y = cube->player.pos.y;
 	if (keysym == MOVE_UP)
 	{
-		cube->player.posy += cube->player.diry / TILE_SIZE;
-		cube->player.posx += cube->player.dirx / TILE_SIZE;
+		cube->player.pos.y += cube->player.diry / TILE_SIZE;
+		cube->player.pos.x += cube->player.dirx / TILE_SIZE;
 	}
 	if (keysym == MOVE_DOWN)
 	{
-		cube->player.posy -= cube->player.diry / TILE_SIZE;
-		cube->player.posx -= cube->player.dirx / TILE_SIZE;
+		cube->player.pos.y -= cube->player.diry / TILE_SIZE;
+		cube->player.pos.x -= cube->player.dirx / TILE_SIZE;
 	}
 	if (keysym == MOVE_LEFT)
-		cube->player.posx -= 0.1;
+		cube->player.pos.x -= 0.1;
 	if (keysym == MOVE_RIGHT)
-		cube->player.posx += 0.1;
-	if (cube->map.map[(int)cube->player.posy][(int)cube->player.posx] == '1')
+		cube->player.pos.x += 0.1;
+	if (cube->map.map[(int)cube->player.pos.y][(int)cube->player.pos.x] == '1')
 	{
-		cube->player.posx = x;
-		cube->player.posy = y;
+		cube->player.pos.x = x;
+		cube->player.pos.y = y;
 	}
 }
 
