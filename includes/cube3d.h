@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez- <jibanez-@student.42    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/10 14:51:24 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/02/03 10:48:13 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,68 @@
 #  define SQ_S 128
 # endif
 
+# ifndef WIN_WIDTH
+#  define WIN_WIDTH 1366
+# endif
+
+# ifndef WIN_HEIGHT
+#  define WIN_HEIGHT 768
+# endif
+
+// TIAGO WIDESCREEN RESOLUTION SETTINGS
+
+// # ifndef WIN_WIDTH
+// #  define WIN_WIDTH 2560
+// # endif
+
+// # ifndef WIN_HEIGHT
+// #  define WIN_HEIGHT 1440
+// # endif
+
 # ifndef WIDTH
 #  define WIDTH 640
 # endif
 
 # ifndef HEIGHT
 #  define HEIGHT 360
+# endif
+
+# ifndef TILE_SIZE
+#  define TILE_SIZE 32
+# endif
+
+# ifndef WALL_HEIGHT
+#  define WALL_HEIGHT 32
+# endif
+
+/*
+**	=================
+**	 Color Macros
+**	=================
+*/
+
+# ifndef RED
+#  define RED 0xFF0000
+# endif
+
+# ifndef GREEN
+#  define GREEN 0x00FF00
+# endif
+
+# ifndef BLUE
+#  define BLUE 0x0000FF
+# endif
+
+# ifndef WHITE
+#  define WHITE 0xFFFFFF
+# endif
+
+# ifndef YELLOW
+#  define YELLOW 0xFFFF00
+# endif
+
+# ifndef BLACK
+#  define BLACK 0x000000
 # endif
 
 /*
@@ -55,12 +111,17 @@
 
 typedef struct s_player
 {
-	double	x;
-	double	y;
-	double	dirx;
-	double	diry;
-	double	planex;
-	double	planey;
+	t_coord	pos;
+	float	posx;
+	float	posy;
+	float	dirx;
+	float	diry;
+	float	angle;
+	float	planex;
+	float	planey;
+	float	height;
+	float	fov;
+	float	position;
 
 	bool	e;
 }				t_player;
@@ -82,6 +143,8 @@ typedef struct s_map
 	char	**map;
 	size_t	height;
 	size_t	width;
+	int		rows;
+	int		cols;
 	char	*no;
 	char	*so;
 	char	*we;
@@ -94,7 +157,7 @@ typedef struct s_mlx
 {
 	t_map		map;
 	t_img		frame;
-	t_player	p;
+	t_player	player;
 
 	bool		win;
 	void		*mlx_ptr;
@@ -104,6 +167,20 @@ typedef struct s_mlx
 	void		*img_we;
 	void		*img_ea;
 }				t_mlx;
+
+typedef struct s_game
+{
+	t_mlx		cube;
+}				t_game;
+
+typedef struct s_raycast
+{
+	int	row;
+	t_coord	pos;
+	t_coord	stp;
+	double	ang;
+	bool	hit;
+}				t_raycast;
 
 /*
 **	=============
@@ -151,7 +228,16 @@ int		draw_frame(t_mlx *cube);
 */
 void	add_pixel(t_img *frame, int rgb, int x, int y);
 void	draw_bg(t_mlx *cube);
-
+void	draw_wall(t_mlx *cube, int x, int y, int height);
+void	draw_player(t_mlx *cube, int x, int y, int height);
+void	draw_square(t_mlx *cube, int x, int y, int height, int color);
+void	blackout(t_mlx *cube);
+void	draw_line(t_mlx *cube, double x1, double y1, double x2, double y2, int color);
+void	draw_circle(t_mlx *cube, int x, int y, int radius, int color);
+void	bresenham(t_mlx *cube, float x1, float y1, int color);
+void	draw_fov(t_mlx *cube);
+void	draw_rays_2D(t_mlx *cube);
+double	distance(t_coord a, t_coord b);
 
 /*
 **	error_handling.c
@@ -159,5 +245,28 @@ void	draw_bg(t_mlx *cube);
 void	error(char *msg, t_mlx *cube);
 void	unload(t_mlx *cube);
 int		quit(t_mlx *cube);
+
+/*
+**	player.c
+*/
+void	init_player_dir(t_mlx *cube, char c);
+void	init_player(t_mlx *cube);
+void	draw_player_2D(t_mlx *cube);
+
+/*
+**	map.c
+*/
+void	draw_map_2D(t_mlx *game);
+
+/*
+**	Math.c
+*/
+float	deg_to_rad(float deg);
+int		fix_angle(float *angle);
+
+/*
+**	dda.c
+*/
+t_coord	dda(t_mlx *cube, double x, double y);
 
 #endif

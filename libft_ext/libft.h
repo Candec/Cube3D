@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez- <jibanez-@student.42    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 15:48:17 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/10 11:02:03 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/31 11:13:23 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <stdarg.h>
 # include <fcntl.h>
 # include <stdbool.h>
-
+# include <math.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 128
@@ -58,7 +58,7 @@
 
 typedef unsigned char	t_uc;
 
-typedef struct	s_rgb
+typedef struct s_rgb
 {
 	bool	fill;
 	int		r;
@@ -66,6 +66,13 @@ typedef struct	s_rgb
 	int		b;
 	int		int_rgb;
 }				t_rgb;
+
+typedef struct s_coord
+{
+	double	x;
+	double	y;
+}				t_coord;
+
 
 /*
 **First half
@@ -151,6 +158,7 @@ int				ft_file_format(char *file, char *file_format);
 void			ft_clean_arr(char **arr);
 int64_t			ft_ternary64(int flag, int64_t a, int64_t b);
 double			ft_ternary_double(int flag, double a, double b);
+float			ft_ternary_float(int flag, float a, float b);
 int8_t			ft_set8(int8_t *a, int8_t b);
 int16_t			ft_set16(int16_t *a, int16_t b);
 int32_t			ft_set32(int32_t *a, int32_t b);
@@ -161,6 +169,14 @@ void			ft_print_arr(char **arr);
 int				ft_add_str_to_arr(char *str, char ***arr);
 void			ft_save_rgb(t_rgb *rgb, char *rgb_code);
 int				ft_encode_rgb(uint8_t red, uint8_t green, uint8_t blue);
-
+void			ft_square_array(char ***arr, char c);
+char			*ft_charstr(char c, size_t size);
+size_t			ft_arr_height(char ***arr);
+size_t			ft_arr_width(char ***arr);
+void			ft_float_swap(float *a, float *b);
+double			ft_double_min(double a, double b);
+double			ft_double_max(double a, double b);
+double			ft_powd(double n, double p);
+t_coord			ft_coord(double x, double y);
 
 #endif

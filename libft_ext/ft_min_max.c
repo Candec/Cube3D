@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_set.c                                           :+:      :+:    :+:   */
+/*   ft_min.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/15 17:02:24 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/27 01:17:35 by jibanez-         ###   ########.fr       */
+/*   Created: 2023/01/30 17:52:22 by jibanez-          #+#    #+#             */
+/*   Updated: 2023/01/30 17:55:18 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int8_t	ft_set8(int8_t *a, int8_t b)
+double	ft_double_min(double a, double b)
 {
-	*a = b;
-	return (b);
+	return (ft_ternary_double(a < b, a, b));
 }
 
-int16_t	ft_set16(int16_t *a, int16_t b)
+double	ft_double_max(double a, double b)
 {
-	*a = b;
-	return (b);
-}
-
-int32_t	ft_set32(int32_t *a, int32_t b)
-{
-	*a = b;
-	return (b);
-}
-
-int64_t	ft_set64(int64_t *a, int64_t b)
-{
-	*a = b;
-	return (b);
+	return (ft_ternary_double(a > b, a, b));
 }

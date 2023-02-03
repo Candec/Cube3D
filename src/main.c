@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez- <jibanez-@student.42    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:09 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/10 14:43:56 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/01/31 02:04:55 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	init(t_mlx *cube)
 {
 	cube->map.height = 0;
 	cube->map.width = 0;
+	cube->map.rows = 0;
+	cube->map.cols = 0;
 	cube->map.c_rgb.r = -1;
 	cube->map.c_rgb.g = -1;
 	cube->map.c_rgb.b = -1;
@@ -39,6 +41,8 @@ void	parse(t_mlx *cube, char *map)
 	info(cube, map);
 	validate_chr(cube);
 	validate_map(cube);
+	ft_square_array(&cube->map.map, ' ');
+	init_player(cube);
 }
 
 void	play(t_mlx *cube)
@@ -55,17 +59,15 @@ int	main(int argc, char *argv[])
 {
 	t_mlx	cube;
 
-	if (argc == 2)
-	{
-		init(&cube);
-		parse(&cube, argv[1]);
-		play(&cube);
-		quit(&cube);
-	}
-	else
+	if (argc != 2)
 	{
 		write(1, "INVALID NUMBER OF ARGUMENTS\n", 29);
 		return (1);
 	}
+	init(&cube);
+	parse(&cube, argv[1]);
+	play(&cube);
+	quit(&cube);
+
 	return (0);
 }

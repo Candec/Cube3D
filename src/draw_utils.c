@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_set.c                                           :+:      :+:    :+:   */
+/*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/15 17:02:24 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/27 01:17:35 by jibanez-         ###   ########.fr       */
+/*   Created: 2023/01/20 22:47:09 by tpereira          #+#    #+#             */
+/*   Updated: 2023/02/03 10:41:15 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cube3d.h"
 
-int8_t	ft_set8(int8_t *a, int8_t b)
+void	blackout(t_mlx *cube)
 {
-	*a = b;
-	return (b);
+	int x;
+	int y;
+
+	y = -1;
+	while (++y < WIN_HEIGHT)
+	{
+		x = -1;
+		while (++x < WIN_WIDTH)
+			add_pixel(&cube->frame, 0, x, y);
+	}
 }
 
-int16_t	ft_set16(int16_t *a, int16_t b)
+double	distance(t_coord a, t_coord b)
 {
-	*a = b;
-	return (b);
-}
+	double distance;
 
-int32_t	ft_set32(int32_t *a, int32_t b)
-{
-	*a = b;
-	return (b);
-}
-
-int64_t	ft_set64(int64_t *a, int64_t b)
-{
-	*a = b;
-	return (b);
+	distance = sqrt(pow(a.x - a.y, 2) + pow(b.x - b.y, 2));
+	return (distance);
 }

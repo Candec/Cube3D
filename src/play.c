@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   play.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez- <jibanez-@student.42    +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/13 18:13:35 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/02/02 12:08:12 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	start_mlx_and_window(t_mlx *cube)
 	cube->mlx_ptr = mlx_init();
 	if (!cube->mlx_ptr)
 		err = FALSE;
-	cube->win_ptr = mlx_new_window(cube->mlx_ptr, 640, 360, "Cube_3d");
+	cube->win_ptr = mlx_new_window(cube->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "Cube_3d");
 	if (!cube->win_ptr)
 		err = FALSE;
 	if (!err)
@@ -56,26 +56,83 @@ void	start_mlx_and_window(t_mlx *cube)
 	cube->win = TRUE;
 }
 
+void	move_player(t_mlx *cube, int keysym)
+{
+	double x;
+	double y;
+
+	x = cube->player.pos.x;
+	y = cube->player.pos.y;
+	if (keysym == MOVE_UP)
+	{
+		cube->player.pos.y += cube->player.diry / TILE_SIZE;
+		cube->player.pos.x += cube->player.dirx / TILE_SIZE;
+	}
+	if (keysym == MOVE_DOWN)
+	{
+		cube->player.pos.y -= cube->player.diry / TILE_SIZE;
+		cube->player.pos.x -= cube->player.dirx / TILE_SIZE;
+	}
+	if (keysym == MOVE_LEFT)
+		cube->player.pos.x -= 0.1;
+	if (keysym == MOVE_RIGHT)
+		cube->player.pos.x += 0.1;
+	if (cube->map.map[(int)cube->player.pos.y][(int)cube->player.pos.x] == '1')
+	{
+		cube->player.pos.x = x;
+		cube->player.pos.y = y;
+	}
+}
+
+void draw_loop(t_mlx *cube)
+{
+	blackout(cube);
+	// draw_map_2D(cube);
+	draw_player_2D(cube);
+	draw_rays_2D(cube);
+	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->frame.img, 0, 0);
+}
+
+void	player(t_mlx *cube, int keysym)
+{
+	if (keysym == MOVE_UP || keysym == MOVE_DOWN
+		|| keysym == MOVE_LEFT || keysym == MOVE_RIGHT)
+		move_player(cube, keysym);
+	if (keysym == LOOK_LEFT)
+		cube->player.angle -= 0.1;
+	if (keysym == LOOK_RIGHT)
+		cube->player.angle += 0.1;
+	fix_angle(&cube->player.angle);
+	cube->player.dirx = cos(cube->player.angle) * 5;
+	cube->player.diry = sin(cube->player.angle) * 5;
+	draw_loop(cube);
+}
+
 int	keypress(int keysym, t_mlx *cube)
 {
 	if (keysym == ESC)
 		quit(cube);
-	printf("%d\n", keysym);
+	//printf("%d\n", keysym);
+	player(cube, keysym);
 	// if (cube->map.player_escape == TRUE)
 	// 	return (0);
 	// else if (keysym == MOVE_UP|| keysym == MOVE_DOWN
 	// 	|| keysym == MOVE_LEFT || keysym == MOVE_RIGHT)
-		// move(data, keysym);
+	// move(data, keysym);
 	return (0);
 }
 
+
 int	draw_frame(t_mlx *cube)
 {
-	cube->frame.img_width = WIDTH;
-	cube->frame.img_height = HEIGHT;
-	cube->frame.img = mlx_new_image(cube->mlx_ptr, WIDTH, HEIGHT);
+	cube->frame.img_width = WIN_WIDTH;
+	cube->frame.img_height = WIN_HEIGHT;
+	cube->frame.img = mlx_new_image(cube->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	cube->frame.data = (int *)mlx_get_data_addr(cube->frame.img, &cube->frame.bpp, &cube->frame.size_l, &cube->frame.endian);
-	draw_bg(cube);
-	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->frame.img, 0, 0);
+	//draw_bg(cube);
+	//draw_wall(cube, 500, 500, 100);
+	draw_loop(cube);
+	// draw_map_2D(cube);
 	return (0);
 }
+
