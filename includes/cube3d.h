@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/02 00:24:04 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/02/03 10:48:13 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,8 +177,8 @@ typedef struct s_raycast
 {
 	int	row;
 	t_coord	pos;
-	t_coord	step;
-	double	angle;
+	t_coord	stp;
+	double	ang;
 	bool	hit;
 }				t_raycast;
 
@@ -237,7 +237,7 @@ void	draw_circle(t_mlx *cube, int x, int y, int radius, int color);
 void	bresenham(t_mlx *cube, float x1, float y1, int color);
 void	draw_fov(t_mlx *cube);
 void	draw_rays_2D(t_mlx *cube);
-double	distance(double x1, double y1, double x2, double y2);
+double	distance(t_coord a, t_coord b);
 
 /*
 **	error_handling.c

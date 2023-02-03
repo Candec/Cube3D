@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/02 12:08:31 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/02/03 10:53:39 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	raycaster_3D(t_mlx *cube, double dist, double angle, int r)
 		else
 			hit = INT_MAX;
 	}
-	dist = distance(cube->player.pos.x, cube->player.pos.y, ray_x, ray_y);
+	dist = distance(cube->player.pos, cube->player.pos, ray_x, ray_y);
 	wall_height = (TILE_SIZE / dist) * WALL_HEIGHT;
 	wall_top = (WIN_HEIGHT / 2) - (wall_height / 2);
 	wall_bottom = (WIN_HEIGHT / 2) + (wall_height / 2);
@@ -139,39 +139,43 @@ void	raycaster_3D(t_mlx *cube, double dist, double angle, int r)
 	draw_line(cube, r, wall_bottom, r, WIN_HEIGHT, 0x000000);
 }
 
-void	draw_rays_2D(t_mlx *c)
+static void	ray_init(t_mlx *c, t_raycast *r)
 {
-	t_raycast *ray;
+	r->hit = false;
+	r->ang = c->player.angle -(c->player.fov / 2)
+		+ ((double)r->row / (double)WIN_WIDTH) * c->player.fov;
+	r->pos.y = ((c->player.pos.y / (TILE_SIZE - 1)) * (TILE_SIZE - 1)) - 0.0001;
+	r->pos.x = (c->player.pos.y - r->pos.y) * (-1 / tan(r->ang)) + c->player.pos.x;
+	r->stp = ft_coord(cos(r->ang) * 0.002, sin(r->ang) * 0.002);
+}
 
-	ray = malloc(sizeof(t_raycast));
-	ray->row = -1;
-	while (++ray->row < WIN_WIDTH)
+void	draw_rays_2d(t_mlx *c)
+{
+	t_raycast	*r;
+
+	r = malloc(sizeof(t_raycast));
+	r->row = -1;
+	while (++r->row < WIN_WIDTH)
 	{
-		ray->hit = false;
-		ray->angle = c->player.angle -(c->player.fov / 2) + ((double)ray->row / (double)WIN_WIDTH) * c->player.fov;
-		ray->pos.y = ((c->player.pos.y / (TILE_SIZE - 1)) * (TILE_SIZE - 1)) - 0.0001;
-		ray->pos.x = (c->player.pos.y - ray->pos.y) * (-1 / tan(ray->angle)) + c->player.pos.x;
-		ray->step = ft_coord(cos(ray->angle) * 0.002, sin(ray->angle) * 0.002);
-		while (!ray->hit)
+		ray_init(c, r);
+		while (!r->hit)
 		{
-			if (ray->pos.x > 0 && ray->pos.y > 0 && ray->pos.x < c->map.width && ray->pos.y < c->map.height)
+			if (r->pos.x > 0 && r->pos.y > 0
+				&& r->pos.x < c->map.width && r->pos.y < c->map.height)
 			{
-				if (c->map.map[(int)floor(ray->pos.y)][(int)floor(ray->pos.x)] == '1')
-					ray->hit = true;
+				if (c->map.map[(int)r->pos.y][(int)r->pos.x] == '1')
+					r->hit = true;
 				else
-				{
-					ray->pos.x += ray->step.x;
-					ray->pos.y += ray->step.y;
-				}
+					r->pos = ft_coord(r->pos.x + r->stp.x, r->pos.y + r->stp.y);
 			}
 			else
-				ray->hit = true;
+				r->hit = true;
 		}
-		draw_line(c, (c->player.pos.x * TILE_SIZE) + TILE_SIZE / 8, (c->player.pos.y * TILE_SIZE) + TILE_SIZE / 8, ray->pos.x * TILE_SIZE, ray->pos.y * TILE_SIZE, RED);
-		raycaster_3D(c, distance(c->player.pos.x, c->player.pos.y, ray->pos.x, ray->pos.y), ray->angle, ray->row);
-		free(ray);
+		raycaster_3D(c, distance(c->player.pos, c->player.pos), r->ang, r->row);
+		free(r);
 	}
 }
+		// draw_line(c, (c->player.pos.x * TILE_SIZE) + TILE_SIZE / 8, (c->player.pos.y * TILE_SIZE) + TILE_SIZE / 8, r->pos.x * TILE_SIZE, r->pos.y * TILE_SIZE, RED);
 
 // void	draw_rays_2D(t_mlx *cube)
 // {
