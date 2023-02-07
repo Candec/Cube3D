@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/07 15:09:18 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/07 16:00:11 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void	raycaster_3D(t_mlx *cube, double dist, double angle, int r)
 	draw_line(cube, r, wall_bottom, r, WIN_HEIGHT, 0x000000);
 }
 
-void	draw_rays_2D(t_mlx *c)
+void	draw_rays_2D(t_mlx *c, int show3d)
 {
 	t_raycast *ray;
 
@@ -167,12 +167,18 @@ void	draw_rays_2D(t_mlx *c)
 			else
 				ray->hit = true;
 		}
-		draw_line(c, (c->player.pos.x * TILE_SIZE) + TILE_SIZE / 8, (c->player.pos.y * TILE_SIZE) + TILE_SIZE / 8, ray->pos.x * TILE_SIZE, ray->pos.y * TILE_SIZE, RED);
-		raycaster_3D(c, distance(c->player.posx, c->player.posy, ray->pos.x, ray->pos.y), ray->angle, ray->row);
+		if (show3d)
+			draw_line(c, (c->player.pos.x * TILE_SIZE) + TILE_SIZE / 8, (c->player.pos.y * TILE_SIZE) + TILE_SIZE / 8, ray->pos.x * TILE_SIZE, ray->pos.y * TILE_SIZE, RED);
+		else
+			raycaster_3D(c, distance(c->player.posx, c->player.posy, ray->pos.x, ray->pos.y), ray->angle, ray->row);
 		//free(ray);
 	}
-	draw_map_2D(c);
-	draw_player_2D(c);
+	if (!show3d)
+	{
+		draw_map_2D(c);
+		draw_player_2D(c);
+		draw_rays_2D(c, 1);
+	}
 }
 
 // void	draw_rays_2D(t_mlx *cube)

@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:08:49 by tpereira          #+#    #+#             */
-/*   Updated: 2023/02/07 15:05:30 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/07 15:30:37 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	draw_map_2D(t_mlx *cube)
 		while (cube->map.map[y][x] != '\0' && x != (int)cube->map.width)
 		{
 			xo = x * TILE_SIZE;
+			draw_square(cube, (xo), (yo), TILE_SIZE, BLACK);
 			if (cube->map.map[y][x] == '1')
 				draw_square(cube, (xo), (yo), TILE_SIZE - 1, WHITE);
 			else if (cube->map.map[y][x] == '0')
