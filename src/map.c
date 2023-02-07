@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:08:49 by tpereira          #+#    #+#             */
-/*   Updated: 2023/02/02 10:37:42 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/02/07 15:05:30 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,15 +81,3 @@ void	draw_player_2D(t_mlx *cube)
 		}
 	}
 }
-
-// void	draw_wall_3d(t_mlx *cube)
-// {
-// 	int	y;
-
-// 	y = 0;
-// 	while (y++ < HEIGHT)
-// 	{
-
-// 	}
-// }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/02 10:49:51 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/02/07 15:09:18 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,14 +127,14 @@ void	raycaster_3D(t_mlx *cube, double dist, double angle, int r)
 	wall_top = (WIN_HEIGHT / 2) - (wall_height / 2);
 	wall_bottom = (WIN_HEIGHT / 2) + (wall_height / 2);
 	wall_color = GREEN;
-	if (angle > 0)
+	if (cube->player.dirx )
 		wall_color = BLUE;
 	else if (angle < M_PI)
 		wall_color = RED;
 	else
 		wall_color = YELLOW;
 	//draw_bg(cube);
-	draw_line(cube, r, 0, r, wall_top, 0x000000);
+	//draw_line(cube, r, 0, r, wall_top, 0x000000);
 	draw_line(cube, r, wall_top, r, wall_bottom, wall_color);
 	draw_line(cube, r, wall_bottom, r, WIN_HEIGHT, 0x000000);
 }
@@ -169,8 +169,10 @@ void	draw_rays_2D(t_mlx *c)
 		}
 		draw_line(c, (c->player.pos.x * TILE_SIZE) + TILE_SIZE / 8, (c->player.pos.y * TILE_SIZE) + TILE_SIZE / 8, ray->pos.x * TILE_SIZE, ray->pos.y * TILE_SIZE, RED);
 		raycaster_3D(c, distance(c->player.posx, c->player.posy, ray->pos.x, ray->pos.y), ray->angle, ray->row);
-		free(ray);
+		//free(ray);
 	}
+	draw_map_2D(c);
+	draw_player_2D(c);
 }
 
 // void	draw_rays_2D(t_mlx *cube)
