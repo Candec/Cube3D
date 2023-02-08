@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/03 10:48:13 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/02/08 00:42:46 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@
 # endif
 
 # ifndef WALL_HEIGHT
-#  define WALL_HEIGHT 32
+#  define WALL_HEIGHT 64
 # endif
 
 /*
@@ -175,12 +175,20 @@ typedef struct s_game
 
 typedef struct s_raycast
 {
-	int	row;
 	t_coord	pos;
 	t_coord	stp;
 	double	ang;
 	bool	hit;
 }				t_raycast;
+
+typedef struct s_wall
+{
+	int	height;
+	int	top;
+	int	bottom;
+	int	color;
+}				t_wall;
+
 
 /*
 **	=============
@@ -236,7 +244,7 @@ void	draw_line(t_mlx *cube, double x1, double y1, double x2, double y2, int colo
 void	draw_circle(t_mlx *cube, int x, int y, int radius, int color);
 void	bresenham(t_mlx *cube, float x1, float y1, int color);
 void	draw_fov(t_mlx *cube);
-void	draw_rays_2D(t_mlx *cube);
+void	draw_rays_2d(t_mlx *c);
 double	distance(t_coord a, t_coord b);
 
 /*

@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/02 12:08:12 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/02/08 00:24:13 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,10 @@ void	move_player(t_mlx *cube, int keysym)
 void draw_loop(t_mlx *cube)
 {
 	blackout(cube);
+	draw_bg(cube);
 	// draw_map_2D(cube);
-	draw_player_2D(cube);
-	draw_rays_2D(cube);
+	// draw_player_2D(cube);
+	draw_rays_2d(cube);
 	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->frame.img, 0, 0);
 }
 
