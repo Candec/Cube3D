@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/08 00:24:13 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/02/08 18:03:11 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	xpm_to_image_wrapper(t_mlx *data, void *img, char *filename)
 {
 	int	size;
 
-	size = SQ_S;
+	size = TILE_SIZE;
 	img = mlx_xpm_file_to_image(data->mlx_ptr, filename, &size, &size);
 	if (!img)
 		return (0);
@@ -48,7 +48,7 @@ void	start_mlx_and_window(t_mlx *cube)
 	cube->mlx_ptr = mlx_init();
 	if (!cube->mlx_ptr)
 		err = FALSE;
-	cube->win_ptr = mlx_new_window(cube->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "Cube_3d");
+	cube->win_ptr = mlx_new_window(cube->mlx_ptr, WIDTH, HEIGHT, "Cube_3d");
 	if (!cube->win_ptr)
 		err = FALSE;
 	if (!err)
@@ -126,9 +126,9 @@ int	keypress(int keysym, t_mlx *cube)
 
 int	draw_frame(t_mlx *cube)
 {
-	cube->frame.img_width = WIN_WIDTH;
-	cube->frame.img_height = WIN_HEIGHT;
-	cube->frame.img = mlx_new_image(cube->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+	cube->frame.img_width = WIDTH;
+	cube->frame.img_height = HEIGHT;
+	cube->frame.img = mlx_new_image(cube->mlx_ptr, WIDTH, HEIGHT);
 	cube->frame.data = (int *)mlx_get_data_addr(cube->frame.img, &cube->frame.bpp, &cube->frame.size_l, &cube->frame.endian);
 	//draw_bg(cube);
 	//draw_wall(cube, 500, 500, 100);

@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/08 00:42:46 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/02/08 18:10:41 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@
 **	=============
 */
 
-# ifndef SQ_S
-#  define SQ_S 128
-# endif
+// # ifndef SQ_S
+// #  define SQ_S 128
+// # endif
 
-# ifndef WIN_WIDTH
-#  define WIN_WIDTH 1366
-# endif
+// # ifndef WIN_WIDTH
+// #  define WIN_WIDTH 640
+// # endif
 
-# ifndef WIN_HEIGHT
-#  define WIN_HEIGHT 768
-# endif
+// # ifndef WIN_HEIGHT
+// #  define WIN_HEIGHT 360
+// # endif
 
 // TIAGO WIDESCREEN RESOLUTION SETTINGS
 
@@ -66,7 +66,7 @@
 # endif
 
 # ifndef TILE_SIZE
-#  define TILE_SIZE 32
+#  define TILE_SIZE 8
 # endif
 
 # ifndef WALL_HEIGHT
