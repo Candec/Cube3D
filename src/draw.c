@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/07 16:00:11 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/13 10:36:54 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	draw_line(t_mlx *cube, double x, double y, double x2, double y2, int color)
 	}
 }
 
-void	raycaster_3D(t_mlx *cube, double dist, double angle, int r)
+void	raycaster_3D(t_mlx *cube, t_raycast *ray)
 {
 	double	ray_x;
 	double	ray_y;
@@ -103,9 +103,9 @@ void	raycaster_3D(t_mlx *cube, double dist, double angle, int r)
 
 	hit = 0;
 	ray_y = ((cube->player.pos.y / TILE_SIZE) * TILE_SIZE);
-	ray_x = (cube->player.pos.y - ray_y) * (-1 / tan(angle)) + cube->player.pos.x;
-	xo = cos(angle) * 0.002;
-	yo = sin(angle) * 0.002;
+	ray_x = (cube->player.pos.y - ray_y) * (-1 / tan(ray->angle)) + cube->player.pos.x;
+	xo = cos(ray->angle) * 0.002;
+	yo = sin(ray->angle) * 0.002;
 	while (hit < INT_MAX)
 	{
 		if (ray_x > 0 && ray_y > 0 && ray_x < cube->map.width && ray_y < cube->map.height)
@@ -122,21 +122,22 @@ void	raycaster_3D(t_mlx *cube, double dist, double angle, int r)
 		else
 			hit = INT_MAX;
 	}
-	dist = distance(cube->player.pos.x, cube->player.pos.y, ray_x, ray_y);
-	wall_height = (TILE_SIZE / dist) * WALL_HEIGHT;
+	ray->dist = distance(cube->player.pos.x, cube->player.pos.y, ray_x, ray_y);
+	fix_fisheye(cube->player.angle, ray);
+	wall_height = (TILE_SIZE / ray->dist) * WALL_HEIGHT;
 	wall_top = (WIN_HEIGHT / 2) - (wall_height / 2);
 	wall_bottom = (WIN_HEIGHT / 2) + (wall_height / 2);
 	wall_color = GREEN;
 	if (cube->player.dirx )
 		wall_color = BLUE;
-	else if (angle < M_PI)
+	else if (ray->angle < M_PI)
 		wall_color = RED;
 	else
 		wall_color = YELLOW;
 	//draw_bg(cube);
-	//draw_line(cube, r, 0, r, wall_top, 0x000000);
-	draw_line(cube, r, wall_top, r, wall_bottom, wall_color);
-	draw_line(cube, r, wall_bottom, r, WIN_HEIGHT, 0x000000);
+	//draw_line(cube, ray->row, 0, ray->row, wall_top, 0x000000);
+	draw_line(cube, ray->row, wall_top, ray->row, wall_bottom, wall_color);
+	draw_line(cube, ray->row, wall_bottom, ray->row, WIN_HEIGHT, 0x000000);
 }
 
 void	draw_rays_2D(t_mlx *c, int show3d)
@@ -151,10 +152,10 @@ void	draw_rays_2D(t_mlx *c, int show3d)
 		ray->angle = c->player.angle -(c->player.fov / 2) + ((double)ray->row / (double)WIN_WIDTH) * c->player.fov;
 		ray->pos.y = ((c->player.pos.y / (TILE_SIZE - 1)) * (TILE_SIZE - 1)) - 0.0001;
 		ray->pos.x = (c->player.pos.y - ray->pos.y) * (-1 / tan(ray->angle)) + c->player.pos.x;
-		ray->step = ft_coord(cos(ray->angle) * 0.001, sin(ray->angle) * 0.001);
+		ray->step = ft_coord(cos(ray->angle) * 0.0001, sin(ray->angle) * 0.0001);
 		while (!ray->hit)
 		{
-			if (ray->pos.x > 0 && ray->pos.y > 0 && ray->pos.x < c->map.width && ray->pos.y < c->map.height)
+			if (ray->pos.x > 0 && ray->pos.y > 0)
 			{
 				if (c->map.map[(int)floor(ray->pos.y)][(int)floor(ray->pos.x)] == '1')
 					ray->hit = true;
@@ -170,7 +171,10 @@ void	draw_rays_2D(t_mlx *c, int show3d)
 		if (show3d)
 			draw_line(c, (c->player.pos.x * TILE_SIZE) + TILE_SIZE / 8, (c->player.pos.y * TILE_SIZE) + TILE_SIZE / 8, ray->pos.x * TILE_SIZE, ray->pos.y * TILE_SIZE, RED);
 		else
-			raycaster_3D(c, distance(c->player.posx, c->player.posy, ray->pos.x, ray->pos.y), ray->angle, ray->row);
+		{
+			ray->dist = distance(c->player.posx, c->player.posy, ray->pos.x, ray->pos.y);
+			raycaster_3D(c, ray);
+		}
 		//free(ray);
 	}
 	if (!show3d)
