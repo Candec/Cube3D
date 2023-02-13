@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/13 10:36:54 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/13 12:28:26 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,10 +128,8 @@ void	raycaster_3D(t_mlx *cube, t_raycast *ray)
 	wall_top = (WIN_HEIGHT / 2) - (wall_height / 2);
 	wall_bottom = (WIN_HEIGHT / 2) + (wall_height / 2);
 	wall_color = GREEN;
-	if (cube->player.dirx )
+	if (ray->angle < (3 * M_PI / 2) && ray->angle > M_PI / 2)
 		wall_color = BLUE;
-	else if (ray->angle < M_PI)
-		wall_color = RED;
 	else
 		wall_color = YELLOW;
 	//draw_bg(cube);
