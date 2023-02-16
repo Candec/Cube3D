@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/14 15:17:46 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/16 09:35:31 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	move_player(t_mlx *cube, int keysym)
 		cube->player.pos.x -= 0.1;
 	if (keysym == MOVE_RIGHT)
 		cube->player.pos.x += 0.1;
-	if (cube->map.map[(int)cube->player.pos.y][(int)cube->player.pos.x] == '1')
+	if (cube->map.map[(int)floor(cube->player.pos.y)][(int)floor(cube->player.pos.x)] == '1')
 	{
 		cube->player.pos.x = x;
 		cube->player.pos.y = y;
