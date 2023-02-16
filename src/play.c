@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/16 10:38:03 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/16 10:38:49 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int	keypress(int keysym, t_mlx *cube)
 {
 	if (keysym == ESC)
 		quit(cube);
-	printf("%d\n", keysym);
+	//printf("%d\n", keysym);
 	player(cube, keysym);
 	// if (cube->map.player_escape == TRUE)
 	// 	return (0);

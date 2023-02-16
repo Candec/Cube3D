@@ -34,6 +34,7 @@ SRC =		main.c\
 			bresenham.c\
 			math.c\
 			dda.c\
+			rays.c\
 			
 all: $(NAME)
 

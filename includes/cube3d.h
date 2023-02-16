@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/16 10:35:29 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/16 12:20:55 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@
 **	 Structures
 **	=============
 */
-
 typedef struct s_player
 {
 	t_coord	pos;
@@ -153,11 +152,28 @@ typedef struct s_map
 	t_rgb	c_rgb;
 }				t_map;
 
+typedef struct s_raycast
+{
+	int		row;
+	t_coord	pos;
+	t_coord	step;
+	float	angle;
+	float	dist;
+	bool	hit;
+}				t_raycast;
+typedef struct s_rays
+{
+	t_raycast		ray;
+	struct s_rays	*head;
+	struct s_rays	*next;
+}				t_rays;
+
 typedef struct s_mlx
 {
 	t_map		map;
 	t_img		frame;
 	t_player	player;
+	t_rays		rays;
 
 	bool		show_minimap;
 	bool		win;
@@ -168,16 +184,6 @@ typedef struct s_mlx
 	void		*img_we;
 	void		*img_ea;
 }				t_mlx;
-
-typedef struct s_raycast
-{
-	int	row;
-	t_coord	pos;
-	t_coord	step;
-	float	angle;
-	float	dist;
-	bool	hit;
-}				t_raycast;
 
 /*
 **	=============
@@ -237,6 +243,11 @@ void	draw_rays_2D(t_mlx *cube);
 double	distance(double x1, double y1, double x2, double y2);
 void	fix_fisheye(float p_angle, t_raycast *ray);
 void	draw_3D(t_mlx *c);
+
+/*
+**	rays.c
+*/
+void	add_ray(t_mlx *cube, t_raycast ray);
 
 /*
 **	error_handling.c
