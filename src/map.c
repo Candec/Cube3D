@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:08:49 by tpereira          #+#    #+#             */
-/*   Updated: 2023/02/13 08:53:00 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/14 14:47:33 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	draw_map_2D(t_mlx *cube)
 			if (cube->map.map[y][x] == '1')
 				draw_square(cube, (xo), (yo), TILE_SIZE - 1, WHITE);
 			else if (cube->map.map[y][x] == '0')
-				draw_square(cube, (xo), (yo), TILE_SIZE - 1, BLACK);
+				draw_square(cube, (xo), (yo), TILE_SIZE - 1, BLUE);
 			else if (ft_strchr("NSEW", cube->map.map[y][x]))
-				draw_square(cube, (xo), (yo), TILE_SIZE - 1, BLACK);
+				draw_square(cube, (xo), (yo), TILE_SIZE - 1, BLUE);
 			else
 				draw_square(cube, (xo), (yo), TILE_SIZE - 1, GREEN);
 			x++;
@@ -78,7 +78,7 @@ void	draw_player_2D(t_mlx *cube)
 		{
 			xo = cube->player.pos.x * TILE_SIZE;
 			if (cube->map.map[y][x] == '0')
-				draw_square(cube, xo, yo, TILE_SIZE / 4, YELLOW);
+				draw_square(cube, xo + (TILE_SIZE * 0.40), yo + (TILE_SIZE * 0.40), TILE_SIZE / 4, YELLOW);
 		}
 	}
 }

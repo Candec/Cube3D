@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/07 15:36:42 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/14 15:17:46 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,17 @@ void	move_player(t_mlx *cube, int keysym)
 	}
 }
 
-void draw_loop(t_mlx *cube)
+void draw_loop(t_mlx *cube, bool show_minimap)
 {
 	blackout(cube);
-	draw_map_2D(cube);
-	draw_player_2D(cube);
-	draw_rays_2D(cube, 0);
+	if (show_minimap)
+	{
+		draw_map_2D(cube);
+		draw_player_2D(cube);
+		draw_rays_2D(cube, 1);
+	}
+	else
+		draw_rays_2D(cube, 0);
 	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->frame.img, 0, 0);
 }
 
@@ -102,10 +107,17 @@ void	player(t_mlx *cube, int keysym)
 		cube->player.angle -= 0.1;
 	if (keysym == LOOK_RIGHT)
 		cube->player.angle += 0.1;
+	if (keysym == M_KEY)
+	{
+		if (cube->show_minimap)
+			cube->show_minimap = 0;
+		else
+			cube->show_minimap = 1;
+	}
 	fix_angle(&cube->player.angle);
 	cube->player.dirx = cos(cube->player.angle) * 5;
 	cube->player.diry = sin(cube->player.angle) * 5;
-	draw_loop(cube);
+	draw_loop(cube, cube->show_minimap);
 }
 
 int	keypress(int keysym, t_mlx *cube)
@@ -131,7 +143,7 @@ int	draw_frame(t_mlx *cube)
 	cube->frame.data = (int *)mlx_get_data_addr(cube->frame.img, &cube->frame.bpp, &cube->frame.size_l, &cube->frame.endian);
 	//draw_bg(cube);
 	//draw_wall(cube, 500, 500, 100);
-	draw_loop(cube);
+	draw_loop(cube, cube->show_minimap);
 	// draw_map_2D(cube);
 	return (0);
 }

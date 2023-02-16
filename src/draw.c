@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/13 10:36:54 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/14 15:30:16 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ void	raycaster_3D(t_mlx *cube, t_raycast *ray)
 	draw_line(cube, ray->row, wall_bottom, ray->row, WIN_HEIGHT, 0x000000);
 }
 
-void	draw_rays_2D(t_mlx *c, int show3d)
+void	draw_rays_2D(t_mlx *c, bool show_minimap)
 {
 	t_raycast *ray;
 
@@ -168,17 +168,15 @@ void	draw_rays_2D(t_mlx *c, int show3d)
 			else
 				ray->hit = true;
 		}
-		if (show3d)
-			draw_line(c, (c->player.pos.x * TILE_SIZE) + TILE_SIZE / 8, (c->player.pos.y * TILE_SIZE) + TILE_SIZE / 8, ray->pos.x * TILE_SIZE, ray->pos.y * TILE_SIZE, RED);
-		else
-		{
-			ray->dist = distance(c->player.posx, c->player.posy, ray->pos.x, ray->pos.y);
-			raycaster_3D(c, ray);
-		}
-		//free(ray);
+		if (show_minimap)
+			draw_line(c, (c->player.pos.x * TILE_SIZE) + (TILE_SIZE * 0.5), (c->player.pos.y * TILE_SIZE) + (TILE_SIZE * 0.5), ray->pos.x * TILE_SIZE, ray->pos.y * TILE_SIZE, RED);
+		ray->dist = distance(c->player.posx, c->player.posy, ray->pos.x, ray->pos.y);
+		raycaster_3D(c, ray);
 	}
-	if (!show3d)
+	free(ray);
+	if (show_minimap)
 	{
+		show_minimap = 0;
 		draw_map_2D(c);
 		draw_player_2D(c);
 		draw_rays_2D(c, 1);

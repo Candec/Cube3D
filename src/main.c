@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:09 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/31 02:04:55 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/02/14 15:07:54 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	init(t_mlx *cube)
 	cube->map.ea = NULL;
 	cube->map.map = ft_calloc(sizeof(char **), 0);
 	cube->win = FALSE;
+	cube->show_minimap = FALSE;
 }
 
 void	parse(t_mlx *cube, char *map)
