@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/02/15 18:20:47 by jibanez-         ###   ########.fr       */
+=======
+/*   Updated: 2023/02/13 10:35:54 by tpereira         ###   ########.fr       */
+>>>>>>> tiago
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +70,7 @@
 # endif
 
 # ifndef TILE_SIZE
-#  define TILE_SIZE 8
+#  define TILE_SIZE 16
 # endif
 
 # ifndef WALL_HEIGHT
@@ -176,8 +180,9 @@ typedef struct s_game
 typedef struct s_raycast
 {
 	t_coord	pos;
-	t_coord	stp;
-	double	ang;
+	t_coord	step;
+	float	angle;
+	float	dist;
 	bool	hit;
 }				t_raycast;
 
@@ -244,8 +249,9 @@ void	draw_line(t_mlx *cube, double x1, double y1, double x2, double y2, int colo
 void	draw_circle(t_mlx *cube, int x, int y, int radius, int color);
 void	bresenham(t_mlx *c, t_coord p, int color);
 void	draw_fov(t_mlx *cube);
-void	draw_rays_2d(t_mlx *c);
-double	distance(t_coord a, t_coord b);
+void	draw_rays_2D(t_mlx *cube, int show3d);
+double	distance(double x1, double y1, double x2, double y2);
+void	fix_fisheye(float p_angle, t_raycast *ray);
 
 /*
 **	error_handling.c

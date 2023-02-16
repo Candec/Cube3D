@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:08:49 by tpereira          #+#    #+#             */
-/*   Updated: 2023/02/02 18:49:44 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:43:02 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,13 @@ void	draw_map_2D(t_mlx *cube)
 		while (cube->map.map[y][x] != '\0' && x != (int)cube->map.width)
 		{
 			xo = x * TILE_SIZE;
+			draw_square(cube, (xo), (yo), TILE_SIZE, BLACK);
 			if (cube->map.map[y][x] == '1')
 				draw_square(cube, (xo), (yo), TILE_SIZE - 1, WHITE);
 			else if (cube->map.map[y][x] == '0')
-				draw_square(cube, (xo), (yo), TILE_SIZE - 1, BLUE);
+				draw_square(cube, (xo), (yo), TILE_SIZE - 1, BLACK);
 			else if (ft_strchr("NSEW", cube->map.map[y][x]))
-				draw_square(cube, (xo), (yo), TILE_SIZE - 1, BLUE);
+				draw_square(cube, (xo), (yo), TILE_SIZE - 1, BLACK);
 			else
 				draw_square(cube, (xo), (yo), TILE_SIZE - 1, GREEN);
 			x++;
@@ -81,15 +82,3 @@ void	draw_player_2D(t_mlx *cube)
 		}
 	}
 }
-
-// void	draw_wall_3d(t_mlx *cube)
-// {
-// 	int	y;
-
-// 	y = 0;
-// 	while (y++ < HEIGHT)
-// 	{
-
-// 	}
-// }
-
