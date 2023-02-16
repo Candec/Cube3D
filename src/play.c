@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/16 10:36:14 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/16 10:38:03 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,13 @@ void	move_player(t_mlx *cube, int keysym)
 void draw_loop(t_mlx *cube)
 {
 	blackout(cube);
+	draw_3D(cube);
 	if (cube->show_minimap)
 	{
 		draw_map_2D(cube);
 		draw_player_2D(cube);
 		draw_rays_2D(cube);
 	}
-	draw_3D(cube);
 	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->frame.img, 0, 0);
 }
 
