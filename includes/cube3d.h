@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/08 18:10:41 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/02/15 18:20:47 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,7 +242,7 @@ void	draw_square(t_mlx *cube, int x, int y, int height, int color);
 void	blackout(t_mlx *cube);
 void	draw_line(t_mlx *cube, double x1, double y1, double x2, double y2, int color);
 void	draw_circle(t_mlx *cube, int x, int y, int radius, int color);
-void	bresenham(t_mlx *cube, float x1, float y1, int color);
+void	bresenham(t_mlx *c, t_coord p, int color);
 void	draw_fov(t_mlx *cube);
 void	draw_rays_2d(t_mlx *c);
 double	distance(t_coord a, t_coord b);
