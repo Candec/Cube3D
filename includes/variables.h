@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 16:42:40 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/14 15:07:14 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/16 10:08:40 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 #  define LOOK_LEFT		65361	// ←
 #  define LOOK_RIGHT	65363	// →
 #  define TOGGLE_MOUSE	113		// Q
-#  define M_KEY			46		// M -> need to check the Key for Linux
+#  define M_KEY			109		// M -> need to check the Key for Linux
 # elif defined(__APPLE__)
 #  define ESC			53		// ESQ
 #  define MOVE_UP		13		// W

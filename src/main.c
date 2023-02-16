@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:09 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/16 09:33:51 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/16 10:06:47 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	play(t_mlx *cube)
 	mlx_hook(cube->win_ptr, KeyPress, KeyPressMask, keypress, cube);
 	mlx_hook(cube->win_ptr, DestroyNotify, StructureNotifyMask, quit, cube);
 	draw_frame(cube);
-	// mlx_loop_hook(cube->win_ptr, draw_frame, cube);
 	mlx_loop(cube->mlx_ptr);
 }
 
