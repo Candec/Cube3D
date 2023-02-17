@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:08:49 by tpereira          #+#    #+#             */
-/*   Updated: 2023/02/17 12:05:49 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/17 12:09:09 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	draw_map_2D(t_mlx *cube)
 	int yo;
 
 	y = 0;
-	//print_map(cube);
 	while (y != (int)cube->map.height)
 	{
 		yo = y * TILE_SIZE;
