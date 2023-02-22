@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/17 12:02:14 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/22 08:41:14 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,38 +91,11 @@ void	draw_line(t_mlx *cube, double x, double y, double x2, double y2, int color)
 
 void	raycaster_3D(t_mlx *cube, t_raycast *ray)
 {
-	double	ray_x;
-	double	ray_y;
-	double	xo;
-	double	yo;
-	int		hit;
 	int		wall_height;
 	int		wall_top;
 	int		wall_bottom;
 	int		wall_color;
 
-	hit = 0;
-	ray_y = ((cube->player.pos.y / TILE_SIZE) * TILE_SIZE);
-	ray_x = (cube->player.pos.y - ray_y) * (-1 / tan(ray->angle)) + cube->player.pos.x;
-	xo = cos(ray->angle) * 0.002;
-	yo = sin(ray->angle) * 0.002;
-	while (hit < INT_MAX)
-	{
-		if (ray_x > 0 && ray_y > 0 && ray_x < cube->map.width && ray_y < cube->map.height)
-		{
-			if (cube->map.map[(int)floor(ray_y)][(int)floor(ray_x)] == '1')
-				hit = INT_MAX;
-			else
-			{
-				hit++;
-				ray_x += xo;
-				ray_y += yo;
-			}
-		}
-		else
-			hit = INT_MAX;
-	}
-	ray->dist = distance(cube->player.pos.x, cube->player.pos.y, ray_x, ray_y);
 	fix_fisheye(cube->player.angle, ray);
 	wall_height = (TILE_SIZE / ray->dist) * WALL_HEIGHT;
 	wall_top = (WIN_HEIGHT / 2) - (wall_height / 2);
@@ -135,7 +108,7 @@ void	raycaster_3D(t_mlx *cube, t_raycast *ray)
 	//draw_bg(cube);
 	//draw_line(cube, ray->row, 0, ray->row, wall_top, 0x000000);
 	draw_line(cube, ray->row, wall_top, ray->row, wall_bottom, wall_color);
-	draw_line(cube, ray->row, wall_bottom, ray->row, WIN_HEIGHT, 0x000000);
+	//draw_line(cube, ray->row, wall_bottom, ray->row, WIN_HEIGHT, 0x000000);
 	if (cube->show_minimap)
 		draw_line(cube, (cube->player.pos.x * TILE_SIZE) + (TILE_SIZE * 0.5), (cube->player.pos.y * TILE_SIZE) + (TILE_SIZE * 0.5), ray->pos.x * TILE_SIZE, ray->pos.y * TILE_SIZE, RED);
 }
@@ -170,9 +143,13 @@ void	draw_rays_2D(t_mlx *c)
 				ray.hit = true;
 		}
 		ray.dist = distance(c->player.posx, c->player.posy, ray.pos.x, ray.pos.y);
-		draw_line(c, (c->player.pos.x * TILE_SIZE) + (TILE_SIZE * 0.5), (c->player.pos.y * TILE_SIZE) + (TILE_SIZE * 0.5), ray.pos.x * TILE_SIZE, ray.pos.y * TILE_SIZE, RED);
-		ray.dist = distance(c->player.posx, c->player.posy, ray.pos.x, ray.pos.y);
 		raycaster_3D(c, &ray);
+		if (c->show_minimap)
+		{
+			draw_line(c, (c->player.pos.x * TILE_SIZE) + (TILE_SIZE * 0.5), (c->player.pos.y * TILE_SIZE) + (TILE_SIZE * 0.5), ray.pos.x * TILE_SIZE, ray.pos.y * TILE_SIZE, RED);
+			draw_map_2D(c);
+			draw_player_2D(c);
+		}
 	}
 }
 
