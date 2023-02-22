@@ -31,7 +31,6 @@ SRC =		main.c\
 			error.c\
 			player.c\
 			map.c\
-			bresenham.c\
 			math.c\
 			dda.c\
 			rays.c\
