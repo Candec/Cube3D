@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/22 09:23:38 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/22 11:53:46 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,47 +40,51 @@ void	load_img(t_mlx *cube)
 		error("COULDN'T LOAD IMG\n", cube);
 }
 
-void	start_mlx_and_window(t_mlx *cube)
+void	start_mlx_and_window(t_mlx *c)
 {
 	bool	err;
 
 	err = TRUE;
-	cube->mlx_ptr = mlx_init();
-	if (!cube->mlx_ptr)
+	c->mlx_ptr = mlx_init();
+	if (!c->mlx_ptr)
 		err = FALSE;
-	cube->win_ptr = mlx_new_window(cube->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "Cube_3d");
-	if (!cube->win_ptr)
+	c->win_ptr = mlx_new_window(c->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "Cub3d");
+	if (!c->win_ptr)
 		err = FALSE;
 	if (!err)
-		error("COULDN'T CREATE WINDOW\n", cube);
-	cube->win = TRUE;
+		error("COULDN'T CREATE WINDOW\n", c);
+	c->win = TRUE;
 }
 
-void	move_player(t_mlx *cube, int keysym)
+void	move_player(t_mlx *c, int keysym)
 {
-	double x;
-	double y;
+	double	x;
+	double	y;
+	int		floor_x;
+	int		floor_y;
 
-	x = cube->player.pos.x;
-	y = cube->player.pos.y;
+	floor_x = (int)floor(c->player.pos.x);
+	floor_y = (int)floor(c->player.pos.y);
+	x = c->player.pos.x;
+	y = c->player.pos.y;
 	if (keysym == MOVE_UP)
 	{
-		cube->player.pos.y += cube->player.diry / TILE_SIZE;
-		cube->player.pos.x += cube->player.dirx / TILE_SIZE;
+		c->player.pos.y += c->player.diry / TILE_SIZE;
+		c->player.pos.x += c->player.dirx / TILE_SIZE;
 	}
 	if (keysym == MOVE_DOWN)
 	{
-		cube->player.pos.y -= cube->player.diry / TILE_SIZE;
-		cube->player.pos.x -= cube->player.dirx / TILE_SIZE;
+		c->player.pos.y -= c->player.diry / TILE_SIZE;
+		c->player.pos.x -= c->player.dirx / TILE_SIZE;
 	}
 	if (keysym == MOVE_LEFT)
-		cube->player.pos.x -= 0.1;
+		c->player.pos.x -= 0.1;
 	if (keysym == MOVE_RIGHT)
-		cube->player.pos.x += 0.1;
-	if (cube->map.map[(int)floor(cube->player.pos.y)][(int)floor(cube->player.pos.x)] == '1')
+		c->player.pos.x += 0.1;
+	if (c->map.map[floor_y][floor_x] == '1')
 	{
-		cube->player.pos.x = x;
-		cube->player.pos.y = y;
+		c->player.pos.x = x;
+		c->player.pos.y = y;
 	}
 }
 

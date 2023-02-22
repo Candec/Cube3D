@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:28:31 by tpereira          #+#    #+#             */
-/*   Updated: 2023/02/22 11:42:09 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/22 11:49:28 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,16 @@ void	init_player(t_mlx *cube)
 	int	i;
 	int	j;
 
-	i = 0;
-	while (i < (int)cube->map.height)
+	i = -1;
+	while (++i < (int)cube->map.height)
 	{
-		j = 0;
-		while (j < (int)cube->map.width)
+		j = -1;
+		while (++j < (int)cube->map.width)
 		{
 			if (ft_strchr("NSEW", cube->map.map[i][j]))
 			{
 				if (cube->map.map[i][j] == '\0')
 					break ;
-				//printf("c = %c\n\n", cube->map.map[i][j]);
 				cube->player.posx = j + 0.4f;
 				cube->player.posy = i + 0.4f;
 				cube->player.angle = 1.5;
@@ -53,8 +52,6 @@ void	init_player(t_mlx *cube)
 				init_player_dir(cube, cube->map.map[i][j]);
 				return ;
 			}
-			j++;
 		}
-		i++;
 	}
 }
