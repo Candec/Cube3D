@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/22 08:33:10 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/22 09:23:38 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,15 @@ void draw_loop(t_mlx *cube)
 	double dx;
 	double dy;
 
-	px = (cube->player.pos.x * TILE_SIZE) + TILE_SIZE / 2;
-	py = (cube->player.pos.y * TILE_SIZE) + TILE_SIZE / 2;
+	px = (cube->player.pos.x * TILE_SIZE);
+	py = (cube->player.pos.y * TILE_SIZE);
 	dx = px + cube->player.dirx * 5;
 	dy = py + cube->player.diry * 5;
 
 	blackout(cube);
 	draw_rays_2D(cube);
-	draw_line(cube, px, py, dx, dy, GREEN);			// show players direction
+	if (cube->show_minimap)
+		draw_line(cube, px, py, dx, dy, GREEN);			// show players direction
 	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->frame.img, 0, 0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:08:49 by tpereira          #+#    #+#             */
-/*   Updated: 2023/02/17 12:09:09 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/22 09:20:16 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ void	draw_player_2D(t_mlx *cube)
 	while (++y != (int)cube->map.height)
 	{
 		x = -1;
-		yo = cube->player.pos.y * TILE_SIZE;
+		yo = (cube->player.pos.y - 1) * TILE_SIZE;
 		while (++x != (int)cube->map.width)
 		{
-			xo = cube->player.pos.x * TILE_SIZE;
+			xo = (cube->player.pos.x - 1) * TILE_SIZE;
 			if (cube->map.map[y][x] == '0')
-				draw_square(cube, xo + (TILE_SIZE * 0.40), yo + (TILE_SIZE * 0.40), TILE_SIZE / 4, YELLOW);
+				draw_square(cube, xo + (TILE_SIZE), yo + (TILE_SIZE), TILE_SIZE / 4, YELLOW);
 		}
 	}
 }

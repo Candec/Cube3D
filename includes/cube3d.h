@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/16 12:20:55 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/22 09:13:12 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,7 +266,7 @@ void	draw_player_2D(t_mlx *cube);
 /*
 **	map.c
 */
-void	draw_map_2D(t_mlx *game);
+void	draw_map_2D(t_mlx *cube);
 
 /*
 **	Math.c
