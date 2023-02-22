@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/22 11:06:00 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/22 11:11:00 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	draw_bg(t_mlx *cube)
 	double j;
 
 	i = WIN_HEIGHT - 1;
-	j = 0;
+	j = WIN_HEIGHT - 1;
 	y = -1;
 	while (++y < WIN_HEIGHT)
 	{
@@ -36,7 +36,7 @@ void	draw_bg(t_mlx *cube)
 		while (++x < WIN_WIDTH)
 		{
 			if (y > (WIN_HEIGHT / 2))							// floor
-				add_pixel(&cube->frame, 0xffa500 + j, x, y);
+				add_pixel(&cube->frame, MAROON + j, x, y);
 			else if (y < (WIN_HEIGHT / 2))						// sky
 				add_pixel(&cube->frame, 0x00ffff + i, x, y);
 		}
@@ -102,8 +102,6 @@ void	raycaster_3D(t_mlx *cube, t_raycast *ray)
 	int				wall_top;
 	int				wall_bottom;
 	int				wall_color;
-	static double	i = WIN_HEIGHT - 1;
-	static double	j = 0;
 
 	ray->dist = distance(cube->player.pos.x, cube->player.pos.y, ray->pos.x, ray->pos.y);
 	fix_fisheye(cube->player.angle, ray);
@@ -115,11 +113,7 @@ void	raycaster_3D(t_mlx *cube, t_raycast *ray)
 		wall_color = MAROON;
 	else
 		wall_color = YELLOW;
-	draw_line(cube, ray->row, 0, ray->row, wall_top, 0xffa500 + i);
 	draw_line(cube, ray->row, wall_top, ray->row, wall_bottom, wall_color);
-	draw_line(cube, ray->row, wall_bottom, ray->row, WIN_HEIGHT, 0x00ffff + j);
-	i -= 0.7;
-	j -= 0.65;
 }
 
 void	draw_rays_2D(t_mlx *c)
