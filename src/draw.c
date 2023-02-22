@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/22 11:11:00 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/22 11:41:40 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	draw_bg(t_mlx *cube)
 	double j;
 
 	i = WIN_HEIGHT - 1;
-	j = WIN_HEIGHT - 1;
+	j = 0;
 	y = -1;
 	while (++y < WIN_HEIGHT)
 	{
@@ -36,12 +36,12 @@ void	draw_bg(t_mlx *cube)
 		while (++x < WIN_WIDTH)
 		{
 			if (y > (WIN_HEIGHT / 2))							// floor
-				add_pixel(&cube->frame, MAROON + j, x, y);
+				add_pixel(&cube->frame, 0x8888F0 + j, x, y);
 			else if (y < (WIN_HEIGHT / 2))						// sky
 				add_pixel(&cube->frame, 0x00ffff + i, x, y);
 		}
 		i -= 0.7;
-		j -= 0.65;
+		j -= 0.6;
 	}
 }
 
