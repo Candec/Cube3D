@@ -33,7 +33,6 @@ SRC =		main.c\
 			map.c\
 			math.c\
 			dda.c\
-			rays.c\
 			
 all: $(NAME)
 
