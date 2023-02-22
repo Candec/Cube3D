@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/22 09:13:12 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/22 10:58:57 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,9 @@
 #  define BLACK 0x000000
 # endif
 
+# ifndef MAROON
+#  define MAROON 0x800000
+# endif
 /*
 **	=============
 **	 Structures
