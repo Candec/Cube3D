@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/13 10:35:54 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/23 15:09:04 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,10 +178,22 @@ typedef struct s_raycast
 	int	row;
 	t_coord	pos;
 	t_coord	step;
+	t_coord	dir;
+	t_coord	len;
+	t_coord	tot_len;
+	t_coord hit_pos;
 	float	angle;
 	float	dist;
 	bool	hit;
 }				t_raycast;
+
+typedef struct s_wall
+{
+	int		h;
+	int		top;
+	int		bot;
+	int		c;
+}				t_wall;
 
 /*
 **	=============
@@ -269,6 +281,6 @@ int		fix_angle(float *angle);
 /*
 **	dda.c
 */
-t_coord	dda(t_mlx *cube, double x, double y);
+void	dda(t_mlx *c, t_raycast *r);
 
 #endif
