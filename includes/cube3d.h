@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/22 10:58:57 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/24 08:41:28 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,19 +164,12 @@ typedef struct s_raycast
 	float	dist;
 	bool	hit;
 }				t_raycast;
-typedef struct s_rays
-{
-	t_raycast		ray;
-	struct s_rays	*head;
-	struct s_rays	*next;
-}				t_rays;
 
 typedef struct s_mlx
 {
 	t_map		map;
 	t_img		frame;
 	t_player	player;
-	t_rays		rays;
 
 	bool		show_minimap;
 	bool		win;
