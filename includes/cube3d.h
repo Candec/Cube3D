@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/23 15:09:04 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/02/24 02:25:44 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,6 @@
 typedef struct s_player
 {
 	t_coord	pos;
-	float	posx;
-	float	posy;
 	float	dirx;
 	float	diry;
 	float	angle;
@@ -121,7 +119,6 @@ typedef struct s_player
 	float	planey;
 	float	height;
 	float	fov;
-	float	position;
 
 	bool	e;
 }				t_player;
@@ -177,13 +174,14 @@ typedef struct s_raycast
 {
 	int	row;
 	t_coord	pos;
+	t_coord	step_size;
 	t_coord	step;
 	t_coord	dir;
 	t_coord	len;
-	t_coord	tot_len;
 	t_coord hit_pos;
-	float	angle;
-	float	dist;
+	double	tot_len;
+	double	angle;
+	double	dist;
 	bool	hit;
 }				t_raycast;
 
@@ -252,6 +250,7 @@ void	draw_fov(t_mlx *cube);
 void	draw_rays_2D(t_mlx *cube, int show3d);
 double	distance(double x1, double y1, double x2, double y2);
 void	fix_fisheye(float p_angle, t_raycast *ray);
+void	raycaster(t_mlx *c);
 
 /*
 **	error_handling.c

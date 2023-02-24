@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   play.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/13 11:19:06 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/24 01:19:58 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ void	move_player(t_mlx *cube, int keysym)
 		cube->player.pos.x -= cube->player.dirx / TILE_SIZE;
 	}
 	if (keysym == MOVE_LEFT)
-		cube->player.pos.x -= 0.1;
+		cube->player.pos.x -= cube->player.dirx / TILE_SIZE;
 	if (keysym == MOVE_RIGHT)
-		cube->player.pos.x += 0.1;
+		cube->player.pos.x += cube->player.diry / TILE_SIZE;
 	if (cube->map.map[(int)floor(cube->player.pos.y)][(int)floor(cube->player.pos.x)] == '1')
 	{
 		cube->player.pos.x = x;
@@ -89,7 +89,8 @@ void draw_loop(t_mlx *cube)
 	blackout(cube);
 	draw_map_2D(cube);
 	draw_player_2D(cube);
-	draw_rays_2D(cube, 0);
+	// draw_rays_2D(cube, 0);
+	raycaster(cube);
 	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->frame.img, 0, 0);
 }
 

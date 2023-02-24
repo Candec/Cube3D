@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bresenham.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:24:26 by tpereira          #+#    #+#             */
-/*   Updated: 2023/01/26 16:59:02 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/24 02:24:38 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ void	my_mlx_pixel_put(t_mlx *cube, int x, int y, int color)
 
 void	bresenham(t_mlx *cube, float x1, float y1, int color)
 {
-	while ((int)(cube->player.posx- x1) || (int)(cube->player.posy - y1))
+	while ((int)(cube->player.pos.x- x1) || (int)(cube->player.pos.y - y1))
 	{
-		my_mlx_pixel_put(cube, cube->player.posx, cube->player.posy + 1, color);
-		cube->player.posx+= 0.1;
-		cube->player.posy += 0.1;
+		my_mlx_pixel_put(cube, cube->player.pos.x, cube->player.pos.y + 1, color);
+		cube->player.pos.x+= 0.1;
+		cube->player.pos.y += 0.1;
 	}
 }

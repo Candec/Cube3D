@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/23 15:10:37 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/02/24 02:18:44 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,14 @@ void	raycaster(t_mlx *c)
 	r = malloc(sizeof(t_raycast));
 	w = malloc(sizeof(t_wall));
 	dda(c, r);
-	fix_fisheye(c->player.angle, r);
-	w->h = (TILE_SIZE / r->dist) * WALL_HEIGHT;
-	w->top = (WIN_HEIGHT / 2) - (w->h / 2);
-	w->bot= (WIN_HEIGHT / 2) + (w->h / 2);
-	w->c = GREEN;
-	draw_line(c, r->row, w->top, r->row, w->bot, w->c);
-	draw_line(c, r->row, w->bot, r->row, WIN_HEIGHT, 0x000000);
+	// fix_fisheye(c->player.angle, r);
+	// w->h = (TILE_SIZE / r->dist) * WALL_HEIGHT;
+	// w->top = (WIN_HEIGHT / 2) - (w->h / 2);
+	// w->bot= (WIN_HEIGHT / 2) + (w->h / 2);
+	// w->c = GREEN;
+	draw_line(c, c->player.pos.x, c->player.pos.y, r->pos.x, r->pos.y, RED);
+	// draw_line(c, r->row, w->bot, r->row, WIN_HEIGHT, 0x000000);
+	free(w);
 	free(r);
 }
 
