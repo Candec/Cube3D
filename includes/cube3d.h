@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/24 08:41:28 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/27 11:40:01 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@
 # endif
 
 # ifndef TILE_SIZE
-#  define TILE_SIZE 16
+#  define TILE_SIZE 32
 # endif
 
 # ifndef WALL_HEIGHT
@@ -268,7 +268,7 @@ void	draw_map_2D(t_mlx *cube);
 **	Math.c
 */
 float	deg_to_rad(float deg);
-int		fix_angle(float *angle);
+void	fix_angle(float *angle);
 
 /*
 **	dda.c

@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/22 11:53:46 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/27 10:14:12 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,8 @@ void draw_loop(t_mlx *cube)
 
 	blackout(cube);
 	draw_rays_2D(cube);
-	if (cube->show_minimap)
-		draw_line(cube, px, py, dx, dy, GREEN);			// show players direction
+	//if (cube->show_minimap)
+	draw_line(cube, px, py, dx, dy, GREEN);			// show players direction
 	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->frame.img, 0, 0);
 }
 
