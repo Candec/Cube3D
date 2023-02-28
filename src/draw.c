@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/27 18:00:46 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/27 18:11:25 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,8 @@ void	vertical_hit(t_raycast *ray, t_mlx *c)
 		ray->pos.y = (c->player.pos.x - ray->pos.x) * a_tan + c->player.pos.y;
 		ray->step.x = TILE_SIZE;
 		ray->step.y = (-ray->step.x) * a_tan;
+		printf("ray->step.x: %f, ray->step.y: %f\n", ray->step.x, ray->step.y);
+		printf("ray->pos.x: %f, ray->pos.y: %f\n", ray->pos.x, ray->pos.y);
 	}
 	if (ray->angle > M_PI / 2 && ray->angle < 3 * M_PI / 2)					// Looking Left
 	{
@@ -143,20 +145,20 @@ void	vertical_hit(t_raycast *ray, t_mlx *c)
 	}
 	while (!ray->hit)
 	{
-		if (ray->pos.x > 0 && ray->pos.y > 0)
+		if (ray->pos.x > 0 && ray->pos.y > 0 && ray->pos.y < c->map.height && ray->pos.x < c->map.width)
 		{
 			if (c->map.map[(int)floor(ray->pos.y)][(int)floor(ray->pos.x)] == '1')
 				ray->hit = true;
 			else
 			{
-				ray->pos.x += ray->step.x;
-				ray->pos.y += ray->step.y;
+				ray->pos.x += ray->step.x * 0.0001;
+				ray->pos.y += ray->step.y * 0.0001;
 			}
 		}
 		else
 			ray->hit = true;
 	}
-	draw_line(c, (c->player.pos.x * TILE_SIZE), (c->player.pos.y * TILE_SIZE), ray->pos.x * TILE_SIZE, ray->pos.y * TILE_SIZE, RED);
+	//draw_line(c, (c->player.pos.x * TILE_SIZE), (c->player.pos.y * TILE_SIZE), ray->pos.x * TILE_SIZE, ray->pos.y * TILE_SIZE, RED);
 	ray->dist = distance(c->player.pos.x, c->player.pos.y, ray->pos.x, ray->pos.y);
 }
 
@@ -200,7 +202,7 @@ void	horizontal_hit(t_raycast *ray, t_mlx *c)				// YELLOW
 		else
 			ray->hit = true;
 	}
-	//draw_line(c, (c->player.pos.x * TILE_SIZE - 1), (c->player.pos.y * TILE_SIZE - 1), ray->pos.x * TILE_SIZE - 1, ray->pos.y * TILE_SIZE - 1, RED);
+	draw_line(c, (c->player.pos.x * TILE_SIZE - 1), (c->player.pos.y * TILE_SIZE - 1), ray->pos.x * TILE_SIZE - 1, ray->pos.y * TILE_SIZE - 1, RED);
 	ray->dist = distance(c->player.pos.x, c->player.pos.y, ray->pos.x, ray->pos.y);
 }
 
