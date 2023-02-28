@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/27 10:14:12 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/28 09:39:33 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,36 @@ void	move_player(t_mlx *c, int keysym)
 		c->player.pos.x -= c->player.dirx / TILE_SIZE;
 	}
 	if (keysym == MOVE_LEFT)
-		c->player.pos.x -= 0.1;
+		cube->player.pos.x -= cube->player.dirx / TILE_SIZE;
 	if (keysym == MOVE_RIGHT)
-		c->player.pos.x += 0.1;
-	if (c->map.map[floor_y][floor_x] == '1')
+		cube->player.pos.x += cube->player.diry / TILE_SIZE;
+	if (cube->map.map[(int)floor(cube->player.pos.y)][(int)floor(cube->player.pos.x)] == '1')
 	{
 		c->player.pos.x = x;
 		c->player.pos.y = y;
 	}
 }
+// void	move_player(t_mlx *cube, int keysym)
+// {
+// 	double x;
+// 	double y;
+
+// 	x = cube->player.pos.x;
+// 	y = cube->player.pos.y;
+// 	if (keysym == MOVE_UP)
+// 		cube->player.pos.y -= 0.1;
+// 	if (keysym == MOVE_DOWN)
+// 		cube->player.pos.y += 0.1;
+// 	if (keysym == MOVE_LEFT)
+// 		cube->player.pos.x -= 0.1;
+// 	if (keysym == MOVE_RIGHT)
+// 		cube->player.pos.x += 0.1;
+// 	if (cube->map.map[(int)floor(cube->player.pos.y)][(int)floor(cube->player.pos.x)] == '1')
+// 	{
+// 		cube->player.pos.x = x;
+// 		cube->player.pos.y = y;
+// 	}
+// }
 
 void draw_loop(t_mlx *cube)
 {
@@ -101,9 +122,10 @@ void draw_loop(t_mlx *cube)
 	dy = py + cube->player.diry * 5;
 
 	blackout(cube);
-	draw_rays_2D(cube);
-	//if (cube->show_minimap)
-	draw_line(cube, px, py, dx, dy, GREEN);			// show players direction
+	draw_map_2D(cube);
+	draw_player_2D(cube);
+	// draw_rays_2D(cube, 0);
+	raycaster(cube);
 	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->frame.img, 0, 0);
 }
 
@@ -113,7 +135,7 @@ void	player(t_mlx *cube, int keysym)
 		|| keysym == MOVE_LEFT || keysym == MOVE_RIGHT)
 		move_player(cube, keysym);
 	if (keysym == LOOK_LEFT)
-		cube->player.angle -= 0.1;
+		cube->player.angle -= 0.01;
 	if (keysym == LOOK_RIGHT)
 		cube->player.angle += 0.1;
 	if (keysym == M_KEY)
@@ -126,6 +148,12 @@ void	player(t_mlx *cube, int keysym)
 	fix_angle(&cube->player.angle);
 	cube->player.dirx = cos(cube->player.angle) * 5;
 	cube->player.diry = sin(cube->player.angle) * 5;
+// =======
+// 		cube->player.angle += 0.01;
+// 	// fix_angle(&cube->player.angle);
+// 	cube->player.dirx = cos(cube->player.angle);
+// 	cube->player.diry = sin(cube->player.angle);
+// >>>>>>> jesus2
 	draw_loop(cube);
 }
 

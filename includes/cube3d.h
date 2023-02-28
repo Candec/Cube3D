@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/27 16:31:43 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/28 09:36:10 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,6 @@
 typedef struct s_player
 {
 	t_coord	pos;
-	float	posx;
-	float	posy;
 	float	dirx;
 	float	diry;
 	float	angle;
@@ -123,7 +121,6 @@ typedef struct s_player
 	float	planey;
 	float	height;
 	float	fov;
-	float	position;
 
 	bool	e;
 }				t_player;
@@ -180,6 +177,33 @@ typedef struct s_mlx
 	void		*img_we;
 	void		*img_ea;
 }				t_mlx;
+
+typedef struct s_game
+{
+	t_mlx		cube;
+}				t_game;
+
+typedef struct s_raycast
+{
+	t_coord	step;
+	t_coord	step_size;
+	t_coord	dir;
+	t_coord	pos;
+	t_coord hit_pos;
+	t_coord	len;
+	double	tot_len;
+	double	angle;
+	double	dist;
+	bool	hit;
+}				t_raycast;
+
+typedef struct s_wall
+{
+	int		h;
+	int		top;
+	int		bot;
+	int		c;
+}				t_wall;
 
 /*
 **	=============
@@ -244,6 +268,7 @@ void	draw_3D(t_mlx *c);
 **	rays.c
 */
 void	add_ray(t_mlx *cube, t_raycast ray);
+void	raycaster(t_mlx *c);
 
 /*
 **	error_handling.c
@@ -273,6 +298,6 @@ void	fix_angle(float *angle);
 /*
 **	dda.c
 */
-t_coord	dda(t_mlx *cube, double x, double y);
+void	dda(t_mlx *c, t_raycast *r);
 
 #endif
