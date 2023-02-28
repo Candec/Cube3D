@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/24 02:25:44 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/02/28 01:33:05 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,13 +172,12 @@ typedef struct s_game
 
 typedef struct s_raycast
 {
-	int	row;
-	t_coord	pos;
-	t_coord	step_size;
 	t_coord	step;
+	t_coord	step_size;
 	t_coord	dir;
-	t_coord	len;
+	t_coord	pos;
 	t_coord hit_pos;
+	t_coord	len;
 	double	tot_len;
 	double	angle;
 	double	dist;

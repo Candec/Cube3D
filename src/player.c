@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:28:31 by tpereira          #+#    #+#             */
-/*   Updated: 2023/02/24 02:21:53 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/02/28 00:49:03 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	init_player_dir(t_mlx *cube, char c)
 		cube->player.angle = M_PI;
 	else
 		cube->player.angle = M_PI;
-	cube->player.dirx = cos(cube->player.angle) * 5;
-	cube->player.diry = sin(cube->player.angle) * 5;
+	cube->player.dirx = cos(cube->player.angle); // times 0.5
+	cube->player.diry = sin(cube->player.angle);
 }
 
 void	init_player(t_mlx *cube)
@@ -48,10 +48,8 @@ void	init_player(t_mlx *cube)
 				cube->player.pos.y = i + 0.4;
 				cube->player.angle = 1.5;
 				cube->player.fov = 0.66;
-				cube->player.dirx = cos(cube->player.angle) * 5;
-				cube->player.diry = sin(cube->player.angle) * 5;
-				cube->player.planex = 0;					// what should we use this for? Is it the same as dirx?
-				cube->player.planey = 0;
+				cube->player.dirx = cos(cube->player.angle); // times 0.5
+				cube->player.diry = sin(cube->player.angle);
 				init_player_dir(cube, cube->map.map[i][j]);
 				return ;
 			}
