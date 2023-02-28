@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/28 09:39:33 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/28 09:44:34 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ void	move_player(t_mlx *c, int keysym)
 		c->player.pos.x -= c->player.dirx / TILE_SIZE;
 	}
 	if (keysym == MOVE_LEFT)
-		cube->player.pos.x -= cube->player.dirx / TILE_SIZE;
+		c->player.pos.x -= c->player.dirx / TILE_SIZE;
 	if (keysym == MOVE_RIGHT)
-		cube->player.pos.x += cube->player.diry / TILE_SIZE;
-	if (cube->map.map[(int)floor(cube->player.pos.y)][(int)floor(cube->player.pos.x)] == '1')
+		c->player.pos.x += c->player.diry / TILE_SIZE;
+	if (c->map.map[(int)floor(c->player.pos.y)][(int)floor(c->player.pos.x)] == '1')
 	{
 		c->player.pos.x = x;
 		c->player.pos.y = y;
@@ -135,7 +135,7 @@ void	player(t_mlx *cube, int keysym)
 		|| keysym == MOVE_LEFT || keysym == MOVE_RIGHT)
 		move_player(cube, keysym);
 	if (keysym == LOOK_LEFT)
-		cube->player.angle -= 0.01;
+		cube->player.angle -= 0.1;
 	if (keysym == LOOK_RIGHT)
 		cube->player.angle += 0.1;
 	if (keysym == M_KEY)

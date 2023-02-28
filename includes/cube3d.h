@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/28 09:36:10 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/28 09:40:58 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,16 +151,6 @@ typedef struct s_map
 	t_rgb	f_rgb;
 	t_rgb	c_rgb;
 }				t_map;
-
-typedef struct s_raycast
-{
-	int		row;
-	t_coord	pos;
-	t_coord	step;
-	float	angle;
-	float	dist;
-	bool	hit;
-}				t_raycast;
 
 typedef struct s_mlx
 {

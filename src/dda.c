@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 02:00:19 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/28 09:28:36 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/28 09:51:53 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	dda(t_mlx *c, t_raycast *r)
 		while (!r->hit)
 		{
 			dir_dda(c, r);
-			if (r->len.x < r->len.y)
+			if (fabs(r->len.x) < fabs(r->len.y))
 			{
 				r->pos.x += r->step.x;
 				r->tot_len = r->len.x;
@@ -80,7 +80,7 @@ void	dda(t_mlx *c, t_raycast *r)
 		}
 		r->hit_pos = ft_coord(c->player.pos.x + r->dir.x * r->tot_len,
 				c->player.pos.y + r->dir.y * r->tot_len);
-		draw_line(c, c->player.pos.x * TILE_SIZE, c->player.pos.y  * TILE_SIZE, r->hit_pos.x * TILE_SIZE - TILE_SIZE / 2, r->hit_pos.y * TILE_SIZE - TILE_SIZE / 2, RED);
+		draw_line(c, c->player.pos.x * TILE_SIZE, c->player.pos.y  * TILE_SIZE, r->hit_pos.x * (TILE_SIZE) - TILE_SIZE / 2, r->hit_pos.y * (TILE_SIZE) - TILE_SIZE / 2, RED);
 	}
 }
 
