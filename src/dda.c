@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 02:00:19 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/28 09:28:36 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/28 12:19:58 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,16 @@ static void	dir_dda(t_mlx *c, t_raycast *r)
 
 void	dda(t_mlx *c, t_raycast *r)
 {
-	int col;
+	int	col;
 
 	col = -1;
 	while (++col < WIN_WIDTH)
 	{
 		r->angle = c->player.angle - (c->player.fov / 2) + ((double)col / (double)WIN_WIDTH) * c->player.fov;
 		init_dda(c, r);
+		dir_dda(c, r);
 		while (!r->hit)
 		{
-			dir_dda(c, r);
 			if (r->len.x < r->len.y)
 			{
 				r->pos.x += r->step.x;
@@ -78,9 +78,11 @@ void	dda(t_mlx *c, t_raycast *r)
 				r->hit = true;
 			}
 		}
-		r->hit_pos = ft_coord(c->player.pos.x + r->dir.x * r->tot_len,
-				c->player.pos.y + r->dir.y * r->tot_len);
-		draw_line(c, c->player.pos.x * TILE_SIZE, c->player.pos.y  * TILE_SIZE, r->hit_pos.x * TILE_SIZE - TILE_SIZE / 2, r->hit_pos.y * TILE_SIZE - TILE_SIZE / 2, RED);
+		// r->hit_pos = ft_coord(c->player.pos.x + r->dir.x * r->tot_len - c->player.pos.x + floor(c->player.pos.x) ,
+				// c->player.pos.y + r->dir.y * r->tot_len - c->player.pos.y + floor(c->player.pos.y));
+		r->hit_pos = ft_coord(c->player.pos.x + r->dir.x * r->tot_len - c->player.pos.x + floor(c->player.pos.x) ,
+				c->player.pos.y + r->dir.y * r->tot_len - c->player.pos.y + floor(c->player.pos.y));
+		draw_line(c, c->player.pos.x * TILE_SIZE, c->player.pos.y  * TILE_SIZE, r->hit_pos.x * TILE_SIZE, r->hit_pos.y * TILE_SIZE, RED);
 	}
 }
 
