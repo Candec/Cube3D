@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 02:00:19 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/28 02:24:11 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/02/28 08:48:59 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,14 @@ void	dda(t_mlx *c, t_raycast *r)
 			r->tot_len = r->len.y;
 			r->len.y += r->step_size.y;
 		}
-		if (c->map.map[(int)r->pos.y][(int)r->pos.x] == '1')
+		if (c->map.map[(int)round(r->pos.y)][(int)round(r->pos.x)] == '1')
 		{
 			r->hit = true;
 		}
 	}
 	r->hit_pos = ft_coord(c->player.pos.x + r->dir.x * r->tot_len,
 			c->player.pos.y + r->dir.y * r->tot_len);
-	draw_line(c, c->player.pos.x * TILE_SIZE, c->player.pos.y  * TILE_SIZE, r->hit_pos.x * TILE_SIZE, r->hit_pos.y * TILE_SIZE, RED);
+	draw_line(c, c->player.pos.x * TILE_SIZE, c->player.pos.y  * TILE_SIZE, r->hit_pos.x * TILE_SIZE - TILE_SIZE / 2, r->hit_pos.y * TILE_SIZE - TILE_SIZE/2, RED);
 }
 
 			// printf("\n----\nLen X: %f - Len Y: %f\nDir X: %f - Dir Y: %f\nHit pos X: %f - Hit pos Y: %f\nPlayer X: %f - Player Y: %f\nStep_size X: %f - Step_size Y: %f\nMap Char: [%c]\n",
