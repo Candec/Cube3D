@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   play.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/28 01:40:44 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/02/28 09:18:17 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,33 +56,6 @@ void	start_mlx_and_window(t_mlx *cube)
 	cube->win = TRUE;
 }
 
-// void	move_player(t_mlx *cube, int keysym)
-// {
-// 	double x;
-// 	double y;
-
-// 	x = cube->player.pos.x;
-// 	y = cube->player.pos.y;
-// 	if (keysym == MOVE_UP)
-// 	{
-// 		cube->player.pos.y += cube->player.diry / TILE_SIZE;
-// 		cube->player.pos.x += cube->player.dirx / TILE_SIZE;
-// 	}
-// 	if (keysym == MOVE_DOWN)
-// 	{
-// 		cube->player.pos.y -= cube->player.diry / TILE_SIZE;
-// 		cube->player.pos.x -= cube->player.dirx / TILE_SIZE;
-// 	}
-// 	if (keysym == MOVE_LEFT)
-// 		cube->player.pos.x -= cube->player.dirx / TILE_SIZE;
-// 	if (keysym == MOVE_RIGHT)
-// 		cube->player.pos.x += cube->player.diry / TILE_SIZE;
-// 	if (cube->map.map[(int)floor(cube->player.pos.y)][(int)floor(cube->player.pos.x)] == '1')
-// 	{
-// 		cube->player.pos.x = x;
-// 		cube->player.pos.y = y;
-// 	}
-// }
 void	move_player(t_mlx *cube, int keysym)
 {
 	double x;
@@ -91,19 +64,46 @@ void	move_player(t_mlx *cube, int keysym)
 	x = cube->player.pos.x;
 	y = cube->player.pos.y;
 	if (keysym == MOVE_UP)
-		cube->player.pos.y -= 0.1;
+	{
+		cube->player.pos.y += cube->player.diry / TILE_SIZE;
+		cube->player.pos.x += cube->player.dirx / TILE_SIZE;
+	}
 	if (keysym == MOVE_DOWN)
-		cube->player.pos.y += 0.1;
+	{
+		cube->player.pos.y -= cube->player.diry / TILE_SIZE;
+		cube->player.pos.x -= cube->player.dirx / TILE_SIZE;
+	}
 	if (keysym == MOVE_LEFT)
-		cube->player.pos.x -= 0.1;
+		cube->player.pos.x -= cube->player.dirx / TILE_SIZE;
 	if (keysym == MOVE_RIGHT)
-		cube->player.pos.x += 0.1;
+		cube->player.pos.x += cube->player.diry / TILE_SIZE;
 	if (cube->map.map[(int)floor(cube->player.pos.y)][(int)floor(cube->player.pos.x)] == '1')
 	{
 		cube->player.pos.x = x;
 		cube->player.pos.y = y;
 	}
 }
+// void	move_player(t_mlx *cube, int keysym)
+// {
+// 	double x;
+// 	double y;
+
+// 	x = cube->player.pos.x;
+// 	y = cube->player.pos.y;
+// 	if (keysym == MOVE_UP)
+// 		cube->player.pos.y -= 0.1;
+// 	if (keysym == MOVE_DOWN)
+// 		cube->player.pos.y += 0.1;
+// 	if (keysym == MOVE_LEFT)
+// 		cube->player.pos.x -= 0.1;
+// 	if (keysym == MOVE_RIGHT)
+// 		cube->player.pos.x += 0.1;
+// 	if (cube->map.map[(int)floor(cube->player.pos.y)][(int)floor(cube->player.pos.x)] == '1')
+// 	{
+// 		cube->player.pos.x = x;
+// 		cube->player.pos.y = y;
+// 	}
+// }
 
 void draw_loop(t_mlx *cube)
 {
