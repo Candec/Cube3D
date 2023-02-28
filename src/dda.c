@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 02:00:19 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/28 09:25:12 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/02/28 09:28:36 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,15 @@ void	dda(t_mlx *c, t_raycast *r)
 				r->tot_len = r->len.x;
 				r->len.x += r->step_size.x;
 			}
-			if (c->map.map[(int)r->pos.y][(int)r->pos.x] == '1')
-			{
-				r->hit = true;
-			}
 			else
 			{
 				r->pos.y += r->step.y;
 				r->tot_len = r->len.y;
 				r->len.y += r->step_size.y;
+			}
+			if (c->map.map[(int)r->pos.y][(int)r->pos.x] == '1')
+			{
+				r->hit = true;
 			}
 		}
 		r->hit_pos = ft_coord(c->player.pos.x + r->dir.x * r->tot_len,
