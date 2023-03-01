@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/27 16:31:43 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/01 12:07:34 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,30 @@
 # ifndef MAROON
 #  define MAROON 0x800000
 # endif
+
+/*
+**	=============
+**	 PI MACROS
+**	=============
+*/
+
+# ifndef PI
+#  define PI  3.141593
+# endif
+
+# ifndef PII
+#  define PII 6.283185
+# endif
+
+# ifndef PI3
+#  define PI3 4.712389
+# endif
+
+# ifndef PI2
+#  define PI2 1.570796
+# endif
+
+
 /*
 **	=============
 **	 Structures
