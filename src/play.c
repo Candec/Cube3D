@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   play.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/28 09:18:17 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:05:06 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,15 @@ void	move_player(t_mlx *cube, int keysym)
 		cube->player.pos.x -= cube->player.dirx / TILE_SIZE;
 	}
 	if (keysym == MOVE_LEFT)
-		cube->player.pos.x -= cube->player.dirx / TILE_SIZE;
-	if (keysym == MOVE_RIGHT)
+	{
+		cube->player.pos.y -= cube->player.dirx / TILE_SIZE;
 		cube->player.pos.x += cube->player.diry / TILE_SIZE;
+	}
+	if (keysym == MOVE_RIGHT)
+	{
+		cube->player.pos.y += cube->player.dirx / TILE_SIZE;
+		cube->player.pos.x -= cube->player.diry / TILE_SIZE;
+	}
 	if (cube->map.map[(int)floor(cube->player.pos.y)][(int)floor(cube->player.pos.x)] == '1')
 	{
 		cube->player.pos.x = x;
