@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/01 11:39:10 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/01 11:40:46 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ void	horizontal_hit(t_raycast *ray, t_mlx *c)
 	a_tan = -1 / tan(ray->angle);
 	if (ray->angle > 0 && ray->angle < M_PI)					// Looking down
 	{
-		ray->pos.y = (c->player.pos.y * TILE_SIZE) / TILE_SIZE;
+		ray->pos.y = round((c->player.pos.y * TILE_SIZE) / TILE_SIZE);
 		ray->pos.x = ((c->player.pos.y - ray->pos.y) * a_tan + c->player.pos.x);
 		ray->step.y = TILE_SIZE;
 		ray->step.x = (-ray->step.y) * a_tan;
