@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/01 14:08:19 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/01 14:29:21 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,35 +116,30 @@ void	raycaster_3D(t_mlx *cube, t_raycast *ray)
 	draw_line(cube, ray->row, wall_top, ray->row, wall_bottom, wall_color);
 }
 
-void	vertical_hit(t_raycast *ray, t_mlx *c)
+float	vertical_hit(t_raycast *ray, t_mlx *c)
 {
 	float	a_tan;
 	
 	a_tan = -tan(ray->angle);
-	printf("ray->angle: %.9f\n", (double)ray->angle);
-	printf("PI3: %.9f\n", (double)(PI3));
-	if (ray->angle > PI2 && ray->angle < (PI3)) // Looking Left
+	if (ray->angle > PI2 && ray->angle < (PI3)) 						// Looking Left
 	{
 		ray->pos.x = floor((c->player.pos.x * TILE_SIZE) / TILE_SIZE) - 0.0001;
 		ray->pos.y = ((c->player.pos.x - ray->pos.x) * a_tan + c->player.pos.y);
 		ray->step.x = -TILE_SIZE;
 		ray->step.y = (-ray->step.x) * a_tan;
-		printf("LEFT\n");
 	}
-	if ((double)ray->angle > (double)(PI3) || ray->angle < PI2) // Looking Right
+	if ((double)ray->angle > (double)(PI3) || ray->angle < PI2) 		// Looking Right
 	{
 		ray->pos.x = floor((c->player.pos.x * TILE_SIZE) / TILE_SIZE) + 1;
-		ray->pos.y = (c->player.pos.x - ray->pos.x) * a_tan + c->player.pos.y; // ISSUES HERE
+		ray->pos.y = (c->player.pos.x - ray->pos.x) * a_tan + c->player.pos.y;
 		ray->step.x = TILE_SIZE;
 		ray->step.y = (-ray->step.x) * a_tan;
-		printf("RIGHT\n");
 	}
-	if (ray->angle == PI2 || ray->angle == (PI3))								// Looking straight up/down
+	if (ray->angle == PI2 || ray->angle == (PI3))						// Looking straight down/up
 	{
 		ray->pos.x = c->player.pos.x;
 		ray->pos.y = c->player.pos.y;
 		ray->hit = true;
-		printf("test\n");
 	}
 	while (!ray->hit)
 	{
@@ -161,18 +156,14 @@ void	vertical_hit(t_raycast *ray, t_mlx *c)
 		else
 			ray->hit = true;
 	}
-	printf("ray->pos.x = %f\n", ray->pos.x);
-	printf("ray->pos.y = %f\n", ray->pos.y);
-	// printf("c->player.pos.x = %f\n", c->player.pos.x);
-	// printf("c->player.pos.y = %f\n", c->player.pos.y);
-	draw_line(c, (c->player.pos.x * TILE_SIZE), (c->player.pos.y * TILE_SIZE), ray->pos.x * TILE_SIZE, ray->pos.y * TILE_SIZE, RED);
 	ray->dist = distance(c->player.pos.x, c->player.pos.y, ray->pos.x, ray->pos.y);
+	return (ray->dist);
 }
 
-void	horizontal_hit(t_raycast *ray, t_mlx *c)
+float	horizontal_hit(t_raycast *ray, t_mlx *c)
 {
-	float	a_tan;
- 	
+	float		a_tan;
+
 	a_tan = -1 / tan(ray->angle);
 	if (ray->angle > 0 && ray->angle < PI)					// Looking down
 	{
@@ -209,30 +200,49 @@ void	horizontal_hit(t_raycast *ray, t_mlx *c)
 		else
 			ray->hit = true;
 	}
-	draw_line(c, (c->player.pos.x * TILE_SIZE - 1), c->player.pos.y * TILE_SIZE - 1, ray->pos.x * TILE_SIZE - 1, ray->pos.y * TILE_SIZE - 1, YELLOW);
 	ray->dist = distance(c->player.pos.x, c->player.pos.y, ray->pos.x, ray->pos.y);
+	return (ray->dist);
 }
 
 void	draw_rays_2D(t_mlx *c)
 {
 	int			row;
 	t_raycast	ray;
+	t_raycast	ray_h;
+	t_raycast	ray_v;
 	row = -1;
 
-	//draw_bg(c);
+	// draw_bg(c);
 	draw_map_2D(c);
 	draw_player_2D(c);
-	while (++row < 1)
+	while (++row < WIN_WIDTH)
 	{
 		ray.hit = false;
 		ray.row = row;
-		//ray.angle = c->player.angle - (c->player.fov / 2) + ((double)ray.row / (double)WIN_WIDTH) * c->player.fov;
-		ray.angle = c->player.angle;
+		//ray.angle = c->player.angle;
+		ray.angle = c->player.angle - (c->player.fov / 2) + ((double)ray.row / (double)WIN_WIDTH) * c->player.fov;
+
+		ray_h.hit = false;
+		ray_h.row = row;
+		ray_h.angle = c->player.angle - (c->player.fov / 2) + ((double)ray.row / (double)WIN_WIDTH) * c->player.fov;
+
+		ray_v.hit = false;
+		ray_v.row = row;
+		ray_v.angle = c->player.angle - (c->player.fov / 2) + ((double)ray.row / (double)WIN_WIDTH) * c->player.fov;
 		fix_angle(&ray.angle);
-		//horizontal_hit(&ray, c);
-		vertical_hit(&ray, c);
+		ray_h.dist = horizontal_hit(&ray_h, c);
+		ray_v.dist = vertical_hit(&ray_v, c);
+		printf("ray.pos.x: %f\n", ray.pos.x);		
+		printf("ray.pos.y: %f\n", ray.pos.y);
+		if (ray_h.dist < ray_v.dist)
+			ray = ray_h;
+		else
+			ray = ray_v;
+		printf("ray.pos.x: %f\n", ray.pos.x);		
+		printf("ray.pos.y: %f\n", ray.pos.y);
+		draw_line(c, (c->player.pos.x * TILE_SIZE - 1), c->player.pos.y * TILE_SIZE - 1, ray.pos.x * TILE_SIZE - 1, ray.pos.y * TILE_SIZE - 1, RED);
 		//draw_line(c, (c->player.pos.x * TILE_SIZE) + (TILE_SIZE * 0.5), (c->player.pos.y * TILE_SIZE) + (TILE_SIZE * 0.5), ray.pos.x * TILE_SIZE, ray.pos.y * TILE_SIZE, RED);
-		//raycaster_3D(c, &ray);
+		// raycaster_3D(c, &ray);
 	}
 	// if (c->show_minimap)
 	// {
