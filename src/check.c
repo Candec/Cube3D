@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 01:03:26 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/01 02:23:44 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/03/01 13:01:00 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	set_p(size_t i, size_t j, t_mlx *cube)
 	cube->player.posy = j;
 	cube->player.pos.x = (double)j;
 	cube->player.pos.y = (double)i;
-	printf("x: %f - y: %f\n", cube->player.pos.x, cube->player.pos.y);
+	//printf("x: %f - y: %f\n", cube->player.pos.x, cube->player.pos.y);
 }
 
 void	validate_chr(t_mlx *cube)

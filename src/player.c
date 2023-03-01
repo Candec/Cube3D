@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:28:31 by tpereira          #+#    #+#             */
-/*   Updated: 2023/03/01 12:09:19 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/01 14:07:47 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 void	init_player_dir(t_mlx *cube, char c)
 {
 	if (c == 'N')
-		cube->player.angle = PI3;
+		cube->player.angle = (PI3);
 	else if (c == 'S')
 		cube->player.angle = PI2;
 	else if (c == 'E')
-		cube->player.angle = PII;
+		cube->player.angle = (PII);
 	else if (c == 'W')
-		cube->player.angle = M_PI;
+		cube->player.angle = PI;
 	else
-		cube->player.angle = M_PI;
+		cube->player.angle = PI;
 	cube->player.dirx = cos(cube->player.angle) * 5;
 	cube->player.diry = sin(cube->player.angle) * 5;
 }

@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 22:47:09 by tpereira          #+#    #+#             */
-/*   Updated: 2023/03/01 12:09:19 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/01 14:07:47 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	fix_fisheye(float p_angle, t_raycast *ray)
 
 	cos_angle = p_angle - ray->angle;
 	if (cos_angle < 0)
-		cos_angle += PII;
-	if (cos_angle > PII)
-		cos_angle -= PII;
+		cos_angle += (PII);
+	if (cos_angle > (PII))
+		cos_angle -= (PII);
 	ray->dist = ray->dist * cos(cos_angle);
 }
