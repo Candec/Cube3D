@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/02 11:16:22 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/02 17:44:56 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,21 +121,21 @@ float	vertical_hit(t_raycast *ray, t_mlx *c)
 	float	a_tan;
 	
 	a_tan = -tan(ray->angle);
-	if (ray->angle > PI2 && ray->angle < (PI3)) 						// Looking Left
+	if ((double)ray->angle > PI2 && (double)ray->angle < (PI3)) 				// Looking Left
 	{
-		ray->pos.x = round((c->player.pos.x * TILE_SIZE) / TILE_SIZE) - 0.0001;
-		ray->pos.y = ((c->player.pos.x - ray->pos.x) * a_tan + c->player.pos.y);
+		ray->pos.x = floor(c->player.pos.x) - 0.0001;
+		ray->pos.y = (c->player.pos.x - ray->pos.x) * a_tan + c->player.pos.y;
 		ray->step.x = -TILE_SIZE;
 		ray->step.y = (-ray->step.x) * a_tan;
 	}
-	if ((double)ray->angle > (double)(PI3) || ray->angle < PI2) 		// Looking Right
+	if ((double)ray->angle > (double)(PI3) || (double)ray->angle < PI2) 		// Looking Right
 	{
-		ray->pos.x = round((c->player.pos.x * TILE_SIZE) / TILE_SIZE);
-		ray->pos.y = (c->player.pos.x - ray->pos.x) * a_tan + c->player.pos.y;
+		ray->pos.x = floor(c->player.pos.x) + 1;
+		ray->pos.y = ((c->player.pos.x - ray->pos.x) * a_tan + c->player.pos.y);
 		ray->step.x = TILE_SIZE;
 		ray->step.y = (-ray->step.x) * a_tan;
 	}
-	if (ray->angle == PI2 || ray->angle == (PI3))						// Looking straight down/up
+	if ((double)ray->angle == PI2 || (double)ray->angle == (PI3))				// Looking straight down/up
 	{
 		ray->pos.x = c->player.pos.x;
 		ray->pos.y = c->player.pos.y;
@@ -221,7 +221,7 @@ void	draw_rays_2D(t_mlx *c)
 		ray.row = row;
 		//ray.angle = c->player.angle;
 		ray.angle = c->player.angle - (c->player.fov / 2) + ((double)ray.row / (double)WIN_WIDTH) * c->player.fov;
-		// horizontal_hit(&ray, c);
+		//vertical_hit(&ray, c);
 		ray_h.hit = false;
 		ray_h.row = row;
 		ray_h.angle = c->player.angle - (c->player.fov / 2) + ((double)ray.row / (double)WIN_WIDTH) * c->player.fov;
@@ -232,8 +232,6 @@ void	draw_rays_2D(t_mlx *c)
 		fix_angle(&ray.angle);
 		ray_h.dist = horizontal_hit(&ray_h, c);
 		ray_v.dist = vertical_hit(&ray_v, c);
-		printf("ray.pos.x: %f\n", ray.pos.x);		
-		printf("ray.pos.y: %f\n", ray.pos.y);
 		if (ray_h.dist < ray_v.dist)
 			ray = ray_h;
 		else
