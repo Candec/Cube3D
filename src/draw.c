@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/01 14:29:21 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/02 11:10:20 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,14 +123,14 @@ float	vertical_hit(t_raycast *ray, t_mlx *c)
 	a_tan = -tan(ray->angle);
 	if (ray->angle > PI2 && ray->angle < (PI3)) 						// Looking Left
 	{
-		ray->pos.x = floor((c->player.pos.x * TILE_SIZE) / TILE_SIZE) - 0.0001;
+		ray->pos.x = round((c->player.pos.x * TILE_SIZE) / TILE_SIZE) - 0.0001;
 		ray->pos.y = ((c->player.pos.x - ray->pos.x) * a_tan + c->player.pos.y);
 		ray->step.x = -TILE_SIZE;
 		ray->step.y = (-ray->step.x) * a_tan;
 	}
 	if ((double)ray->angle > (double)(PI3) || ray->angle < PI2) 		// Looking Right
 	{
-		ray->pos.x = floor((c->player.pos.x * TILE_SIZE) / TILE_SIZE) + 1;
+		ray->pos.x = round((c->player.pos.x * TILE_SIZE) / TILE_SIZE);
 		ray->pos.y = (c->player.pos.x - ray->pos.x) * a_tan + c->player.pos.y;
 		ray->step.x = TILE_SIZE;
 		ray->step.y = (-ray->step.x) * a_tan;
@@ -165,26 +165,35 @@ float	horizontal_hit(t_raycast *ray, t_mlx *c)
 	float		a_tan;
 
 	a_tan = -1 / tan(ray->angle);
-	if (ray->angle > 0 && ray->angle < PI)					// Looking down
+	printf("ray->angle: %f\n", ray->angle);
+	if (ray->angle > 0 && ray->angle < PI) // Looking down
 	{
-		ray->pos.y = round((c->player.pos.y * TILE_SIZE) / TILE_SIZE);
+		ray->pos.y = floor(c->player.pos.y) + 1;
 		ray->pos.x = ((c->player.pos.y - ray->pos.y) * a_tan + c->player.pos.x);
 		ray->step.y = TILE_SIZE;
 		ray->step.x = (-ray->step.y) * a_tan;
+		printf("\nDown\n");
 	}
 	if (ray->angle > PI && ray->angle < (PII)) 					// LOOking UP
 	{
-		ray->pos.y = round((c->player.pos.y * TILE_SIZE) / TILE_SIZE) - 0.0001;
+		ray->pos.y = floor(c->player.pos.y) - 0.0001;
 		ray->pos.x = (c->player.pos.y - ray->pos.y) * a_tan + c->player.pos.x;
+		printf("p.y - r.y: %f, a_tan: %f, p.x: %f\n", c->player.pos.y - ray->pos.y, a_tan, c->player.pos.x);
 		ray->step.y = -TILE_SIZE;
 		ray->step.x = (-ray->step.y) * a_tan;
+		printf("\nUP\n");
 	}
 	if (ray->angle == 0 || ray->angle == PI)					// Looking straight left/right
 	{
 		ray->pos.x = c->player.pos.x;
 		ray->pos.y = c->player.pos.y;
 		ray->hit = true;
+		printf("\nLEFT/RIGHT\n");
 	}
+	printf("ray->pos.y : %f\n",ray->pos.y);
+	printf("ray->pos.x : %f\n",ray->pos.x);
+	printf("ray->step.y: %f\n",ray->step.y / TILE_SIZE);
+	printf("ray->step.x: %f\n",ray->step.x / TILE_SIZE);
 	while (!ray->hit)
 	{
 		if (ray->pos.x > 0 && ray->pos.y > 0 && ray->pos.y < c->map.height && ray->pos.x < c->map.width)
@@ -193,14 +202,20 @@ float	horizontal_hit(t_raycast *ray, t_mlx *c)
 				ray->hit = true;
 			else
 			{
-				ray->pos.x += ray->step.x / TILE_SIZE;
-				ray->pos.y += ray->step.y / TILE_SIZE;
+				ray->pos.x += (ray->step.x / TILE_SIZE);
+				ray->pos.y += (ray->step.y / TILE_SIZE);
+				printf("+step\n");
 			}
 		}
 		else
 			ray->hit = true;
 	}
 	ray->dist = distance(c->player.pos.x, c->player.pos.y, ray->pos.x, ray->pos.y);
+	printf("*ray->pos.y : %f\n",ray->pos.y);
+	printf("*ray->pos.x : %f\n",ray->pos.x);
+	printf("ray->dist: %f\n",ray->dist);
+	//draw_square(c, ray->pos.x * TILE_SIZE, ray->pos.y * TILE_SIZE, 32, YELLOW);
+	draw_line(c, (c->player.pos.x * TILE_SIZE - 1), c->player.pos.y * TILE_SIZE - 1, ray->pos.x * TILE_SIZE, ray->pos.y * TILE_SIZE, RED);
 	return (ray->dist);
 }
 
@@ -208,38 +223,37 @@ void	draw_rays_2D(t_mlx *c)
 {
 	int			row;
 	t_raycast	ray;
-	t_raycast	ray_h;
-	t_raycast	ray_v;
+	// t_raycast	ray_h;
+	// t_raycast	ray_v;
 	row = -1;
 
 	// draw_bg(c);
 	draw_map_2D(c);
 	draw_player_2D(c);
-	while (++row < WIN_WIDTH)
+	while (++row < 1)
 	{
 		ray.hit = false;
 		ray.row = row;
-		//ray.angle = c->player.angle;
-		ray.angle = c->player.angle - (c->player.fov / 2) + ((double)ray.row / (double)WIN_WIDTH) * c->player.fov;
+		ray.angle = c->player.angle;
+		//ray.angle = c->player.angle - (c->player.fov / 2) + ((double)ray.row / (double)WIN_WIDTH) * c->player.fov;
+		horizontal_hit(&ray, c);
+		// ray_h.hit = false;
+		// ray_h.row = row;
+		// ray_h.angle = c->player.angle - (c->player.fov / 2) + ((double)ray.row / (double)WIN_WIDTH) * c->player.fov;
 
-		ray_h.hit = false;
-		ray_h.row = row;
-		ray_h.angle = c->player.angle - (c->player.fov / 2) + ((double)ray.row / (double)WIN_WIDTH) * c->player.fov;
-
-		ray_v.hit = false;
-		ray_v.row = row;
-		ray_v.angle = c->player.angle - (c->player.fov / 2) + ((double)ray.row / (double)WIN_WIDTH) * c->player.fov;
-		fix_angle(&ray.angle);
-		ray_h.dist = horizontal_hit(&ray_h, c);
-		ray_v.dist = vertical_hit(&ray_v, c);
-		printf("ray.pos.x: %f\n", ray.pos.x);		
-		printf("ray.pos.y: %f\n", ray.pos.y);
-		if (ray_h.dist < ray_v.dist)
-			ray = ray_h;
-		else
-			ray = ray_v;
-		printf("ray.pos.x: %f\n", ray.pos.x);		
-		printf("ray.pos.y: %f\n", ray.pos.y);
+		// ray_v.hit = false;
+		// ray_v.row = row;
+		// ray_v.angle = c->player.angle - (c->player.fov / 2) + ((double)ray.row / (double)WIN_WIDTH) * c->player.fov;
+		// fix_angle(&ray.angle);
+		// ray_h.dist = horizontal_hit(&ray_h, c);
+		// ray_v.dist = vertical_hit(&ray_v, c);
+		// printf("ray.pos.x: %f\n", ray.pos.x);		
+		// printf("ray.pos.y: %f\n", ray.pos.y);
+		// if (ray_h.dist < ray_v.dist)
+		// 	ray = ray_h;
+		// else
+		// 	ray = ray_v;
+		
 		draw_line(c, (c->player.pos.x * TILE_SIZE - 1), c->player.pos.y * TILE_SIZE - 1, ray.pos.x * TILE_SIZE - 1, ray.pos.y * TILE_SIZE - 1, RED);
 		//draw_line(c, (c->player.pos.x * TILE_SIZE) + (TILE_SIZE * 0.5), (c->player.pos.y * TILE_SIZE) + (TILE_SIZE * 0.5), ray.pos.x * TILE_SIZE, ray.pos.y * TILE_SIZE, RED);
 		// raycaster_3D(c, &ray);
