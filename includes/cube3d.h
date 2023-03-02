@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/01 14:07:30 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/02 18:00:08 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@
 # endif
 
 # ifndef TILE_SIZE
-#  define TILE_SIZE 32
+#  define TILE_SIZE 16
 # endif
 
 # ifndef WALL_HEIGHT
@@ -187,6 +187,7 @@ typedef struct s_raycast
 	float	angle;
 	float	dist;
 	bool	hit;
+	int		color;
 }				t_raycast;
 
 typedef struct s_mlx

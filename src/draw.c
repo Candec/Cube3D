@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/02 17:44:56 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/02 18:33:25 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,19 +101,25 @@ void	raycaster_3D(t_mlx *cube, t_raycast *ray)
 	int				wall_height;
 	int				wall_top;
 	int				wall_bottom;
-	int				wall_color;
+	// int				wall_color;
 
 	ray->dist = distance(cube->player.pos.x, cube->player.pos.y, ray->pos.x, ray->pos.y);
 	fix_fisheye(cube->player.angle, ray);
 	wall_height = (TILE_SIZE / ray->dist) * WALL_HEIGHT;
 	wall_top = (WIN_HEIGHT / 2) - (wall_height / 2);
 	wall_bottom = (WIN_HEIGHT / 2) + (wall_height / 2);
-	wall_color = GREEN;
-	if (ray->angle < ((PI3)) && ray->angle > PI2)
-		wall_color = RED;
-	else
-		wall_color = YELLOW;
-	draw_line(cube, ray->row, wall_top, ray->row, wall_bottom, wall_color);
+	// If x % tile_size <= 1 && player_angle between 90 && 270 [West Wall]
+	// If x % tile_size >= tile_size - 1 && player_angle between 270 && 90 [East Wall]
+	if (fmod(ray->pos.x, (double)TILE_SIZE) <= 1 && cube->player.angle > PI2 && cube->player.angle < PI3)
+		ray->color = GREEN;
+	if (fmod(ray->pos.x, (double)TILE_SIZE) >= TILE_SIZE - 1 && (cube->player.angle > PI3 || cube->player.angle < PI2))
+		ray->color = BLUE;
+	// wall_color = GREEN;
+	// if (ray->angle < ((PI3)) && ray->angle > PI2)
+	// 	wall_color = RED;
+	// else
+	// 	wall_color = YELLOW;
+	draw_line(cube, ray->row, wall_top, ray->row, wall_bottom, ray->color);
 }
 
 float	vertical_hit(t_raycast *ray, t_mlx *c)
@@ -212,9 +218,13 @@ void	draw_rays_2D(t_mlx *c)
 	t_raycast	ray_v;
 	row = -1;
 
-	// draw_bg(c);
-	draw_map_2D(c);
-	draw_player_2D(c);
+	ray_v.color = 0xa10000;
+	draw_bg(c);
+	if (c->show_minimap)
+	{
+		draw_map_2D(c);
+		draw_player_2D(c);
+	}
 	while (++row < WIN_WIDTH)
 	{
 		ray.hit = false;
@@ -233,19 +243,18 @@ void	draw_rays_2D(t_mlx *c)
 		ray_h.dist = horizontal_hit(&ray_h, c);
 		ray_v.dist = vertical_hit(&ray_v, c);
 		if (ray_h.dist < ray_v.dist)
+		{
 			ray = ray_h;
+			ray.color = RED;
+		}
 		else
 			ray = ray_v;
-		
-		draw_line(c, (c->player.pos.x * TILE_SIZE - 1), c->player.pos.y * TILE_SIZE - 1, ray.pos.x * TILE_SIZE - 1, ray.pos.y * TILE_SIZE - 1, RED);
+	//	if (c->show_minimap)
+			draw_line(c, (c->player.pos.x * TILE_SIZE - 1), c->player.pos.y * TILE_SIZE - 1, ray.pos.x * TILE_SIZE - 1, ray.pos.y * TILE_SIZE - 1, ray.color);
 		//draw_line(c, (c->player.pos.x * TILE_SIZE) + (TILE_SIZE * 0.5), (c->player.pos.y * TILE_SIZE) + (TILE_SIZE * 0.5), ray.pos.x * TILE_SIZE, ray.pos.y * TILE_SIZE, RED);
-		// raycaster_3D(c, &ray);
+		//raycaster_3D(c, &ray);
 	}
-	// if (c->show_minimap)
-	// {
-		// draw_map_2D(c);
-		// draw_player_2D(c);
-	// }
+	printf("fmod: %f\n", fmod(ray.pos.x, (double)TILE_SIZE));
 }
 
 // void	draw_rays_2D(t_mlx *cube)

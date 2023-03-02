@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/02 10:14:41 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/02 17:58:22 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,20 +90,20 @@ void	move_player(t_mlx *c, int keysym)
 
 void draw_loop(t_mlx *cube)
 {
-	double px;
-	double py;
-	double dx;
-	double dy;
+	// double px;
+	// double py;
+	// double dx;
+	// double dy;
 
-	px = (cube->player.pos.x * TILE_SIZE);
-	py = (cube->player.pos.y * TILE_SIZE);
-	dx = px + cube->player.dirx * 5;
-	dy = py + cube->player.diry * 5;
+	// px = (cube->player.pos.x * TILE_SIZE);
+	// py = (cube->player.pos.y * TILE_SIZE);
+	// dx = px + cube->player.dirx * 5;
+	// dy = py + cube->player.diry * 5;
 
 	blackout(cube);
 	draw_rays_2D(cube);
 	//if (cube->show_minimap)
-	draw_line(cube, px, py, dx, dy, GREEN);			// show players direction
+	// draw_line(cube, px, py, dx, dy, GREEN);			// show players direction
 	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->frame.img, 0, 0);
 }
 
@@ -113,9 +113,9 @@ void	player(t_mlx *cube, int keysym)
 		|| keysym == MOVE_LEFT || keysym == MOVE_RIGHT)
 		move_player(cube, keysym);
 	if (keysym == LOOK_LEFT)
-		cube->player.angle -= 0.0174533;				// ONE DEGREE IN RADIANS
+		cube->player.angle -= 0.0174533 * 5;				// ONE DEGREE IN RADIANS * 5
 	if (keysym == LOOK_RIGHT)
-		cube->player.angle += 0.0174533;
+		cube->player.angle += 0.0174533 * 5;
 	if (keysym == M_KEY)
 	{
 		if (cube->show_minimap)
