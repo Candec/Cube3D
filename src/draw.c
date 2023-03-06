@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/02 18:33:25 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/06 10:31:22 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ float	vertical_hit(t_raycast *ray, t_mlx *c)
 			ray->hit = true;
 	}
 	ray->dist = distance(c->player.pos.x, c->player.pos.y, ray->pos.x, ray->pos.y);
+	//draw_line(c, (c->player.pos.x * TILE_SIZE), c->player.pos.y * TILE_SIZE, ray->pos.x * TILE_SIZE, ray->pos.y * TILE_SIZE, GREEN);
 	return (ray->dist);
 }
 
@@ -171,7 +172,7 @@ float	horizontal_hit(t_raycast *ray, t_mlx *c)
 	float		a_tan;
 
 	a_tan = -1 / tan(ray->angle);
-	if (ray->angle > 0 && ray->angle < PI) // Looking down
+	if (ray->angle > 0.0f && ray->angle < PI) // Looking down
 	{
 		ray->pos.y = floor(c->player.pos.y) + 1;
 		ray->pos.x = ((c->player.pos.y - ray->pos.y) * a_tan + c->player.pos.x);
@@ -207,6 +208,7 @@ float	horizontal_hit(t_raycast *ray, t_mlx *c)
 			ray->hit = true;
 	}
 	ray->dist = distance(c->player.pos.x, c->player.pos.y, ray->pos.x, ray->pos.y);
+	// draw_line(c, (c->player.pos.x * TILE_SIZE - 1), c->player.pos.y * TILE_SIZE - 1, ray->pos.x * TILE_SIZE - 1, ray->pos.y * TILE_SIZE - 1, RED);
 	return (ray->dist);
 }
 
@@ -229,9 +231,7 @@ void	draw_rays_2D(t_mlx *c)
 	{
 		ray.hit = false;
 		ray.row = row;
-		//ray.angle = c->player.angle;
 		ray.angle = c->player.angle - (c->player.fov / 2) + ((double)ray.row / (double)WIN_WIDTH) * c->player.fov;
-		//vertical_hit(&ray, c);
 		ray_h.hit = false;
 		ray_h.row = row;
 		ray_h.angle = c->player.angle - (c->player.fov / 2) + ((double)ray.row / (double)WIN_WIDTH) * c->player.fov;
@@ -239,7 +239,8 @@ void	draw_rays_2D(t_mlx *c)
 		ray_v.hit = false;
 		ray_v.row = row;
 		ray_v.angle = c->player.angle - (c->player.fov / 2) + ((double)ray.row / (double)WIN_WIDTH) * c->player.fov;
-		fix_angle(&ray.angle);
+		fix_angle(&ray_v.angle);
+		fix_angle(&ray_h.angle);
 		ray_h.dist = horizontal_hit(&ray_h, c);
 		ray_v.dist = vertical_hit(&ray_v, c);
 		if (ray_h.dist < ray_v.dist)
@@ -249,12 +250,11 @@ void	draw_rays_2D(t_mlx *c)
 		}
 		else
 			ray = ray_v;
-	//	if (c->show_minimap)
+		if (c->show_minimap)
 			draw_line(c, (c->player.pos.x * TILE_SIZE - 1), c->player.pos.y * TILE_SIZE - 1, ray.pos.x * TILE_SIZE - 1, ray.pos.y * TILE_SIZE - 1, ray.color);
 		//draw_line(c, (c->player.pos.x * TILE_SIZE) + (TILE_SIZE * 0.5), (c->player.pos.y * TILE_SIZE) + (TILE_SIZE * 0.5), ray.pos.x * TILE_SIZE, ray.pos.y * TILE_SIZE, RED);
-		//raycaster_3D(c, &ray);
+		raycaster_3D(c, &ray);
 	}
-	printf("fmod: %f\n", fmod(ray.pos.x, (double)TILE_SIZE));
 }
 
 // void	draw_rays_2D(t_mlx *cube)
