@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/06 19:22:07 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/06 20:04:14 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,29 +56,8 @@ void	start_mlx_and_window(t_mlx *c)
 	c->win = TRUE;
 }
 
-void	move_player(t_mlx *c, int keysym)
+void	strafe(t_mlx *c, int keysym)
 {
-	double	x;
-	double	y;
-	int		floor_x;
-	int		floor_y;
-
-	floor_x = (int)floor(c->player.pos.x);
-	floor_y = (int)floor(c->player.pos.y);
-	x = c->player.pos.x;
-	y = c->player.pos.y;
-	if (keysym == MOVE_UP)
-	{
-		c->player.pos.y += c->player.diry / TILE_SIZE;
-		c->player.pos.x += c->player.dirx / TILE_SIZE;
-	}
-	if (keysym == MOVE_DOWN)
-	{
-		c->player.pos.y -= c->player.diry / TILE_SIZE;
-		c->player.pos.x -= c->player.dirx / TILE_SIZE;
-	}
-	printf("player.dirx: %f\n", c->player.dirx);
-	printf("player.diry: %f\n", c->player.diry);
 	if (keysym == MOVE_LEFT)
 	{
 		if (c->player.angle > 0 && c->player.angle < PI)
@@ -105,6 +84,30 @@ void	move_player(t_mlx *c, int keysym)
 			c->player.pos.y += sin(c->player.angle + PI / 2) / TILE_SIZE;
 		}
 	}
+}
+
+void	move_player(t_mlx *c, int keysym)
+{
+	double	x;
+	double	y;
+	int		floor_x;
+	int		floor_y;
+
+	x = c->player.pos.x;
+	y = c->player.pos.y;
+	if (keysym == MOVE_UP)
+	{
+		c->player.pos.y += c->player.diry / TILE_SIZE;
+		c->player.pos.x += c->player.dirx / TILE_SIZE;
+	}
+	if (keysym == MOVE_DOWN)
+	{
+		c->player.pos.y -= c->player.diry / TILE_SIZE;
+		c->player.pos.x -= c->player.dirx / TILE_SIZE;
+	}
+	strafe(c, keysym);
+	floor_x = (int)floor(c->player.pos.x);
+	floor_y = (int)floor(c->player.pos.y);
 	if (c->map.map[floor_y][floor_x] == '1')
 	{
 		c->player.pos.x = x;
