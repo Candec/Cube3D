@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 22:47:09 by tpereira          #+#    #+#             */
-/*   Updated: 2023/03/01 14:07:47 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/06 19:28:15 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ double	distance(double x1, double y1, double x2, double y2)
 	double distance;
 
 	distance = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
-	//distance = x2 * cos(c->player.angle) + y2 * sin(ray->angle);  >>>>> MORE EFICIENT WAY -> no Square Root
+	//distance = x2 * cos(c->player.angle) + y2 * sin(ray->angle); // >>>>> MORE EFICIENT WAY -> no Square Root
 	return (distance);
 }
 
