@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/28 09:10:56 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/01 19:01:23 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	raycaster(t_mlx *c)
 	// w->top = (WIN_HEIGHT / 2) - (w->h / 2);
 	// w->bot= (WIN_HEIGHT / 2) + (w->h / 2);
 	// w->c = GREEN;
-	draw_line(c, c->player.pos.x, c->player.pos.y, r->pos.x, r->pos.y, RED);
+	// draw_line(c, c->player.pos.x, c->player.pos.y, r->pos.x, r->pos.y, RED);
 	// draw_line(c, r->row, w->bot, r->row, WIN_HEIGHT, 0x000000);
 	free(w);
 	free(r);

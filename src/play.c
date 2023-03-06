@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/01 16:05:06 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/03/01 19:00:30 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,34 +89,12 @@ void	move_player(t_mlx *cube, int keysym)
 		cube->player.pos.y = y;
 	}
 }
-// void	move_player(t_mlx *cube, int keysym)
-// {
-// 	double x;
-// 	double y;
-
-// 	x = cube->player.pos.x;
-// 	y = cube->player.pos.y;
-// 	if (keysym == MOVE_UP)
-// 		cube->player.pos.y -= 0.1;
-// 	if (keysym == MOVE_DOWN)
-// 		cube->player.pos.y += 0.1;
-// 	if (keysym == MOVE_LEFT)
-// 		cube->player.pos.x -= 0.1;
-// 	if (keysym == MOVE_RIGHT)
-// 		cube->player.pos.x += 0.1;
-// 	if (cube->map.map[(int)floor(cube->player.pos.y)][(int)floor(cube->player.pos.x)] == '1')
-// 	{
-// 		cube->player.pos.x = x;
-// 		cube->player.pos.y = y;
-// 	}
-// }
 
 void draw_loop(t_mlx *cube)
 {
 	blackout(cube);
 	draw_map_2D(cube);
 	draw_player_2D(cube);
-	// draw_rays_2D(cube, 0);
 	raycaster(cube);
 	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->frame.img, 0, 0);
 }
@@ -140,7 +118,6 @@ int	keypress(int keysym, t_mlx *cube)
 {
 	if (keysym == ESC)
 		quit(cube);
-	//printf("%d\n", keysym);
 	player(cube, keysym);
 	// if (cube->map.player_escape == TRUE)
 	// 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 02:00:19 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/01 15:30:20 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/03/01 18:51:34 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static void	init_dda(t_mlx *c, t_raycast *r)
 	r->pos = ft_coord(c->player.pos.x, c->player.pos.y);
 	r->hit_pos = ft_coord(0.0, 0.0);
 	r->step = ft_coord(0.0, 0.0);
-	r->dir = ft_coord(c->player.dirx, c->player.diry);
-	// r->dir.x = cos(r->angle);
-	// r->dir.y = sin(r->angle);
+	// r->dir = ft_coord(c->player.dirx, c->player.diry);
+	r->dir.x = cos(r->angle);
+	r->dir.y = sin(r->angle);
 	r->step_size = ft_coord(fabs(1.0 / r->dir.x), fabs(1.0 / r->dir.y));
 }
 
@@ -80,8 +80,8 @@ void	dda(t_mlx *c, t_raycast *r)
 		}
 		// r->hit_pos = ft_coord(c->player.pos.x + r->dir.x * r->tot_len - c->player.pos.x + floor(c->player.pos.x) ,
 				// c->player.pos.y + r->dir.y * r->tot_len - c->player.pos.y + floor(c->player.pos.y));
-		r->hit_pos = ft_coord(c->player.pos.x + r->dir.x * r->tot_len - c->player.pos.x + floor(c->player.pos.x) ,
-				c->player.pos.y + r->dir.y * r->tot_len - c->player.pos.y + floor(c->player.pos.y));
+		r->hit_pos = ft_coord(c->player.pos.x + r->dir.x * (r->tot_len + c->player.pos.x - floor(c->player.pos.x)) ,
+				c->player.pos.y + r->dir.y * (r->tot_len + c->player.pos.y - floor(c->player.pos.y)));
 		draw_line(c, c->player.pos.x * TILE_SIZE, c->player.pos.y  * TILE_SIZE, r->hit_pos.x * TILE_SIZE, r->hit_pos.y * TILE_SIZE, RED);
 		if (col == 0)
 			printf("I x: %f - y: %f  ", r->hit_pos.x, r->hit_pos.y);
