@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/06 17:06:29 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/06 19:22:07 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ void	move_player(t_mlx *c, int keysym)
 	{
 		if (c->player.angle > 0 && c->player.angle < PI)
 		{
-			c->player.pos.x += cos(c->player.angle + PI / 2) / TILE_SIZE;
-			c->player.pos.y += sin(c->player.angle + PI / 2) / TILE_SIZE;
+			c->player.pos.x -= cos(c->player.angle + PI / 2) / TILE_SIZE;
+			c->player.pos.y -= sin(c->player.angle + PI / 2) / TILE_SIZE;
 		}
 		else
 		{
@@ -96,8 +96,8 @@ void	move_player(t_mlx *c, int keysym)
 	{
 		if (c->player.angle > 0 && c->player.angle < PI)
 		{
-			c->player.pos.x += cos(c->player.angle - PI / 2) / TILE_SIZE;
-			c->player.pos.y += sin(c->player.angle - PI / 2) / TILE_SIZE;
+			c->player.pos.x -= cos(c->player.angle - PI / 2) / TILE_SIZE;
+			c->player.pos.y -= sin(c->player.angle - PI / 2) / TILE_SIZE;
 		}
 		else
 		{
