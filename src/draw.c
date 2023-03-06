@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/06 10:31:22 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/06 10:33:34 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,6 @@ float	vertical_hit(t_raycast *ray, t_mlx *c)
 			ray->hit = true;
 	}
 	ray->dist = distance(c->player.pos.x, c->player.pos.y, ray->pos.x, ray->pos.y);
-	//draw_line(c, (c->player.pos.x * TILE_SIZE), c->player.pos.y * TILE_SIZE, ray->pos.x * TILE_SIZE, ray->pos.y * TILE_SIZE, GREEN);
 	return (ray->dist);
 }
 
@@ -208,7 +207,6 @@ float	horizontal_hit(t_raycast *ray, t_mlx *c)
 			ray->hit = true;
 	}
 	ray->dist = distance(c->player.pos.x, c->player.pos.y, ray->pos.x, ray->pos.y);
-	// draw_line(c, (c->player.pos.x * TILE_SIZE - 1), c->player.pos.y * TILE_SIZE - 1, ray->pos.x * TILE_SIZE - 1, ray->pos.y * TILE_SIZE - 1, RED);
 	return (ray->dist);
 }
 

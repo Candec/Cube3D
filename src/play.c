@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/02 17:58:22 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/06 17:06:29 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,34 @@ void	move_player(t_mlx *c, int keysym)
 		c->player.pos.y -= c->player.diry / TILE_SIZE;
 		c->player.pos.x -= c->player.dirx / TILE_SIZE;
 	}
+	printf("player.dirx: %f\n", c->player.dirx);
+	printf("player.diry: %f\n", c->player.diry);
 	if (keysym == MOVE_LEFT)
-		c->player.pos.x -= 0.1;
+	{
+		if (c->player.angle > 0 && c->player.angle < PI)
+		{
+			c->player.pos.x += cos(c->player.angle + PI / 2) / TILE_SIZE;
+			c->player.pos.y += sin(c->player.angle + PI / 2) / TILE_SIZE;
+		}
+		else
+		{
+			c->player.pos.x += cos(c->player.angle - PI / 2) / TILE_SIZE;
+			c->player.pos.y += sin(c->player.angle - PI / 2) / TILE_SIZE;
+		}
+	}
 	if (keysym == MOVE_RIGHT)
-		c->player.pos.x += 0.1;
+	{
+		if (c->player.angle > 0 && c->player.angle < PI)
+		{
+			c->player.pos.x += cos(c->player.angle - PI / 2) / TILE_SIZE;
+			c->player.pos.y += sin(c->player.angle - PI / 2) / TILE_SIZE;
+		}
+		else
+		{
+			c->player.pos.x += cos(c->player.angle + PI / 2) / TILE_SIZE;
+			c->player.pos.y += sin(c->player.angle + PI / 2) / TILE_SIZE;
+		}
+	}
 	if (c->map.map[floor_y][floor_x] == '1')
 	{
 		c->player.pos.x = x;
@@ -146,6 +170,22 @@ int	keypress(int keysym, t_mlx *cube)
 
 int	draw_frame(t_mlx *cube)
 {
+	// int width;
+	// int height;
+
+	// width = cube->frame.img_width / 100;
+	// height = cube->frame.img_height / 100;
+	// // testing xpm image
+
+	// cube->frame.img_width = WIN_WIDTH;
+	// cube->frame.img_height = WIN_HEIGHT;
+	// cube->frame.img = mlx_xpm_file_to_image(cube->mlx_ptr, "./assets/brick_wall.xpm", &width, &height);
+	// cube->frame.data = (int *)mlx_get_data_addr(cube->frame.img, &cube->frame.bpp, &cube->frame.size_l, &cube->frame.endian);
+	// mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->frame.img, 0, 0);
+
+	// end testing xpm image
+
+
 	cube->frame.img_width = WIN_WIDTH;
 	cube->frame.img_height = WIN_HEIGHT;
 	cube->frame.img = mlx_new_image(cube->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
