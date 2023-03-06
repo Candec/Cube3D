@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 01:03:26 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/01 13:01:00 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/06 19:30:49 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 void	set_p(size_t i, size_t j, t_mlx *cube)
 {
-	if (cube->player.e)
-		error(">1 PLAYERS DETECTED\n", cube);
+	if (cube->player.e != 1)
+		error("WRONG NUM OF PLAYERS DETECTED\n", cube);
 	cube->player.posx = i;
 	cube->player.posy = j;
 	cube->player.pos.x = (double)j;
 	cube->player.pos.y = (double)i;
-	//printf("x: %f - y: %f\n", cube->player.pos.x, cube->player.pos.y);
 }
 
 void	validate_chr(t_mlx *cube)
@@ -46,6 +45,7 @@ void	validate_map(t_mlx *cube)
 	size_t	i;
 	size_t	j;
 
+	cube->player.e = 0;
 	i = -1;
 	while (cube->map.map[++i])
 	{
@@ -60,7 +60,10 @@ void	validate_map(t_mlx *cube)
 					error("MAP NOT CLOSED V", cube);
 			}
 			if (ft_strchr("NSEW", cube->map.map[i][j]))
+			{
+				cube->player.e += 1;
 				set_p(i, j, cube);
+			}
 		}
 	}
 }
