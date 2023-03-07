@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/06 20:08:47 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/03/07 11:27:12 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,8 +138,6 @@
 typedef struct s_player
 {
 	t_coord	pos;
-	float	posx;
-	float	posy;
 	float	dirx;
 	float	diry;
 	float	angle;
@@ -190,11 +188,19 @@ typedef struct s_raycast
 	int		color;
 }				t_raycast;
 
+typedef struct s_mouse
+{
+	int		x;
+	int		y;
+	int		pressed;
+}			t_mouse;
+
 typedef struct s_mlx
 {
 	t_map		map;
 	t_img		frame;
 	t_player	player;
+	t_mouse		mouse;
 
 	bool		show_minimap;
 	bool		win;
@@ -204,6 +210,8 @@ typedef struct s_mlx
 	void		*img_so;
 	void		*img_we;
 	void		*img_ea;
+	void		*img_f;
+	void		*img_c;
 }				t_mlx;
 
 /*
@@ -245,6 +253,7 @@ void	start_mlx_and_window(t_mlx *cube);
 void	load_img(t_mlx *cube);
 int		xpm_to_image_wrapper(t_mlx *data, void *img, char *filename);
 int		keypress(int keysym, t_mlx *cube);
+int		mouse_move(t_mlx *cube);
 int		draw_frame(t_mlx *cube);
 
 /*
@@ -261,7 +270,7 @@ void	draw_circle(t_mlx *cube, int x, int y, int radius, int color);
 void	bresenham(t_mlx *cube, float x1, float y1, int color);
 void	draw_fov(t_mlx *cube);
 void	draw_rays_2D(t_mlx *cube);
-double	distance(double x1, double y1, double x2, double y2);
+double	distance(t_mlx *c, t_raycast *ray);
 void	fix_fisheye(float p_angle, t_raycast *ray);
 void	draw_3D(t_mlx *c);
 

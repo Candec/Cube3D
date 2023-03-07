@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:28:31 by tpereira          #+#    #+#             */
-/*   Updated: 2023/03/06 14:46:06 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/07 10:00:10 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,9 @@ void	init_player(t_mlx *cube)
 			{
 				if (cube->map.map[i][j] == '\0')
 					break ;
-				cube->player.posx = j + 0.4f;
-				cube->player.posy = i + 0.4f;
-				cube->player.angle = 1.5;
-				cube->player.fov = 1.5;
-				cube->player.dirx = cos(cube->player.angle) * 5;
-				cube->player.diry = sin(cube->player.angle) * 5;
+				cube->player.pos.x = j;
+				cube->player.pos.y = i;
+				cube->player.fov = 1.2;
 				init_player_dir(cube, cube->map.map[i][j]);
 				return ;
 			}

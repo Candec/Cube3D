@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/06 10:33:34 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/07 10:23:22 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	raycaster_3D(t_mlx *cube, t_raycast *ray)
 	int				wall_bottom;
 	// int				wall_color;
 
-	ray->dist = distance(cube->player.pos.x, cube->player.pos.y, ray->pos.x, ray->pos.y);
+	ray->dist = sqrt(distance(cube, ray));
 	fix_fisheye(cube->player.angle, ray);
 	wall_height = (TILE_SIZE / ray->dist) * WALL_HEIGHT;
 	wall_top = (WIN_HEIGHT / 2) - (wall_height / 2);
@@ -162,7 +162,7 @@ float	vertical_hit(t_raycast *ray, t_mlx *c)
 		else
 			ray->hit = true;
 	}
-	ray->dist = distance(c->player.pos.x, c->player.pos.y, ray->pos.x, ray->pos.y);
+	ray->dist = distance(c, ray);
 	return (ray->dist);
 }
 
@@ -206,7 +206,7 @@ float	horizontal_hit(t_raycast *ray, t_mlx *c)
 		else
 			ray->hit = true;
 	}
-	ray->dist = distance(c->player.pos.x, c->player.pos.y, ray->pos.x, ray->pos.y);
+	ray->dist = distance(c, ray);
 	return (ray->dist);
 }
 

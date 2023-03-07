@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 22:47:09 by tpereira          #+#    #+#             */
-/*   Updated: 2023/03/06 19:28:15 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/07 10:21:27 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,19 @@ void	blackout(t_mlx *cube)
 	}
 }
 
-double	distance(double x1, double y1, double x2, double y2)
+double	distance(t_mlx *c, t_raycast *ray)
 {
-	double distance;
+	// double distance;
+	double squared_dist;
 
-	distance = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
-	//distance = x2 * cos(c->player.angle) + y2 * sin(ray->angle); // >>>>> MORE EFICIENT WAY -> no Square Root
-	return (distance);
+	squared_dist = pow(ray->pos.x - c->player.pos.x, 2) + pow(ray->pos.y - c->player.pos.y, 2);
+
+	// distance = 0;
+	// distance = sqrt(pow(ray->pos.x - c->player.pos.x, 2) + pow(ray->pos.y - c->player.pos.y, 2));
+
+	//distance = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+	//distance = ray->pos.x * cos(c->player.angle) + ray->pos.y* sin(ray->angle); // >>>>> MORE EFICIENT WAY -> no Square Root
+	return (squared_dist);
 }
 
 void	fix_fisheye(float p_angle, t_raycast *ray)

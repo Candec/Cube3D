@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/06 20:04:14 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/07 12:32:38 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,13 @@ int	keypress(int keysym, t_mlx *cube)
 	return (0);
 }
 
+int	mouse_move(t_mlx *cube)
+{
+	printf("mouse move\n");
+	printf("x: %d, y: %d\n", cube->mouse.x, cube->mouse.y);
+	
+	return (0);
+}
 
 int	draw_frame(t_mlx *cube)
 {
