@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:09 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/07 12:33:59 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/07 15:40:44 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,7 @@ void	play(t_mlx *cube)
 {
 	start_mlx_and_window(cube);
 	mlx_hook(cube->win_ptr, KeyPress, KeyPressMask, keypress, cube);
-	mlx_mouse_get_pos(cube->win_ptr, &cube->mouse.x, &cube->mouse.y);
-	mlx_hook(cube->win_ptr, 6, 0, mouse_move, cube);
-	//mlx_mouse_hook(cube->win_ptr, mouse_move, cube);
-	//mlx_hook(cube->win_ptr, 6, PointerMotionMask, mouse_move, cube);
 	mlx_hook(cube->win_ptr, DestroyNotify, StructureNotifyMask, quit, cube);
-	
 	draw_frame(cube);
 	mlx_loop(cube->mlx_ptr);
 }

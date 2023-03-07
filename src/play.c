@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/07 12:32:38 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/07 15:53:47 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ void	move_player(t_mlx *c, int keysym)
 	y = c->player.pos.y;
 	if (keysym == MOVE_UP)
 	{
-		c->player.pos.y += c->player.diry / TILE_SIZE;
-		c->player.pos.x += c->player.dirx / TILE_SIZE;
+		c->player.pos.y += (c->player.diry / TILE_SIZE) * 0.5;
+		c->player.pos.x += (c->player.dirx / TILE_SIZE) * 0.5;
 	}
 	if (keysym == MOVE_DOWN)
 	{
@@ -117,20 +117,30 @@ void	move_player(t_mlx *c, int keysym)
 
 void draw_loop(t_mlx *cube)
 {
-	// double px;
-	// double py;
-	// double dx;
-	// double dy;
+	double px;
+	double py;
+	double dx;
+	double dy;
 
-	// px = (cube->player.pos.x * TILE_SIZE);
-	// py = (cube->player.pos.y * TILE_SIZE);
-	// dx = px + cube->player.dirx * 5;
-	// dy = py + cube->player.diry * 5;
+	px = (cube->player.pos.x * TILE_SIZE);
+	py = (cube->player.pos.y * TILE_SIZE);
+	dx = px + cube->player.dirx * 5;
+	dy = py + cube->player.diry * 5;
 
 	blackout(cube);
-	draw_rays_2D(cube);
-	//if (cube->show_minimap)
-	// draw_line(cube, px, py, dx, dy, GREEN);			// show players direction
+	if (cube->show_minimap)
+	{
+		draw_bg(cube);
+		draw_rays_2D(cube);
+		draw_map_2D(cube);
+		draw_player_2D(cube);
+		draw_line(cube, px, py, dx, dy, GREEN);			// show players direction
+	}
+	else
+	{
+		draw_bg(cube);
+		draw_rays_2D(cube);
+	}
 	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->frame.img, 0, 0);
 }
 
@@ -161,7 +171,7 @@ int	keypress(int keysym, t_mlx *cube)
 	if (keysym == ESC)
 		quit(cube);
 	//printf("%d\n", keysym);
-	player(cube, keysym);
+	player(cube, keysym);	
 	// if (cube->map.player_escape == TRUE)
 	// 	return (0);
 	// else if (keysym == MOVE_UP|| keysym == MOVE_DOWN
@@ -173,8 +183,9 @@ int	keypress(int keysym, t_mlx *cube)
 int	mouse_move(t_mlx *cube)
 {
 	printf("mouse move\n");
+	mlx_mouse_hide(cube->mlx_ptr, cube->win_ptr);
 	printf("x: %d, y: %d\n", cube->mouse.x, cube->mouse.y);
-	
+
 	return (0);
 }
 

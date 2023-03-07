@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/07 10:23:22 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/07 16:19:37 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,14 @@ void	raycaster_3D(t_mlx *cube, t_raycast *ray)
 	wall_bottom = (WIN_HEIGHT / 2) + (wall_height / 2);
 	// If x % tile_size <= 1 && player_angle between 90 && 270 [West Wall]
 	// If x % tile_size >= tile_size - 1 && player_angle between 270 && 90 [East Wall]
-	if (fmod(ray->pos.x, (double)TILE_SIZE) <= 1 && cube->player.angle > PI2 && cube->player.angle < PI3)
-		ray->color = GREEN;
-	if (fmod(ray->pos.x, (double)TILE_SIZE) >= TILE_SIZE - 1 && (cube->player.angle > PI3 || cube->player.angle < PI2))
-		ray->color = BLUE;
+	// if (fmod(ray->pos.x, (double)TILE_SIZE) <= 1 && cube->player.angle > PI2 && cube->player.angle < PI3)
+	// 	ray->color = GREEN;
+	// if (fmod(ray->pos.x, (double)TILE_SIZE) >= TILE_SIZE - 1 && (cube->player.angle > PI3 || cube->player.angle < PI2))
+	// 	ray->color = BLUE;
+	// if (fmod(ray->pos.x, (double)TILE_SIZE) <= 1 && (cube->player.angle > PI && cube->player.angle < PII))
+	// 	ray->color = YELLOW;
+	// if (fmod(ray->pos.x, (double)TILE_SIZE) <= 1 && (cube->player.angle > PI && cube->player.angle < PII))
+	// 	ray->color = YELLOW;
 	// wall_color = GREEN;
 	// if (ray->angle < ((PI3)) && ray->angle > PI2)
 	// 	wall_color = RED;
@@ -133,6 +137,7 @@ float	vertical_hit(t_raycast *ray, t_mlx *c)
 		ray->pos.y = (c->player.pos.x - ray->pos.x) * a_tan + c->player.pos.y;
 		ray->step.x = -TILE_SIZE;
 		ray->step.y = (-ray->step.x) * a_tan;
+		ray->color = YELLOW;
 	}
 	if ((double)ray->angle > (double)(PI3) || (double)ray->angle < PI2) 		// Looking Right
 	{
@@ -140,6 +145,7 @@ float	vertical_hit(t_raycast *ray, t_mlx *c)
 		ray->pos.y = ((c->player.pos.x - ray->pos.x) * a_tan + c->player.pos.y);
 		ray->step.x = TILE_SIZE;
 		ray->step.y = (-ray->step.x) * a_tan;
+		ray->color = BLUE;
 	}
 	if ((double)ray->angle == PI2 || (double)ray->angle == (PI3))				// Looking straight down/up
 	{
@@ -177,6 +183,7 @@ float	horizontal_hit(t_raycast *ray, t_mlx *c)
 		ray->pos.x = ((c->player.pos.y - ray->pos.y) * a_tan + c->player.pos.x);
 		ray->step.y = TILE_SIZE;
 		ray->step.x = (-ray->step.y) * a_tan;
+		ray->color = WHITE;
 	}
 	if (ray->angle > PI && ray->angle < (PII)) 					// LOOking UP
 	{
@@ -184,6 +191,7 @@ float	horizontal_hit(t_raycast *ray, t_mlx *c)
 		ray->pos.x = (c->player.pos.y - ray->pos.y) * a_tan + c->player.pos.x;
 		ray->step.y = -TILE_SIZE;
 		ray->step.x = (-ray->step.y) * a_tan;
+		ray->color = GREEN;
 	}
 	if (ray->angle == 0 || ray->angle == PI)					// Looking straight left/right
 	{
@@ -219,12 +227,7 @@ void	draw_rays_2D(t_mlx *c)
 	row = -1;
 
 	ray_v.color = 0xa10000;
-	draw_bg(c);
-	if (c->show_minimap)
-	{
-		draw_map_2D(c);
-		draw_player_2D(c);
-	}
+	ray_h.color = 0xa10000;
 	while (++row < WIN_WIDTH)
 	{
 		ray.hit = false;
@@ -241,13 +244,9 @@ void	draw_rays_2D(t_mlx *c)
 		fix_angle(&ray_h.angle);
 		ray_h.dist = horizontal_hit(&ray_h, c);
 		ray_v.dist = vertical_hit(&ray_v, c);
+		ray = ray_v;
 		if (ray_h.dist < ray_v.dist)
-		{
 			ray = ray_h;
-			ray.color = RED;
-		}
-		else
-			ray = ray_v;
 		if (c->show_minimap)
 			draw_line(c, (c->player.pos.x * TILE_SIZE - 1), c->player.pos.y * TILE_SIZE - 1, ray.pos.x * TILE_SIZE - 1, ray.pos.y * TILE_SIZE - 1, ray.color);
 		//draw_line(c, (c->player.pos.x * TILE_SIZE) + (TILE_SIZE * 0.5), (c->player.pos.y * TILE_SIZE) + (TILE_SIZE * 0.5), ray.pos.x * TILE_SIZE, ray.pos.y * TILE_SIZE, RED);
