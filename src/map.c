@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:08:49 by tpereira          #+#    #+#             */
-/*   Updated: 2023/03/08 14:09:12 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/08 14:16:08 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void	print_map(t_mlx *cube)
 	}
 }
 
-void	draw_map_2D(t_mlx *cube)
+void	draw_map_2d(t_mlx *cube)
 {
 	int		x;
 	int		y;
-	t_coord o;
+	t_coord	o;
 
 	y = 0;
 	while (y != (int)cube->map.height)
@@ -60,11 +60,11 @@ void	draw_map_2D(t_mlx *cube)
 	}
 }
 
-void	draw_player_2D(t_mlx *cube)
+void	draw_player_2d(t_mlx *cube)
 {
-	int	x;
-	int	y;
-	t_coord o;
+	int		x;
+	int		y;
+	t_coord	o;
 
 	y = -1;
 	while (++y != (int)cube->map.height)

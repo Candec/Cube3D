@@ -26,8 +26,11 @@ SRC =		main.c\
 			parse.c\
 			check.c\
 			play.c\
+			play_utils.c\
 			draw.c\
 			draw_utils.c\
+			draw_vertical_rays.c\
+			draw_horizontal_rays.c\
 			error.c\
 			player.c\
 			map.c\

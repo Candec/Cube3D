@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:09 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/08 13:04:32 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/08 14:15:14 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,5 @@ int	main(int argc, char *argv[])
 	parse(&cube, argv[1]);
 	play(&cube);
 	quit(&cube);
-
 	return (0);
 }

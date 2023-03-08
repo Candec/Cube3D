@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 22:47:09 by tpereira          #+#    #+#             */
-/*   Updated: 2023/03/08 14:09:12 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/08 14:49:25 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	blackout(t_mlx *cube)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = -1;
 	while (++y < WIN_HEIGHT)
@@ -28,22 +28,16 @@ void	blackout(t_mlx *cube)
 
 double	distance(t_mlx *c, t_raycast *ray)
 {
-	// double distance;
-	double squared_dist;
+	double	squared_dist;
 
-	squared_dist = pow(ray->pos.x - c->p.pos.x, 2) + pow(ray->pos.y - c->p.pos.y, 2);
-
-	// distance = 0;
-	// distance = sqrt(pow(ray->pos.x - c->p.pos.x, 2) + pow(ray->pos.y - c->p.pos.y, 2));
-
-	//distance = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
-	//distance = ray->pos.x * cos(c->p.angle) + ray->pos.y* sin(ray->angle); // >>>>> MORE EFICIENT WAY -> no Square Root
+	squared_dist = pow(ray->pos.x - c->p.pos.x, 2)
+		+ pow(ray->pos.y - c->p.pos.y, 2);
 	return (squared_dist);
 }
 
 void	fix_fisheye(float p_angle, t_raycast *ray)
 {
-	float cos_angle;
+	float	cos_angle;
 
 	cos_angle = p_angle - ray->angle;
 	if (cos_angle < 0)
@@ -51,4 +45,40 @@ void	fix_fisheye(float p_angle, t_raycast *ray)
 	if (cos_angle > (PII))
 		cos_angle -= (PII);
 	ray->dist = ray->dist * cos(cos_angle);
+}
+
+void	draw_square(t_mlx *cube, t_coord pos, int height, int color)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < height)
+	{
+		j = -1;
+		while (++j < height)
+			add_pixel(&cube->frame, color, pos.x + i, pos.y + j);
+	}
+}
+
+void	draw_line(t_mlx *cube, t_coord a, t_coord b, int color)
+{
+	t_coord	d;
+	t_coord	inc;
+	double	step;
+	double	i;
+
+	d.x = fabs(b.x - a.x);
+	d.y = fabs(b.y - a.y);
+	step = ft_ternary_double(d.x > d.y, d.x, d.y);
+	inc.x = (b.x - a.x) / step;
+	inc.y = (b.y - a.y) / step;
+	i = 1;
+	while (i <= step)
+	{
+		add_pixel(&cube->frame, color, round(a.x), round(a.y));
+		a.x += inc.x;
+		a.y += inc.y;
+		i++;
+	}
 }
