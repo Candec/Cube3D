@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/07 15:34:54 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/08 14:08:19 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,8 +141,6 @@ typedef struct s_player
 	float	dirx;
 	float	diry;
 	float	angle;
-	float	planex;
-	float	planey;
 	float	height;
 	float	fov;
 	float	position;
@@ -199,7 +197,7 @@ typedef struct s_mlx
 {
 	t_map		map;
 	t_img		frame;
-	t_player	player;
+	t_player	p;
 	t_mouse		mouse;
 
 	bool		show_minimap;
@@ -263,13 +261,13 @@ void	add_pixel(t_img *frame, int rgb, int x, int y);
 void	draw_bg(t_mlx *cube);
 void	draw_wall(t_mlx *cube, int x, int y, int height);
 void	draw_player(t_mlx *cube, int x, int y, int height);
-void	draw_square(t_mlx *cube, int x, int y, int height, int color);
+void	draw_square(t_mlx *cube, t_coord pos, int height, int color);
 void	blackout(t_mlx *cube);
-void	draw_line(t_mlx *cube, double x1, double y1, double x2, double y2, int color);
+void	draw_line(t_mlx *cube, t_coord a, t_coord b, int color);
 void	draw_circle(t_mlx *cube, int x, int y, int radius, int color);
 void	bresenham(t_mlx *cube, float x1, float y1, int color);
 void	draw_fov(t_mlx *cube);
-void	draw_rays_2D(t_mlx *cube);
+void	draw_rays_2d(t_mlx *cube);
 double	distance(t_mlx *c, t_raycast *ray);
 void	fix_fisheye(float p_angle, t_raycast *ray);
 void	draw_3D(t_mlx *c);

@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:28:31 by tpereira          #+#    #+#             */
-/*   Updated: 2023/03/07 10:00:10 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/08 14:09:12 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 void	init_player_dir(t_mlx *cube, char c)
 {
 	if (c == 'N')
-		cube->player.angle = PI3 + 0.00001;
+		cube->p.angle = PI3 + 0.00001;
 	else if (c == 'S')
-		cube->player.angle = PI2 + 0.00001;
+		cube->p.angle = PI2 + 0.00001;
 	else if (c == 'E')
-		cube->player.angle = PII + 0.00001;
+		cube->p.angle = PII + 0.00001;
 	else if (c == 'W')
-		cube->player.angle = PI + 0.00001;
+		cube->p.angle = PI + 0.00001;
 	else
-		cube->player.angle = PI3 + 0.00001;
-	cube->player.dirx = cos(cube->player.angle) * 5;
-	cube->player.diry = sin(cube->player.angle) * 5;
+		cube->p.angle = PI3 + 0.00001;
+	cube->p.dirx = cos(cube->p.angle) * 5;
+	cube->p.diry = sin(cube->p.angle) * 5;
 }
 
 void	init_player(t_mlx *cube)
@@ -43,9 +43,9 @@ void	init_player(t_mlx *cube)
 			{
 				if (cube->map.map[i][j] == '\0')
 					break ;
-				cube->player.pos.x = j;
-				cube->player.pos.y = i;
-				cube->player.fov = 1.2;
+				cube->p.pos.x = j;
+				cube->p.pos.y = i;
+				cube->p.fov = 1.2;
 				init_player_dir(cube, cube->map.map[i][j]);
 				return ;
 			}

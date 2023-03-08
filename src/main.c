@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:09 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/07 15:40:44 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/08 13:04:32 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	init(t_mlx *cube)
 	cube->map.so = NULL;
 	cube->map.we = NULL;
 	cube->map.ea = NULL;
+	cube->img_f = NULL;
+	cube->img_c = NULL;
 	cube->map.map = ft_calloc(sizeof(char **), 0);
 	cube->win = FALSE;
 	cube->show_minimap = FALSE;

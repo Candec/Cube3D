@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/07 15:53:47 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/08 14:09:12 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,28 +60,28 @@ void	strafe(t_mlx *c, int keysym)
 {
 	if (keysym == MOVE_LEFT)
 	{
-		if (c->player.angle > 0 && c->player.angle < PI)
+		if (c->p.angle > 0 && c->p.angle < PI)
 		{
-			c->player.pos.x -= cos(c->player.angle + PI / 2) / TILE_SIZE;
-			c->player.pos.y -= sin(c->player.angle + PI / 2) / TILE_SIZE;
+			c->p.pos.x -= cos(c->p.angle + PI / 2) / TILE_SIZE;
+			c->p.pos.y -= sin(c->p.angle + PI / 2) / TILE_SIZE;
 		}
 		else
 		{
-			c->player.pos.x += cos(c->player.angle - PI / 2) / TILE_SIZE;
-			c->player.pos.y += sin(c->player.angle - PI / 2) / TILE_SIZE;
+			c->p.pos.x += cos(c->p.angle - PI / 2) / TILE_SIZE;
+			c->p.pos.y += sin(c->p.angle - PI / 2) / TILE_SIZE;
 		}
 	}
 	if (keysym == MOVE_RIGHT)
 	{
-		if (c->player.angle > 0 && c->player.angle < PI)
+		if (c->p.angle > 0 && c->p.angle < PI)
 		{
-			c->player.pos.x -= cos(c->player.angle - PI / 2) / TILE_SIZE;
-			c->player.pos.y -= sin(c->player.angle - PI / 2) / TILE_SIZE;
+			c->p.pos.x -= cos(c->p.angle - PI / 2) / TILE_SIZE;
+			c->p.pos.y -= sin(c->p.angle - PI / 2) / TILE_SIZE;
 		}
 		else
 		{
-			c->player.pos.x += cos(c->player.angle + PI / 2) / TILE_SIZE;
-			c->player.pos.y += sin(c->player.angle + PI / 2) / TILE_SIZE;
+			c->p.pos.x += cos(c->p.angle + PI / 2) / TILE_SIZE;
+			c->p.pos.y += sin(c->p.angle + PI / 2) / TILE_SIZE;
 		}
 	}
 }
@@ -93,55 +93,50 @@ void	move_player(t_mlx *c, int keysym)
 	int		floor_x;
 	int		floor_y;
 
-	x = c->player.pos.x;
-	y = c->player.pos.y;
+	x = c->p.pos.x;
+	y = c->p.pos.y;
 	if (keysym == MOVE_UP)
 	{
-		c->player.pos.y += (c->player.diry / TILE_SIZE) * 0.5;
-		c->player.pos.x += (c->player.dirx / TILE_SIZE) * 0.5;
+		c->p.pos.y += (c->p.diry / TILE_SIZE) * 0.5;
+		c->p.pos.x += (c->p.dirx / TILE_SIZE) * 0.5;
 	}
 	if (keysym == MOVE_DOWN)
 	{
-		c->player.pos.y -= c->player.diry / TILE_SIZE;
-		c->player.pos.x -= c->player.dirx / TILE_SIZE;
+		c->p.pos.y -= c->p.diry / TILE_SIZE;
+		c->p.pos.x -= c->p.dirx / TILE_SIZE;
 	}
 	strafe(c, keysym);
-	floor_x = (int)floor(c->player.pos.x);
-	floor_y = (int)floor(c->player.pos.y);
+	floor_x = (int)floor(c->p.pos.x);
+	floor_y = (int)floor(c->p.pos.y);
 	if (c->map.map[floor_y][floor_x] == '1')
 	{
-		c->player.pos.x = x;
-		c->player.pos.y = y;
+		c->p.pos.x = x;
+		c->p.pos.y = y;
 	}
 }
 
-void draw_loop(t_mlx *cube)
+void draw_loop(t_mlx *c)
 {
-	double px;
-	double py;
-	double dx;
-	double dy;
+	t_coord p;
+	t_coord d;
 
-	px = (cube->player.pos.x * TILE_SIZE);
-	py = (cube->player.pos.y * TILE_SIZE);
-	dx = px + cube->player.dirx * 5;
-	dy = py + cube->player.diry * 5;
+	p.x = (c->p.pos.x * TILE_SIZE);
+	p.y = (c->p.pos.y * TILE_SIZE);
+	d.x = p.x + c->p.dirx * 5;
+	d.y = p.y + c->p.diry * 5;
 
-	blackout(cube);
-	if (cube->show_minimap)
+	blackout(c);
+	draw_bg(c);
+	if (c->show_minimap)
 	{
-		draw_bg(cube);
-		draw_rays_2D(cube);
-		draw_map_2D(cube);
-		draw_player_2D(cube);
-		draw_line(cube, px, py, dx, dy, GREEN);			// show players direction
+		draw_rays_2d(c);
+		draw_map_2D(c);
+		draw_player_2D(c);
+		draw_line(c, p, d, GREEN);			// show players direction
 	}
 	else
-	{
-		draw_bg(cube);
-		draw_rays_2D(cube);
-	}
-	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->frame.img, 0, 0);
+		draw_rays_2d(c);
+	mlx_put_image_to_window(c->mlx_ptr, c->win_ptr, c->frame.img, 0, 0);
 }
 
 void	player(t_mlx *cube, int keysym)
@@ -150,9 +145,9 @@ void	player(t_mlx *cube, int keysym)
 		|| keysym == MOVE_LEFT || keysym == MOVE_RIGHT)
 		move_player(cube, keysym);
 	if (keysym == LOOK_LEFT)
-		cube->player.angle -= 0.0174533 * 5;				// ONE DEGREE IN RADIANS * 5
+		cube->p.angle -= 0.0174533 * 5;				// ONE DEGREE IN RADIANS * 5
 	if (keysym == LOOK_RIGHT)
-		cube->player.angle += 0.0174533 * 5;
+		cube->p.angle += 0.0174533 * 5;
 	if (keysym == M_KEY)
 	{
 		if (cube->show_minimap)
@@ -160,9 +155,9 @@ void	player(t_mlx *cube, int keysym)
 		else
 			cube->show_minimap = 1;
 	}
-	fix_angle(&cube->player.angle);
-	cube->player.dirx = cos(cube->player.angle) * 5;
-	cube->player.diry = sin(cube->player.angle) * 5;
+	fix_angle(&cube->p.angle);
+	cube->p.dirx = cos(cube->p.angle) * 5;
+	cube->p.diry = sin(cube->p.angle) * 5;
 	draw_loop(cube);
 }
 

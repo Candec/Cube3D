@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 02:00:19 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/01 10:55:14 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/03/08 14:09:12 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 // 	r.distance = 0.0;
 // 	r.reach_end = false;
 // 	r.end = ft_coord(x, y);
-// 	r.dir = ft_coord(r.end.x - c->player.pos.x, r.end.y - c->player.pos.y);
+// 	r.dir = ft_coord(r.end.x - c->p.pos.x, r.end.y - c->p.pos.y);
 // 	r.step_size = ft_coord(sqrt(1 + ft_powd((r.dir.y / r.dir.x), 2.0)),
 // 			sqrt(1 + ft_powd((r.dir.x / r.dir.y), 2.0)));
-// 	r.grid = ft_coord(c->player.pos.x, c->player.pos.y);
+// 	r.grid = ft_coord(c->p.pos.x, c->p.pos.y);
 // }
 
 // static void	dir_dda(t_mlx *c, t_raycast *r)
@@ -28,22 +28,22 @@
 // 	if (r.dir.x < 0)
 // 	{
 // 		r.step.x = -1;
-// 		r.len.x = (c->player.pos.x - r.grid.x) * r.step_size.x;
+// 		r.len.x = (c->p.pos.x - r.grid.x) * r.step_size.x;
 // 	}
 // 	else
 // 	{
 // 		r.step.x = 1;
-// 		r.len.x = ((r.grid.x + 1) - c->player.pos.x) * r.step_size.x;
+// 		r.len.x = ((r.grid.x + 1) - c->p.pos.x) * r.step_size.x;
 // 	}
 // 	if (r.dir.y < 0)
 // 	{
 // 		r.step.y = -1;
-// 		r.len.y = (c->player.pos.y - r.grid.y) * r.step_size.y;
+// 		r.len.y = (c->p.pos.y - r.grid.y) * r.step_size.y;
 // 	}
 // 	else
 // 	{
 // 		r.step.y = 1;
-// 		r.len.y = ((r.grid.y + 1) - c->player.pos.y) * r.step_size.y;
+// 		r.len.y = ((r.grid.y + 1) - c->p.pos.y) * r.step_size.y;
 // 	}
 // }
 
@@ -70,7 +70,7 @@
 // 		if (ft_strncmp(&c->map.map[(int)r.grid.y][(int)r.grid.x], "1", 1))
 // 			r.reach_end = true;
 // 	}
-// 	r.intersection = ft_coord(c->player.pos.x + r.dir.x * r.distance,
-// 		c->player.pos.y + r.dir.y * r.distance);
+// 	r.intersection = ft_coord(c->p.pos.x + r.dir.x * r.distance,
+// 		c->p.pos.y + r.dir.y * r.distance);
 // 	return (r.intersection);
 // }
