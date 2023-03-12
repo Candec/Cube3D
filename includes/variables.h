@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   variables.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 16:42:40 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/16 10:08:40 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/12 14:44:23 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
-
 #ifndef VARIABLES_H
 # define VARIABLES_H
+# include "cube3d.h"
 # if defined(__linux__)
 #  define ESC			65307	// ESQ
 #  define MOVE_UP		119		// W

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/08 14:46:53 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/12 14:42:59 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@
 #  define PI2 1.570796000000000081087137004942633211612701416015625
 # endif
 
-
 /*
 **	=============
 **	 Structures
@@ -145,7 +144,7 @@ typedef struct s_player
 	float	fov;
 	float	position;
 
-	int	e;
+	int		e;
 }				t_player;
 
 typedef struct s_img
@@ -264,18 +263,12 @@ void	move_player(t_mlx *c, int keysym);
 */
 void	add_pixel(t_img *frame, int rgb, int x, int y);
 void	draw_bg(t_mlx *cube);
-void	draw_wall(t_mlx *cube, int x, int y, int height);
-void	draw_player(t_mlx *cube, int x, int y, int height);
 void	draw_square(t_mlx *cube, t_coord pos, int height, int color);
 void	blackout(t_mlx *cube);
 void	draw_line(t_mlx *cube, t_coord a, t_coord b, int color);
-void	draw_circle(t_mlx *cube, int x, int y, int radius, int color);
-void	bresenham(t_mlx *cube, float x1, float y1, int color);
-void	draw_fov(t_mlx *cube);
 void	draw_rays_2d(t_mlx *cube);
 double	distance(t_mlx *c, t_raycast *ray);
 void	fix_fisheye(float p_angle, t_raycast *ray);
-void	draw_3D(t_mlx *c);
 float	horizontal_hit(t_raycast *ray, t_mlx *c);
 float	vertical_hit(t_raycast *ray, t_mlx *c);
 
