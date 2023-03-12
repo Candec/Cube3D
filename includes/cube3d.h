@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/12 14:42:59 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/03/12 19:40:32 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,10 +203,10 @@ typedef struct s_mlx
 	bool		win;
 	void		*mlx_ptr;
 	void		*win_ptr;
-	void		*img_no;
-	void		*img_so;
-	void		*img_we;
-	void		*img_ea;
+	t_img		img_no;
+	t_img		img_so;
+	t_img		img_we;
+	t_img		img_ea;
 	void		*img_f;
 	void		*img_c;
 }				t_mlx;
@@ -248,7 +248,7 @@ bool	check_v(t_mlx *cube, size_t i, size_t j);
 */
 void	start_mlx_and_window(t_mlx *cube);
 void	load_img(t_mlx *cube);
-int		xpm_to_image_wrapper(t_mlx *data, void *img, char *filename);
+int		xpm_to_image_wrapper(t_mlx *c, t_img *img, char *filename);
 int		keypress(int keysym, t_mlx *cube);
 int		mouse_move(t_mlx *cube);
 int		draw_frame(t_mlx *cube);

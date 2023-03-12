@@ -3,22 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   play_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:27:04 by tpereira          #+#    #+#             */
-/*   Updated: 2023/03/08 14:40:26 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/12 20:07:14 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-int	xpm_to_image_wrapper(t_mlx *data, void *img, char *filename)
+int	xpm_to_image_wrapper(t_mlx *c, t_img *img, char *filename)
 {
-	int	size;
-
-	size = SQ_S;
-	img = mlx_xpm_file_to_image(data->mlx_ptr, filename, &size, &size);
-	if (!img)
+	img->img = mlx_xpm_file_to_image(c->mlx_ptr, filename, &img->img_width, &img->img_height);
+	if (!img->img)
 		return (0);
 	return (1);
 }
@@ -28,13 +25,13 @@ void	load_img(t_mlx *cube)
 	bool	err;
 
 	err = FALSE;
-	if (!xpm_to_image_wrapper(cube, cube->img_no, cube->map.no))
+	if (!xpm_to_image_wrapper(cube, &cube->img_no, "./assets/r.xpm"))
 		err = TRUE;
-	if (!xpm_to_image_wrapper(cube, cube->img_so, cube->map.so))
+	if (!xpm_to_image_wrapper(cube, &cube->img_so, "./assets/g.xpm"))
 		err = TRUE;
-	if (!xpm_to_image_wrapper(cube, cube->img_ea, cube->map.ea))
+	if (!xpm_to_image_wrapper(cube, &cube->img_ea, "./assets/b.xpm"))
 		err = TRUE;
-	if (!xpm_to_image_wrapper(cube, cube->img_we, cube->map.we))
+	if (!xpm_to_image_wrapper(cube, &cube->img_we, "./assets/y.xpm"))
 		err = TRUE;
 	if (err)
 		error("COULDN'T LOAD IMG\n", cube);
