@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   play_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:27:04 by tpereira          #+#    #+#             */
-/*   Updated: 2023/03/12 20:07:14 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/03/13 12:20:42 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-int	xpm_to_image_wrapper(t_mlx *c, t_img *img, char *filename)
+int	xpm_to_image_wrapper(t_mlx *cube, t_img *img, char *filename)
 {
-	img->img = mlx_xpm_file_to_image(c->mlx_ptr, filename, &img->img_width, &img->img_height);
-	if (!img->img)
+	img->img = mlx_xpm_file_to_image(cube->mlx_ptr, filename, &img->img_width, &img->img_height);
+	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
+	if (!img)
 		return (0);
 	return (1);
 }
@@ -25,14 +26,14 @@ void	load_img(t_mlx *cube)
 	bool	err;
 
 	err = FALSE;
-	if (!xpm_to_image_wrapper(cube, &cube->img_no, "./assets/r.xpm"))
-		err = TRUE;
-	if (!xpm_to_image_wrapper(cube, &cube->img_so, "./assets/g.xpm"))
-		err = TRUE;
-	if (!xpm_to_image_wrapper(cube, &cube->img_ea, "./assets/b.xpm"))
-		err = TRUE;
-	if (!xpm_to_image_wrapper(cube, &cube->img_we, "./assets/y.xpm"))
-		err = TRUE;
+	// if (!xpm_to_image_wrapper(cube, &cube->img_no, "./assets/brick.xpm"))
+	// 	err = TRUE;
+	// if (!xpm_to_image_wrapper(cube, &cube->img_so, "./assets/brick.xpm"))
+	// 	err = TRUE;
+	// if (!xpm_to_image_wrapper(cube, &cube->img_ea, "./assets/brick.xpm"))
+	// 	err = TRUE;
+	// if (!xpm_to_image_wrapper(cube, &cube->img_we, "./assets/brick.xpm"))
+	// 	err = TRUE;
 	if (err)
 		error("COULDN'T LOAD IMG\n", cube);
 }

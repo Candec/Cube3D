@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/13 08:53:01 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/13 12:32:11 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,13 +151,12 @@ typedef struct s_img
 {
 	void	*img;
 	int		*data;
-
-	int		size_l;
 	int		bpp;
+	int		size_l;
 	int		endian;
 	int		img_width;
 	int		img_height;
-}				t_img;
+} t_img;
 
 typedef struct s_map
 {
@@ -184,6 +183,7 @@ typedef struct s_raycast
 	bool	hit;
 	int		color;
 	int		offset;
+	t_img	texture;
 }				t_raycast;
 
 typedef struct s_mouse
