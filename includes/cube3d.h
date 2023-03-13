@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/08 14:46:53 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/10 09:52:01 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@
 # endif
 
 # ifndef TILE_SIZE
-#  define TILE_SIZE 20
+#  define TILE_SIZE (int)(WIN_WIDTH / 80)
 # endif
 
 # ifndef WALL_HEIGHT
@@ -184,6 +184,7 @@ typedef struct s_raycast
 	float	dist;
 	bool	hit;
 	int		color;
+	int		offset;
 }				t_raycast;
 
 typedef struct s_mouse
@@ -204,7 +205,7 @@ typedef struct s_mlx
 	bool		win;
 	void		*mlx_ptr;
 	void		*win_ptr;
-	void		*img_no;
+	t_img		*img_no;
 	void		*img_so;
 	void		*img_we;
 	void		*img_ea;

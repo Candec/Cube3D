@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/08 14:48:59 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/08 21:58:18 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,20 @@ void	raycaster_3d(t_mlx *cube, t_raycast *ray)
 	w_top.y = (WIN_HEIGHT / 2) - (wall_height / 2);
 	w_bottom.x = ray->row;
 	w_bottom.y = (WIN_HEIGHT / 2) + (wall_height / 2);
-	draw_line(cube, w_top, w_bottom, ray->color);
+	// draw images here
+
+	//while loop to print the wall with texture from xpm file
+	while (w_top.y < w_bottom.y)
+	{
+		add_pixel(&cube->frame, ray->color, w_top.x, w_top.y);
+		w_top.y++;
+	}
+
+	
+
+
+
+	// draw_line(cube, w_top, w_bottom, ray->color);
 }
 
 void	set_rays(t_raycast *ray, t_mlx *c, int row)
