@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/13 16:22:15 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/13 17:26:07 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ void	raycaster_3d(t_mlx *cube, t_raycast *ray)
 
 	// while loop to print the wall with texture from xpm file
 
-	while (w_top.y < w_bottom.y)
+	while (w_top.y++ < w_bottom.y)
 	{
-		add_pixel(&cube->frame, ray->texture.data[(int)w_top.y], w_top.x, w_top.y);
-		w_top.y++;
+		int pixel = ((w_top.y / TILE_SIZE) + (ray->row * TILE_SIZE));
+		add_pixel(&cube->frame, ray->texture.data[pixel], w_top.x, w_top.y);
 	}
 	//draw_line(cube, w_top, w_bottom, ray->color);
 }
@@ -116,5 +116,4 @@ void	draw_rays_2d(t_mlx *c)
 			draw_line(c, p, r, ray[0].color);
 		raycaster_3d(c, &ray[0]);
 	}
-	printf("exited while\n");
 }
