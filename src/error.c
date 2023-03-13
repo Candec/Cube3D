@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 16:09:33 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/08 14:14:56 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/12 19:43:31 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void	error(char *msg, t_mlx *cube)
 
 void	unload(t_mlx *cube)
 {
-	if (cube->img_no)
-		mlx_destroy_image(cube->mlx_ptr, cube->img_no);
-	if (cube->img_so)
-		mlx_destroy_image(cube->mlx_ptr, cube->img_so);
-	if (cube->img_ea)
-		mlx_destroy_image(cube->mlx_ptr, cube->img_ea);
-	if (cube->img_we)
-		mlx_destroy_image(cube->mlx_ptr, cube->img_we);
+	if (cube->img_no.img)
+		mlx_destroy_image(cube->mlx_ptr, &cube->img_no);
+	if (cube->img_so.img)
+		mlx_destroy_image(cube->mlx_ptr, &cube->img_so);
+	if (cube->img_ea.img)
+		mlx_destroy_image(cube->mlx_ptr, &cube->img_ea);
+	if (cube->img_we.img)
+		mlx_destroy_image(cube->mlx_ptr, &cube->img_we);
 }
 
 int	quit(t_mlx *cube)

@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/10 09:52:01 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/13 08:53:01 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@
 #  define PI2 1.570796000000000081087137004942633211612701416015625
 # endif
 
-
 /*
 **	=============
 **	 Structures
@@ -145,7 +144,7 @@ typedef struct s_player
 	float	fov;
 	float	position;
 
-	int	e;
+	int		e;
 }				t_player;
 
 typedef struct s_img
@@ -205,10 +204,10 @@ typedef struct s_mlx
 	bool		win;
 	void		*mlx_ptr;
 	void		*win_ptr;
-	t_img		*img_no;
-	void		*img_so;
-	void		*img_we;
-	void		*img_ea;
+	t_img		img_no;
+	t_img		img_so;
+	t_img		img_we;
+	t_img		img_ea;
 	void		*img_f;
 	void		*img_c;
 }				t_mlx;
@@ -250,7 +249,7 @@ bool	check_v(t_mlx *cube, size_t i, size_t j);
 */
 void	start_mlx_and_window(t_mlx *cube);
 void	load_img(t_mlx *cube);
-int		xpm_to_image_wrapper(t_mlx *data, void *img, char *filename);
+int		xpm_to_image_wrapper(t_mlx *c, t_img *img, char *filename);
 int		keypress(int keysym, t_mlx *cube);
 int		mouse_move(t_mlx *cube);
 int		draw_frame(t_mlx *cube);
@@ -265,18 +264,12 @@ void	move_player(t_mlx *c, int keysym);
 */
 void	add_pixel(t_img *frame, int rgb, int x, int y);
 void	draw_bg(t_mlx *cube);
-void	draw_wall(t_mlx *cube, int x, int y, int height);
-void	draw_player(t_mlx *cube, int x, int y, int height);
 void	draw_square(t_mlx *cube, t_coord pos, int height, int color);
 void	blackout(t_mlx *cube);
 void	draw_line(t_mlx *cube, t_coord a, t_coord b, int color);
-void	draw_circle(t_mlx *cube, int x, int y, int radius, int color);
-void	bresenham(t_mlx *cube, float x1, float y1, int color);
-void	draw_fov(t_mlx *cube);
 void	draw_rays_2d(t_mlx *cube);
 double	distance(t_mlx *c, t_raycast *ray);
 void	fix_fisheye(float p_angle, t_raycast *ray);
-void	draw_3D(t_mlx *c);
 float	horizontal_hit(t_raycast *ray, t_mlx *c);
 float	vertical_hit(t_raycast *ray, t_mlx *c);
 

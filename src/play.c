@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   play.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/08 14:41:12 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/12 19:45:07 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	draw_loop(t_mlx *c)
 	else
 		draw_rays_2d(c);
 	mlx_put_image_to_window(c->mlx_ptr, c->win_ptr, c->frame.img, 0, 0);
+	mlx_put_image_to_window(c->mlx_ptr, c->win_ptr, c->img_no.img, 0, 0);
 }
 
 void	player(t_mlx *cube, int keysym)
