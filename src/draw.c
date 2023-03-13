@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/13 12:45:28 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/13 16:22:15 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,20 @@ void	raycaster_3d(t_mlx *cube, t_raycast *ray)
 
 	if (ray->color == MAROON)
 		ray->texture = cube->img_so;
-	else if (ray->color == GREEN)
-		ray->texture = cube->img_no;
-	else if (ray->color == BLUE)
-		ray->texture = cube->img_we;
-	else if (ray->color == RED)
+	if (ray->color == BLUE)
 		ray->texture = cube->img_ea;
+	if (ray->color == GREEN)
+		ray->texture = cube->img_no;
+	if (ray->color == YELLOW)
+		ray->texture = cube->img_we;
 
+	// while loop to print the wall with texture from xpm file
 
-	//while loop to print the wall with texture from xpm file
 	while (w_top.y < w_bottom.y)
 	{
-		ray->color = ray->texture.data + (int)((int)w_top.y * ray->texture.size_l + (int)w_top.x
-				* (ray->texture.bpp / 8));
-		add_pixel(&cube->frame, ray->color, w_top.x, w_top.y);
+		add_pixel(&cube->frame, ray->texture.data[(int)w_top.y], w_top.x, w_top.y);
 		w_top.y++;
 	}
-
 	//draw_line(cube, w_top, w_bottom, ray->color);
 }
 
@@ -119,4 +116,5 @@ void	draw_rays_2d(t_mlx *c)
 			draw_line(c, p, r, ray[0].color);
 		raycaster_3d(c, &ray[0]);
 	}
+	printf("exited while\n");
 }
