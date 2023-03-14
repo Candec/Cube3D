@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:42:48 by tpereira          #+#    #+#             */
-/*   Updated: 2023/03/13 12:29:18 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/14 22:51:16 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	looking_left(t_raycast *ray, t_mlx *c)
 	ray->step.x = -TILE_SIZE;
 	ray->step.y = (-ray->step.x) * a_tan;
 	ray->color = YELLOW;
-	ray->offset = (int)ray->pos.y % TILE_SIZE;
+	ray->offset = (int)ray->pos.y * 64 / TILE_SIZE % 64;
 }
 
 void	looking_right(t_raycast *ray, t_mlx *c)
@@ -35,7 +35,7 @@ void	looking_right(t_raycast *ray, t_mlx *c)
 	ray->step.x = TILE_SIZE;
 	ray->step.y = (-ray->step.x) * a_tan;
 	ray->color = BLUE;
-	ray->offset = (int)ray->pos.y % TILE_SIZE;
+	ray->offset = (int)ray->pos.y * 64 / TILE_SIZE % 64;
 }
 
 void	looking_up_down(t_raycast *ray, t_mlx *c)
@@ -45,7 +45,7 @@ void	looking_up_down(t_raycast *ray, t_mlx *c)
 	ray->step.x = 0;
 	ray->step.y = 0;
 	ray->color = RED;
-	ray->offset = (int)ray->pos.y % TILE_SIZE;
+	ray->offset = (int)ray->pos.y * 64 / TILE_SIZE % 64;
 }
 
 float	vertical_hit(t_raycast *ray, t_mlx *c)

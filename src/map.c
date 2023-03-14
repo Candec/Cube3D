@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:08:49 by tpereira          #+#    #+#             */
-/*   Updated: 2023/03/08 14:16:08 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/14 18:18:18 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,20 @@ void	draw_map_2d(t_mlx *cube)
 	y = 0;
 	while (y != (int)cube->map.height)
 	{
-		o.y = y * TILE_SIZE;
+		o.y = y * (TILE_SIZE / 2);
 		x = 0;
 		while (cube->map.map[y][x] != '\0' && x != (int)cube->map.width)
 		{
-			o.x = x * TILE_SIZE;
-			draw_square(cube, o, TILE_SIZE, BLACK);
+			o.x = x * (TILE_SIZE / 2);
+			draw_square(cube, o, (TILE_SIZE / 2), BLACK);
 			if (cube->map.map[y][x] == '1')
-				draw_square(cube, o, TILE_SIZE - 1, WHITE);
+				draw_square(cube, o, (TILE_SIZE / 2) - 1, WHITE);
 			else if (cube->map.map[y][x] == '0')
-				draw_square(cube, o, TILE_SIZE - 1, BLUE);
+				draw_square(cube, o, (TILE_SIZE / 2) - 1, BLUE);
 			else if (ft_strchr("NSEW", cube->map.map[y][x]))
-				draw_square(cube, o, TILE_SIZE - 1, BLUE);
+				draw_square(cube, o, (TILE_SIZE / 2) - 1, BLUE);
 			else
-				draw_square(cube, o, TILE_SIZE - 1, GREEN);
+				draw_square(cube, o, (TILE_SIZE / 2) - 1, GREEN);
 			x++;
 		}
 		y++;
@@ -70,12 +70,12 @@ void	draw_player_2d(t_mlx *cube)
 	while (++y != (int)cube->map.height)
 	{
 		x = -1;
-		o.y = (cube->p.pos.y - 1) * TILE_SIZE + TILE_SIZE;
+		o.y = (cube->p.pos.y - 1) * (TILE_SIZE / 2) + (TILE_SIZE / 2);
 		while (++x != (int)cube->map.width)
 		{
-			o.x = (cube->p.pos.x - 1) * TILE_SIZE + TILE_SIZE;
+			o.x = (cube->p.pos.x - 1) * (TILE_SIZE / 2) + (TILE_SIZE / 2);
 			if (cube->map.map[y][x] == '0')
-				draw_square(cube, o, TILE_SIZE / 4, YELLOW);
+				draw_square(cube, o, (TILE_SIZE / 2) / 8, YELLOW);
 		}
 	}
 }

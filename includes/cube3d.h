@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/13 17:06:16 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/14 17:48:04 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@
 # endif
 
 # ifndef TILE_SIZE
-#  define TILE_SIZE 32
+#  define TILE_SIZE 64
 # endif
 
 # ifndef WALL_HEIGHT
@@ -151,6 +151,7 @@ typedef struct s_img
 {
 	void	*img;
 	int		*data;
+	int		**cols;
 	int		bpp;
 	int		size_l;
 	int		endian;
@@ -175,7 +176,7 @@ typedef struct s_map
 
 typedef struct s_raycast
 {
-	int		row;
+	int		col;
 	t_coord	pos;
 	t_coord	step;
 	float	angle;
