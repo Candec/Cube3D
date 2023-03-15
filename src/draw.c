@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/15 12:34:38 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/15 23:53:02 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,24 +65,42 @@ void	raycaster_3d(t_mlx *cube, t_raycast *ray)
 	w_top.y = ((WIN_HEIGHT) - (wall_height)) / 2;
 	w_bottom.x = ray->col;
 	w_bottom.y = ((WIN_HEIGHT) + (wall_height)) / 2;
-	
-	if (ray->color == MAROON)
-		ray->texture = cube->img_so;
-	if (ray->color == BLUE)
-		ray->texture = cube->img_ea;
-	if (ray->color == GREEN)
-		ray->texture = cube->img_no;
-	if (ray->color == YELLOW)
-		ray->texture = cube->img_we;
 
-	// printf("offset: %d\n", ray->offset);
-	while (w_top.y < w_bottom.y)
+	while (w_top.y++ < w_bottom.y)
 	{
-		// printf("coordinate: [%d][%f]\n", (int)w_top.y % 64, (ray->offset));
-		int pixel = ((int)w_top.y) + ((int)ray->offset * 64);
-		add_pixel(&cube->frame, ray->texture.data[pixel], w_top.x, w_top.y);
-		w_top.y++;
+		// printf("offset: %d\n", ray->offset);
+		// printf("w_top.y: %f\n", w_top.y);
+		// printf("w_top.y %% 64: %d\n", (int)w_top.y % 64);
+		// // find the y coordinate of the texture
+		
+		// // calculate the value of the texture coordinate
+
+		// // get the color value of the texture at the coordinate
+		// int pixel = ((int)w_top.y % 64) + ((int)ray->offset * 64);
+		// add_pixel(&cube->frame, ray->texture.data[pixel], w_top.x, w_top.y);
+		
+		// printf("color -> [%d] \n", *(int *)ray->texture.data + ((int)w_top.y % 64) + ((int)ray->offset * 64));
+		int	*tex_ptr = (int *)ray->texture.data + (((int)w_top.y / WALL_HEIGHT) % 64) + ((int)ray->offset * 64);
+		ray->color = *tex_ptr;
+		add_pixel(&cube->frame, ray->color, w_top.x, w_top.y);
+
+
+		// printf("coordinates [%d][%d] = [%d]\n", (int)w_top.y % 64, (int)ray->offset * 64, ((int)w_top.y % 64 + (int)ray->offset * 64));
+		// int pixel = (int)w_top.y % 64 + (int)ray->offset * 64;
+		// add_pixel(&cube->frame, ray->texture.data[pixel], w_top.x, w_top.y);
 	}
+
+	// while (w_top.y < w_bottom.y)
+	// {
+	// 	//printf("coordinate: [%d][%d]\n", (int)w_top.y % 64, ((int)ray->offset * 64));
+	// 	int	*tex_ptr = (int *)ray->texture.data + ((int)w_top.y % 64) + ((int)ray->offset * 64);
+	// 	ray->color = *tex_ptr;
+	// 	add_pixel(&cube->frame, ray->color, w_top.x, w_top.y);
+
+	// 	// int pixel = ((int)w_top.y % 64) + ((int)ray->offset * 64);
+	// 	// add_pixel(&cube->frame, ray->texture.data[pixel], w_top.x, w_top.y);
+	// 	w_top.y++;
+	// }
 
 	//draw_line(cube, w_top, w_bottom, ray->color);
 }
@@ -124,22 +142,11 @@ void	draw_rays_2d(t_mlx *c)
 		set_rays(ray, c, col);
 		ray[1].dist = horizontal_hit(&ray[1], c);
 		ray[2].dist = vertical_hit(&ray[2], c);
-		// printf("ray[1].offset = %f\n", ray[1].offset);
-		// printf("ray[2].offset = %f\n", ray[2].offset);
 		ray[0] = ray[2];
 		if (ray[1].dist < ray[2].dist)
 			ray[0] = ray[1];
 		if (c->show_minimap)
 			draw_line(c, p, r, ray[0].color);
-
-		if (ray->color == MAROON)
-			ray->texture = c->img_so;
-		if (ray->color == BLUE)
-			ray->texture = c->img_ea;
-		if (ray->color == GREEN)
-			ray->texture = c->img_no;
-		if (ray->color == YELLOW)
-			ray->texture = c->img_we;
 		raycaster_3d(c, &ray[0]);
 	}
 	if (ray->color == MAROON)
@@ -151,13 +158,13 @@ void	draw_rays_2d(t_mlx *c)
 	if (ray->color == YELLOW)
 		ray->texture = c->img_we;
 	int i = 0;
-	while (i < ray->texture.img_width)
+	while (i < ray[0].texture.img_width)
 	{
 		int j = 0;
-		while (j < ray->texture.img_height)
+		while (j < ray[0].texture.img_height)
 		{
 			//printf("ray->texture.data[%d + %d(%d)] -> %d\n",i, j,  i + (j * 64), ray->texture.data[i + j]);
-			add_pixel(&c->frame, ray->texture.data[(j * 64) + i], i + 100, j + 100);
+			add_pixel(&c->frame, ray[0].texture.data[(j * 64) + i], i + 100, j + 100);
 			j++;
 		}
 		i++;

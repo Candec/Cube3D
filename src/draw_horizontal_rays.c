@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:45:20 by tpereira          #+#    #+#             */
-/*   Updated: 2023/03/15 12:34:06 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/15 23:49:25 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	looking_down(t_raycast *ray, t_mlx *c)
 	ray->step.y = TILE_SIZE;
 	ray->step.x = (-ray->step.y) * a_tan;
 	ray->color = MAROON;
-	ray->offset = (ray->pos.x - (int)(ray->pos.x)) * TILE_SIZE;
-	printf("down: %f\n", ray->offset);
+	ray->offset = fabs(ceil((ray->pos.x - (int)ray->pos.x) * TILE_SIZE));
+	ray->texture = c->img_so;
 }
 
 void	looking_up(t_raycast *ray, t_mlx *c)
@@ -36,8 +36,8 @@ void	looking_up(t_raycast *ray, t_mlx *c)
 	ray->step.y = -TILE_SIZE;
 	ray->step.x = (-ray->step.y) * a_tan;
 	ray->color = GREEN;
-	ray->offset = (ray->pos.x - (int)(ray->pos.x)) * TILE_SIZE;
-	printf("up: %f\n", ray->offset);
+	ray->offset = fabs(ceil((ray->pos.x - (int)ray->pos.x) * TILE_SIZE));
+	ray->texture = c->img_no;
 }
 
 void	looking_left_right(t_raycast *ray, t_mlx *c)
@@ -47,8 +47,7 @@ void	looking_left_right(t_raycast *ray, t_mlx *c)
 	ray->step.x = 0;
 	ray->step.y = 0;
 	ray->color = RED;
-	ray->offset = (ray->pos.x - (int)(ray->pos.x)) * TILE_SIZE;
-	printf("left/right: %f\n", ray->offset);
+	ray->offset = fabs(ceil((ray->pos.x - (int)ray->pos.x) * TILE_SIZE));
 }
 
 float	horizontal_hit(t_raycast *ray, t_mlx *c)
