@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/15 11:28:26 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/15 12:13:22 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	raycaster_3d(t_mlx *cube, t_raycast *ray)
 	while (w_top.y < w_bottom.y)
 	{
 		// printf("coordinate: [%d][%f]\n", (int)w_top.y % 64, (ray->offset));
-		int pixel = (int)w_top.y % 64 + (ray->offset * 64);
+		int pixel = ((int)w_top.y % 64) + ((int)ray->offset * 64);
 		add_pixel(&cube->frame, ray->texture.data[pixel], w_top.x, w_top.y);
 		w_top.y++;
 	}
