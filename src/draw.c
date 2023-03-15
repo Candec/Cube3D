@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/14 23:02:16 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/15 10:46:47 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,31 +62,28 @@ void	raycaster_3d(t_mlx *cube, t_raycast *ray)
 	fix_fisheye(cube->p.angle, ray);
 	wall_height = (TILE_SIZE / ray->dist) * WALL_HEIGHT;
 	w_top.x = ray->col;
-	w_top.y = ((WIN_HEIGHT / 2) - (wall_height / 2)) / 2;
+	w_top.y = ((WIN_HEIGHT) - (wall_height)) / 2;
 	w_bottom.x = ray->col;
-	w_bottom.y = ((WIN_HEIGHT / 2) + (wall_height / 2)) / 2;
+	w_bottom.y = ((WIN_HEIGHT) + (wall_height)) / 2;
 	
-	printf("offset: %d\n", ray->offset);
-	// while loop to print the wall with texture from xpm file
-	while (w_top.y++ < w_bottom.y)
+	if (ray->color == MAROON)
+		ray->texture = cube->img_so;
+	if (ray->color == BLUE)
+		ray->texture = cube->img_ea;
+	if (ray->color == GREEN)
+		ray->texture = cube->img_no;
+	if (ray->color == YELLOW)
+		ray->texture = cube->img_we;
+
+	// int i;
+	// i = 0;
+	while (w_top.y < w_bottom.y)
 	{
-		// calculate texture coordinate for current pixel (WALL_HEIGHT - lineheight)
-
-		// int tex_y = ((w_top.y - WALL_HEIGHT / 2 + wall_height / 2) * 64) / wall_height;
-		// char *dst = ray->texture.img + (tex_y * ray->texture.size_l + (ray->offset * TILE_SIZE) * (ray->texture.bpp / 8));
-		// ray->color = *(unsigned int *)dst;
-		// add_pixel(&cube->frame, ray->color, w_top.x, w_top.y);
-
-		// int pixel = (ray->offset * 64) + (w_top.y);
-		// add_pixel(&cube->frame, ray->texture.data[pixel], w_top.x, w_top.y);
-		int pixel = (w_top.y * 64) + (ray->col);
-
-		// add_pixel(&c->frame, ray->texture.data[((j) * 64) + (i)], i + 100, j + 100);
-		
-		// int pixel = (ray->offset * 16 + w_top.y) * 3;
-		// ray->color = get_texture_color(&ray->texture, ray->offset, w_top.y);
-		// add_pixel(&cube->frame, ray->color, w_top.x, w_top.y);
-		add_pixel(&cube->frame, ray->texture.data[pixel], w_top.x, w_top.y);
+		//printf("coordinate: [%d][%d]\n", ray->col, (int)w_top.y / 64);
+		// double tex_y = (w_top.y / wall_height) * ray->texture.img_height;
+		// ray->color = get_texture_color(&ray->texture, ray->offset, tex_y);
+		add_pixel(&cube->frame, ray->texture.data[(int)(w_top.y / 64) + (ray->offset)], w_top.x, w_top.y);
+		w_top.y++;
 	}
 
 	//draw_line(cube, w_top, w_bottom, ray->color);
@@ -161,8 +158,8 @@ void	draw_rays_2d(t_mlx *c)
 	// 	int j = 0;
 	// 	while (j < ray->texture.img_height)
 	// 	{
-	// 		printf("ray->texture.data[%d + %d(%d)] -> %d\n",i, j,  i + j, ray->texture.data[i + j]);
-	// 		add_pixel(&c->frame, ray->texture.data[((j) * 64) + (i)], i + 100, j + 100);
+	// 		printf("ray->texture.data[%d + %d(%d)] -> %d\n",i, j,  i + (j * 64), ray->texture.data[i + j]);
+	// 		add_pixel(&c->frame, ray->texture.data[(j * 64) + i ], i + 100, j + 100);
 	// 		j++;
 	// 	}
 	// 	i++;
