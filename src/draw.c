@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/15 10:54:36 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/15 11:28:26 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,12 @@ void	raycaster_3d(t_mlx *cube, t_raycast *ray)
 	if (ray->color == YELLOW)
 		ray->texture = cube->img_we;
 
-	// int i;
-	// i = 0;
+	// printf("offset: %d\n", ray->offset);
 	while (w_top.y < w_bottom.y)
 	{
-		printf("coordinate: [%d][%d]\n", ray->offset, (int)w_top.y / 64);
-		// double tex_y = (w_top.y / wall_height) * ray->texture.img_height;
-		// ray->color = get_texture_color(&ray->texture, ray->offset, tex_y);
-		add_pixel(&cube->frame, ray->texture.data[(int)(w_top.y) + (ray->offset / TILE_SIZE)], w_top.x, w_top.y);
+		// printf("coordinate: [%d][%f]\n", (int)w_top.y % 64, (ray->offset));
+		int pixel = (int)w_top.y % 64 + (ray->offset * 64);
+		add_pixel(&cube->frame, ray->texture.data[pixel], w_top.x, w_top.y);
 		w_top.y++;
 	}
 
@@ -126,8 +124,8 @@ void	draw_rays_2d(t_mlx *c)
 		set_rays(ray, c, col);
 		ray[1].dist = horizontal_hit(&ray[1], c);
 		ray[2].dist = vertical_hit(&ray[2], c);
-		// printf("ray[1].offset = %d\n", ray[1].offset);
-		// printf("ray[2].offset = %d\n", ray[2].offset);
+		// printf("ray[1].offset = %f\n", ray[1].offset);
+		// printf("ray[2].offset = %f\n", ray[2].offset);
 		ray[0] = ray[2];
 		if (ray[1].dist < ray[2].dist)
 			ray[0] = ray[1];
@@ -144,24 +142,24 @@ void	draw_rays_2d(t_mlx *c)
 			ray->texture = c->img_we;
 		raycaster_3d(c, &ray[0]);
 	}
-	// if (ray->color == MAROON)
-	// 	ray->texture = c->img_so;
-	// if (ray->color == BLUE)
-	// 	ray->texture = c->img_ea;
-	// if (ray->color == GREEN)
-	// 	ray->texture = c->img_no;
-	// if (ray->color == YELLOW)
-	// 	ray->texture = c->img_we;
-	// int i = 0;
-	// while (i < ray->texture.img_width)
-	// {
-	// 	int j = 0;
-	// 	while (j < ray->texture.img_height)
-	// 	{
-	// 		printf("ray->texture.data[%d + %d(%d)] -> %d\n",i, j,  i + (j * 64), ray->texture.data[i + j]);
-	// 		add_pixel(&c->frame, ray->texture.data[(j * 64) + i ], i + 100, j + 100);
-	// 		j++;
-	// 	}
-	// 	i++;
-	// }
+	if (ray->color == MAROON)
+		ray->texture = c->img_so;
+	if (ray->color == BLUE)
+		ray->texture = c->img_ea;
+	if (ray->color == GREEN)
+		ray->texture = c->img_no;
+	if (ray->color == YELLOW)
+		ray->texture = c->img_we;
+	int i = 0;
+	while (i < ray->texture.img_width)
+	{
+		int j = 0;
+		while (j < ray->texture.img_height)
+		{
+			//printf("ray->texture.data[%d + %d(%d)] -> %d\n",i, j,  i + (j * 64), ray->texture.data[i + j]);
+			add_pixel(&c->frame, ray->texture.data[(j * 64) + i ], i + 100, j + 100);
+			j++;
+		}
+		i++;
+	}
 }

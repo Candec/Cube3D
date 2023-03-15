@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:45:20 by tpereira          #+#    #+#             */
-/*   Updated: 2023/03/15 10:53:34 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/15 11:25:54 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	looking_down(t_raycast *ray, t_mlx *c)
 	ray->step.y = TILE_SIZE;
 	ray->step.x = (-ray->step.y) * a_tan;
 	ray->color = MAROON;
-	ray->offset = fabs(ray->pos.x - (int)(ray->pos.x) * TILE_SIZE);
+	ray->offset = fabs(ray->pos.x - (int)(ray->pos.x)) * TILE_SIZE;
+	printf("down: %f\n", ray->offset);
 }
 
 void	looking_up(t_raycast *ray, t_mlx *c)
@@ -35,7 +36,8 @@ void	looking_up(t_raycast *ray, t_mlx *c)
 	ray->step.y = -TILE_SIZE;
 	ray->step.x = (-ray->step.y) * a_tan;
 	ray->color = GREEN;
-	ray->offset = fabs(ray->pos.x - (int)(ray->pos.x) * TILE_SIZE);
+	ray->offset = fabs(ray->pos.x - (int)(ray->pos.x)) * TILE_SIZE;
+	printf("up: %f\n", ray->offset);
 }
 
 void	looking_left_right(t_raycast *ray, t_mlx *c)
@@ -45,19 +47,18 @@ void	looking_left_right(t_raycast *ray, t_mlx *c)
 	ray->step.x = 0;
 	ray->step.y = 0;
 	ray->color = RED;
-	ray->offset = fabs(ray->pos.x - (int)(ray->pos.x) * TILE_SIZE);
+	ray->offset = fabs(ray->pos.x - (int)(ray->pos.x)) * TILE_SIZE;
+	printf("left/right: %f\n", ray->offset);
 }
 
 float	horizontal_hit(t_raycast *ray, t_mlx *c)
 {
-	//printf("ray->pos.x: %f\n", ray->pos.x);
 	if (ray->angle > 0.0f && ray->angle < PI)
 		looking_down(ray, c);
 	if (ray->angle > PI && ray->angle < (PII))
 		looking_up(ray, c);
 	if (ray->angle == 0 || ray->angle == PI)
 		looking_left_right(ray, c);
-	//printf("offset_x: %d\n", ray->offset);
 	while (!ray->hit)
 	{
 		if (ray->pos.x > 0 && ray->pos.y > 0 && ray->pos.y < c->map.height

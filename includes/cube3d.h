@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/15 09:29:10 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/15 11:19:27 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ typedef struct s_raycast
 	float	dist;
 	bool	hit;
 	int		color;
-	int		offset;
+	float	offset;
 	t_img	texture;
 }				t_raycast;
 
