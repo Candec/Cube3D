@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/16 12:07:03 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/16 12:43:37 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,10 @@ void	raycaster_3d(t_mlx *cube, t_raycast *ray)
 		// printf("height %d\n", wall_height);
 		// printf("ray->offset %d\n", (int)ray->offset);
 		// printf("calc %f\n", ((w_top.y - hold) / wall_height * 64));
-		int pixel = ((w_top.y - hold) / wall_height * 64) + (int)ray->offset * 64;
+		ray->offset = (int)ray->offset;
+		double y = ((w_top.y - hold) / wall_height * 64);
+		double x = ray->offset;
+		int pixel = (y * (wall_height)) + x;
 		// printf("pixel %d\n", pixel);
 		add_pixel(&cube->frame, ray->texture.data[pixel], w_top.x, w_top.y);
 		//Y*width +x
@@ -172,13 +175,13 @@ void	draw_rays_2d(t_mlx *c)
 	// printf("tex_endian			-> %d\n", ray[0].texture.endian);
 	// printf("sizeof(tex_addr)		-> %lu\n", sizeof(&ray[0].texture.data));
 	int i = 0;
-	while (i < ray[0].texture.img_width * 2)
+	while (i < ray[0].texture.img_width)
 	{
 		int j = 0;
-		while (j < ray[0].texture.img_height * 2)
+		while (j < ray[0].texture.img_height)
 		{
 			//printf("ray->texture.data[%d + %d(%d)] -> %d\n",i, j,  i + (j * 64), ray->texture.data[i + j]);
-			add_pixel(&c->frame, ray[0].texture.data[(j / 2 * 64) + i / 2], i + 100, j + 100);
+			add_pixel(&c->frame, ray[0].texture.data[(j * 64) + i], i + 100, j + 100);
 			j++;
 		}
 		i++;
