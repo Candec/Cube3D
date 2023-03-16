@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/15 23:53:02 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/16 07:22:00 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,15 @@ void	raycaster_3d(t_mlx *cube, t_raycast *ray)
 
 	ray->dist = sqrt(distance(cube, ray));
 	fix_fisheye(cube->p.angle, ray);
-	wall_height = (TILE_SIZE / ray->dist) * WALL_HEIGHT;
+	wall_height = (int)((WIN_HEIGHT) / ray->dist);
 	w_top.x = ray->col;
 	w_top.y = ((WIN_HEIGHT) - (wall_height)) / 2;
 	w_bottom.x = ray->col;
 	w_bottom.y = ((WIN_HEIGHT) + (wall_height)) / 2;
 
+	// printf("[%d] offset: %f\n", ray->col, ray->offset);
 	while (w_top.y++ < w_bottom.y)
 	{
-		// printf("offset: %d\n", ray->offset);
 		// printf("w_top.y: %f\n", w_top.y);
 		// printf("w_top.y %% 64: %d\n", (int)w_top.y % 64);
 		// // find the y coordinate of the texture
@@ -76,14 +76,17 @@ void	raycaster_3d(t_mlx *cube, t_raycast *ray)
 		// // calculate the value of the texture coordinate
 
 		// // get the color value of the texture at the coordinate
-		// int pixel = ((int)w_top.y % 64) + ((int)ray->offset * 64);
-		// add_pixel(&cube->frame, ray->texture.data[pixel], w_top.x, w_top.y);
+		// int pixel = ((int)w_top.y) + ((int)ray->offset * TILE_SIZE);
+		// add_pixel(&cube->frame, ray->texture.data[pixel * 64], w_top.x, w_top.y);
 		
 		// printf("color -> [%d] \n", *(int *)ray->texture.data + ((int)w_top.y % 64) + ((int)ray->offset * 64));
-		int	*tex_ptr = (int *)ray->texture.data + (((int)w_top.y / WALL_HEIGHT) % 64) + ((int)ray->offset * 64);
-		ray->color = *tex_ptr;
-		add_pixel(&cube->frame, ray->color, w_top.x, w_top.y);
+		// int	*tex_ptr = (int *)ray->texture.data + (((int)w_top.y)) + ((int)ray->offset * 64);
+		// ray->color = *tex_ptr;
+		// add_pixel(&cube->frame, ray->color, w_top.x, w_top.y);
 
+
+		ray->color = *(ray->texture.data + (int)((int)w_top.y / TILE_SIZE) + (int)ray->offset * 64);
+		add_pixel(&cube->frame, ray->color, w_top.x, w_top.y);
 
 		// printf("coordinates [%d][%d] = [%d]\n", (int)w_top.y % 64, (int)ray->offset * 64, ((int)w_top.y % 64 + (int)ray->offset * 64));
 		// int pixel = (int)w_top.y % 64 + (int)ray->offset * 64;

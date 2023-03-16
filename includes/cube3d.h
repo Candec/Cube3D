@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/15 19:56:31 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/16 06:30:15 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,23 @@
 #  define SQ_S 128
 # endif
 
-# ifndef WIN_WIDTH
-#  define WIN_WIDTH 1366
-# endif
-
-# ifndef WIN_HEIGHT
-#  define WIN_HEIGHT 768
-# endif
-
-// TIAGO WIDESCREEN RESOLUTION SETTINGS
-
 // # ifndef WIN_WIDTH
-// #  define WIN_WIDTH 2560
+// #  define WIN_WIDTH 1366
 // # endif
 
 // # ifndef WIN_HEIGHT
-// #  define WIN_HEIGHT 1440
+// #  define WIN_HEIGHT 768
 // # endif
+
+// TIAGO WIDESCREEN RESOLUTION SETTINGS
+
+# ifndef WIN_WIDTH
+#  define WIN_WIDTH 2560
+# endif
+
+# ifndef WIN_HEIGHT
+#  define WIN_HEIGHT 1440
+# endif
 
 # ifndef WIDTH
 #  define WIDTH 640
@@ -70,7 +70,7 @@
 # endif
 
 # ifndef WALL_HEIGHT
-#  define WALL_HEIGHT 16
+#  define WALL_HEIGHT 64
 # endif
 
 /*
@@ -143,7 +143,6 @@ typedef struct s_player
 	float	height;
 	float	fov;
 	float	position;
-
 	int		e;
 }				t_player;
 
@@ -183,7 +182,7 @@ typedef struct s_raycast
 	float	dist;
 	bool	hit;
 	int		color;
-	int		offset;
+	float	offset;
 	t_img	texture;
 }				t_raycast;
 
