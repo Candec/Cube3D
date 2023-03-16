@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/16 15:37:10 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/16 17:37:55 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,12 @@ void	raycaster_3d(t_mlx *cube, t_raycast *ray)
 		// printf("height %d\n", wall_height);
 		// printf("ray->offset %d\n", (int)ray->offset);
 		// printf("calc %f\n", ((w_top.y - hold) / wall_height * 64));
+		printf("calc %f\n", fabs(((w_top.y - hold) / wall_height) - ((int)(w_top.y - hold) / wall_height)) * TILE_SIZE);
 		ray->offset = (int)ray->offset;
-		double y = ((w_top.y - hold) / wall_height * 64);
+		double y = (((w_top.y - hold) / wall_height) - ((int)(w_top.y - hold) / wall_height)) * TILE_SIZE;
 		double x = ray->offset;
-		int pixel = (y * (wall_height / 64)) + x;
+		int tex_y = y;
+		int pixel = tex_y * TILE_SIZE + x;
 		//ray->color = ray->texture.data + (y * (wall_height)) + x;
 		// printf("pixel %d\n", pixel);
 		add_pixel(&cube->frame, ray->texture.data[pixel], w_top.x, w_top.y);
@@ -167,18 +169,14 @@ void	draw_rays_2d(t_mlx *c)
 		}
 		if (c->show_minimap)
 			draw_line(c, p, r, ray[0].color);
-		printf("ray->offset: %f\n", ray[0].offset);
+		// printf("ray->offset: %f\n", ray[0].offset);
 		raycaster_3d(c, &ray[0]);
 	}
-	// printf("tex_ptr 			-> %p\n", ray[0].texture.img);
-	// printf("tex_bpp				-> %d\n", ray[0].texture.bpp);
-	// printf("tex_sizel			-> %d\n", ray[0].texture.size_l);
-	// printf("tex_endian			-> %d\n", ray[0].texture.endian);
-	// printf("sizeof(tex_addr)		-> %lu\n", sizeof(&ray[0].texture.data));
 	int i = 0;
+	int j = 0;
 	while (i < ray[0].texture.img_width)
 	{
-		int j = 0;
+		j = 0;
 		while (j < ray[0].texture.img_height)
 		{
 			//printf("ray->texture.data[%d + %d(%d)] -> %d\n",i, j,  i + (j * 64), ray->texture.data[i + j]);
