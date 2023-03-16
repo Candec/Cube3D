@@ -6,19 +6,11 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/16 17:44:47 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/16 18:55:36 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
-
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
-{
-	char *dst;
-
-	dst = img->img + (y * img->size_l + x * (img->bpp / 8));
-	*(unsigned int *)dst = color;
-}
 
 void	add_pixel(t_img *frame, int rgb, int x, int y)
 {
@@ -46,35 +38,31 @@ void	draw_bg(t_mlx *cube)
 	}
 }
 
-unsigned int	get_texture_color(t_img *texture, int pixel_x, int pixel_y)
-{
-	return (*(unsigned int *)((texture->data
-			+ (pixel_y * texture->size_l) + (pixel_x * texture->bpp / 8))));
-}
-
 void	raycaster_3d(t_mlx *cube, t_raycast *ray)
 {
 	t_coord			w_top;
 	t_coord			w_bottom;
-	int				wall_height;
+	int				wh;
+	int				hold;
+	int				tex_y;
 
 	ray->dist = sqrt(distance(cube, ray));
 	fix_fisheye(cube->p.angle, ray);
-	wall_height = (int)((WIN_HEIGHT) / ray->dist);
+	wh = (int)((WIN_HEIGHT) / ray->dist);
 	w_top.x = ray->col;
-	w_top.y = ((WIN_HEIGHT) - (wall_height)) / 2;
+	w_top.y = ((WIN_HEIGHT) - (wh)) / 2;
 	w_bottom.x = ray->col;
-	w_bottom.y = ((WIN_HEIGHT) + (wall_height)) / 2;
-
-	int hold = w_top.y;
+	w_bottom.y = ((WIN_HEIGHT) + (wh)) / 2;
+	hold = w_top.y;
+	ray->pixel = 0;
+	tex_y = 0;
 	while (w_top.y++ < w_bottom.y)
 	{
 		ray->offset = (int)ray->offset;
-		double y = (((w_top.y - hold) / wall_height) - ((int)(w_top.y - hold) / wall_height));
-		double x = ray->offset;
-		int tex_y = y * ray->texture.img_height;
-		int pixel = tex_y * ray->texture.img_height + x;
-		add_pixel(&cube->frame, ray->texture.data[pixel], w_top.x, w_top.y);
+		tex_y = (((w_top.y - hold) / wh) - ((int)(w_top.y - hold) / wh))
+			* ray->tex.img_height;
+		ray->pixel = tex_y * ray->tex.img_height + ray->offset;
+		add_pixel(&cube->frame, ray->tex.data[ray->pixel], w_top.x, w_top.y);
 	}
 }
 
@@ -115,13 +103,7 @@ void	draw_rays_2d(t_mlx *c)
 		set_rays(ray, c, col);
 		ray[1].dist = horizontal_hit(&ray[1], c);
 		ray[2].dist = vertical_hit(&ray[2], c);
-		ray[0] = ray[2];
-		ray[0].offset = (ray[2].pos.y - (int)ray[2].pos.y) * 64;
-		if (ray[1].dist < ray[2].dist)
-		{
-			ray[0] = ray[1];
-			ray[0].offset = (ray[1].pos.x - (int)ray[1].pos.x) * 64;
-		}
+		get_shortest_ray(&ray[0]);
 		if (c->show_minimap)
 			draw_line(c, p, r, ray[0].color);
 		raycaster_3d(c, &ray[0]);

@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/16 17:58:30 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/16 18:56:02 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ typedef struct s_img
 	int		endian;
 	int		img_width;
 	int		img_height;
-} t_img;
+}	t_img;
 
 typedef struct s_map
 {
@@ -183,7 +183,8 @@ typedef struct s_raycast
 	bool	hit;
 	int		color;
 	float	offset;
-	t_img	texture;
+	t_img	tex;
+	int		pixel;
 }				t_raycast;
 
 typedef struct s_mouse
@@ -272,6 +273,7 @@ double	distance(t_mlx *c, t_raycast *ray);
 void	fix_fisheye(float p_angle, t_raycast *ray);
 float	horizontal_hit(t_raycast *ray, t_mlx *c);
 float	vertical_hit(t_raycast *ray, t_mlx *c);
+void	get_shortest_ray(t_raycast *ray);
 
 /*
 **	error_handling.c

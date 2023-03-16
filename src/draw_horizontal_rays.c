@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:45:20 by tpereira          #+#    #+#             */
-/*   Updated: 2023/03/16 09:39:55 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/16 18:27:36 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	looking_down(t_raycast *ray, t_mlx *c)
 	ray->step.y = TILE_SIZE;
 	ray->step.x = (-ray->step.y) * a_tan;
 	ray->color = MAROON;
-	ray->texture = c->img_so;
+	ray->tex = c->img_so;
 }
 
 void	looking_up(t_raycast *ray, t_mlx *c)
@@ -35,7 +35,7 @@ void	looking_up(t_raycast *ray, t_mlx *c)
 	ray->step.y = -TILE_SIZE;
 	ray->step.x = (-ray->step.y) * a_tan;
 	ray->color = GREEN;
-	ray->texture = c->img_no;
+	ray->tex = c->img_no;
 }
 
 void	looking_left_right(t_raycast *ray, t_mlx *c)

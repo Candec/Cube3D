@@ -35,7 +35,7 @@ SRC =		main.c\
 			player.c\
 			map.c\
 			math.c\
-			dda.c\
+			draw_utils2.c\
 			
 all: $(NAME)
 

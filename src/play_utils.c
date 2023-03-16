@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:27:04 by tpereira          #+#    #+#             */
-/*   Updated: 2023/03/14 10:13:04 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/16 18:15:35 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 int	xpm_to_image_wrapper(t_mlx *cube, t_img *img, char *filename)
 {
-	img->img = mlx_xpm_file_to_image(cube->mlx_ptr, filename, &img->img_width, &img->img_height);
-	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
+	img->img = mlx_xpm_file_to_image(cube->mlx_ptr, filename,
+			&img->img_width, &img->img_height);
+	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp,
+			&img->size_l, &img->endian);
 	if (!img)
 		return (0);
 	return (1);
@@ -26,14 +28,14 @@ void	load_img(t_mlx *cube)
 	bool	err;
 
 	err = FALSE;
-	// if (!xpm_to_image_wrapper(cube, &cube->img_no, "./assets/brick.xpm"))
-	// 	err = TRUE;
-	// if (!xpm_to_image_wrapper(cube, &cube->img_so, "./assets/brick.xpm"))
-	// 	err = TRUE;
-	// if (!xpm_to_image_wrapper(cube, &cube->img_ea, "./assets/brick.xpm"))
-	// 	err = TRUE;
-	// if (!xpm_to_image_wrapper(cube, &cube->img_we, "./assets/brick.xpm"))
-	// 	err = TRUE;
+	if (!xpm_to_image_wrapper(cube, &cube->img_no, "./assets/brick.xpm"))
+		err = TRUE;
+	if (!xpm_to_image_wrapper(cube, &cube->img_so, "./assets/brick.xpm"))
+		err = TRUE;
+	if (!xpm_to_image_wrapper(cube, &cube->img_ea, "./assets/brick.xpm"))
+		err = TRUE;
+	if (!xpm_to_image_wrapper(cube, &cube->img_we, "./assets/brick.xpm"))
+		err = TRUE;
 	if (err)
 		error("COULDN'T LOAD IMG\n", cube);
 }
