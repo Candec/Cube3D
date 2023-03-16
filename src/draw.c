@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/16 12:43:37 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/16 15:37:10 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ void	raycaster_3d(t_mlx *cube, t_raycast *ray)
 		ray->offset = (int)ray->offset;
 		double y = ((w_top.y - hold) / wall_height * 64);
 		double x = ray->offset;
-		int pixel = (y * (wall_height)) + x;
+		int pixel = (y * (wall_height / 64)) + x;
+		//ray->color = ray->texture.data + (y * (wall_height)) + x;
 		// printf("pixel %d\n", pixel);
 		add_pixel(&cube->frame, ray->texture.data[pixel], w_top.x, w_top.y);
 		//Y*width +x
