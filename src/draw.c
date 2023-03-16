@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/16 07:22:00 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/16 09:47:53 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	raycaster_3d(t_mlx *cube, t_raycast *ray)
 		// ray->color = *tex_ptr;
 		// add_pixel(&cube->frame, ray->color, w_top.x, w_top.y);
 
-
+		// ray->color = (wall_height * w_top.y) + (ray->offset * (ray->texture.bpp / 8));
 		ray->color = *(ray->texture.data + (int)((int)w_top.y / TILE_SIZE) + (int)ray->offset * 64);
 		add_pixel(&cube->frame, ray->color, w_top.x, w_top.y);
 
@@ -146,30 +146,32 @@ void	draw_rays_2d(t_mlx *c)
 		ray[1].dist = horizontal_hit(&ray[1], c);
 		ray[2].dist = vertical_hit(&ray[2], c);
 		ray[0] = ray[2];
+		ray[0].offset = (ray[2].pos.y - (int)ray[2].pos.y) * 64;
 		if (ray[1].dist < ray[2].dist)
+		{
 			ray[0] = ray[1];
+			ray[0].offset = (ray[1].pos.x - (int)ray[1].pos.x) * 64;
+		}
 		if (c->show_minimap)
 			draw_line(c, p, r, ray[0].color);
+		printf("ray->offset: %f\n", ray[0].offset);
 		raycaster_3d(c, &ray[0]);
 	}
-	if (ray->color == MAROON)
-		ray->texture = c->img_so;
-	if (ray->color == BLUE)
-		ray->texture = c->img_ea;
-	if (ray->color == GREEN)
-		ray->texture = c->img_no;
-	if (ray->color == YELLOW)
-		ray->texture = c->img_we;
-	int i = 0;
-	while (i < ray[0].texture.img_width)
-	{
-		int j = 0;
-		while (j < ray[0].texture.img_height)
-		{
-			//printf("ray->texture.data[%d + %d(%d)] -> %d\n",i, j,  i + (j * 64), ray->texture.data[i + j]);
-			add_pixel(&c->frame, ray[0].texture.data[(j * 64) + i], i + 100, j + 100);
-			j++;
-		}
-		i++;
-	}
+	printf("tex_ptr 			-> %p\n", ray[0].texture.img);
+	printf("tex_bpp				-> %d\n", ray[0].texture.bpp);
+	printf("tex_sizel			-> %d\n", ray[0].texture.size_l);
+	printf("tex_endian			-> %d\n", ray[0].texture.endian);
+	printf("sizeof(tex_addr)		-> %lu\n", sizeof(&ray[0].texture.data));
+	// int i = 0;
+	// while (i < ray[0].texture.img_width)
+	// {
+	// 	int j = 0;
+	// 	while (j < ray[0].texture.img_height)
+	// 	{
+	// 		//printf("ray->texture.data[%d + %d(%d)] -> %d\n",i, j,  i + (j * 64), ray->texture.data[i + j]);
+	// 		add_pixel(&c->frame, ray[0].texture.data[(j * 64) + i], i + 100, j + 100);
+	// 		j++;
+	// 	}
+	// 	i++;
+	// }
 }
