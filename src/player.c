@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:28:31 by tpereira          #+#    #+#             */
-/*   Updated: 2023/02/02 12:36:47 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/03/16 18:03:20 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 void	init_player_dir(t_mlx *cube, char c)
 {
 	if (c == 'N')
-		cube->player.angle = (3 * M_PI) / 2;
+		cube->p.angle = PI3 + 0.00001;
 	else if (c == 'S')
-		cube->player.angle = M_PI / 2;
+		cube->p.angle = PI2 + 0.00001;
 	else if (c == 'E')
-		cube->player.angle = 2 * M_PI;
+		cube->p.angle = PII + 0.00001;
 	else if (c == 'W')
-		cube->player.angle = M_PI;
+		cube->p.angle = PI + 0.00001;
 	else
-		cube->player.angle = M_PI;
-	cube->player.dirx = cos(cube->player.angle) * 5;
-	cube->player.diry = sin(cube->player.angle) * 5;
+		cube->p.angle = PI3 + 0.00001;
+	cube->p.dirx = cos(cube->p.angle) * 5;
+	cube->p.diry = sin(cube->p.angle) * 5;
 }
 
 void	init_player(t_mlx *cube)
@@ -33,30 +33,22 @@ void	init_player(t_mlx *cube)
 	int	i;
 	int	j;
 
-	i = 0;
-	while (i < (int)cube->map.height)
+	i = -1;
+	while (++i < (int)cube->map.height)
 	{
-		j = 0;
-		while (j < (int)cube->map.width)
+		j = -1;
+		while (++j < (int)cube->map.width)
 		{
 			if (ft_strchr("NSEW", cube->map.map[i][j]))
 			{
 				if (cube->map.map[i][j] == '\0')
 					break ;
-				//printf("c = %c\n\n", cube->map.map[i][j]);
-				cube->player.pos.x = j + 0.4;
-				cube->player.pos.y = i + 0.4;
-				cube->player.angle = 1.5;
-				cube->player.fov = 0.66;
-				cube->player.dirx = cos(cube->player.angle) * 5;
-				cube->player.diry = sin(cube->player.angle) * 5;
-				cube->player.planex = 0;					// what should we use this for? Is it the same as dirx?
-				cube->player.planey = 0;
+				cube->p.pos.x = j;
+				cube->p.pos.y = i;
+				cube->p.fov = 1;
 				init_player_dir(cube, cube->map.map[i][j]);
 				return ;
 			}
-			j++;
 		}
-		i++;
 	}
 }

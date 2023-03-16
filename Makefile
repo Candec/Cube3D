@@ -6,7 +6,7 @@ OS			= $(shell uname -s)
 
 LIBFT 		= libft_ext/libft.a
 LIBMLX 		= libraries/minilibx-linux/libmlx.a
-CFLAGS 		= -g -Wall -Wextra -Werror
+CFLAGS 		= -g -Wall -Wextra -Werror -O3
 # CFLAGS 		= -I/usr/include -Imlx_linux -O3 -g
 IFLAGS		= -I libraries/minilibx-linux -Ilmlx -I/includes -Imath
 LFLAGS		= -L libraries/minilibx-linux -lmlx -lXext -lX11 -lm
@@ -26,12 +26,14 @@ SRC =		main.c\
 			parse.c\
 			check.c\
 			play.c\
+			play_utils.c\
 			draw.c\
 			draw_utils.c\
+			draw_vertical_rays.c\
+			draw_horizontal_rays.c\
 			error.c\
 			player.c\
 			map.c\
-			bresenham.c\
 			math.c\
 			dda.c\
 			

@@ -3,109 +3,72 @@
 /*                                                        :::      ::::::::   */
 /*   play.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/08 18:03:11 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/03/16 18:03:12 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-int	xpm_to_image_wrapper(t_mlx *data, void *img, char *filename)
-{
-	int	size;
-
-	size = TILE_SIZE;
-	img = mlx_xpm_file_to_image(data->mlx_ptr, filename, &size, &size);
-	if (!img)
-		return (0);
-	return (1);
-}
-
-void	load_img(t_mlx *cube)
-{
-	bool	err;
-
-	err = FALSE;
-	if (!xpm_to_image_wrapper(cube, cube->img_no, cube->map.no))
-		err = TRUE;
-	if (!xpm_to_image_wrapper(cube, cube->img_so, cube->map.so))
-		err = TRUE;
-	if (!xpm_to_image_wrapper(cube, cube->img_ea, cube->map.ea))
-		err = TRUE;
-	if (!xpm_to_image_wrapper(cube, cube->img_we, cube->map.we))
-		err = TRUE;
-	if (err)
-		error("COULDN'T LOAD IMG\n", cube);
-}
-
-void	start_mlx_and_window(t_mlx *cube)
+void	start_mlx_and_window(t_mlx *c)
 {
 	bool	err;
 
 	err = TRUE;
-	cube->mlx_ptr = mlx_init();
-	if (!cube->mlx_ptr)
+	c->mlx_ptr = mlx_init();
+	if (!c->mlx_ptr)
 		err = FALSE;
-	cube->win_ptr = mlx_new_window(cube->mlx_ptr, WIDTH, HEIGHT, "Cube_3d");
-	if (!cube->win_ptr)
+	c->win_ptr = mlx_new_window(c->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "Cub3d");
+	if (!c->win_ptr)
 		err = FALSE;
 	if (!err)
-		error("COULDN'T CREATE WINDOW\n", cube);
-	cube->win = TRUE;
+		error("COULDN'T CREATE WINDOW\n", c);
+	c->win = TRUE;
 }
 
-void	move_player(t_mlx *cube, int keysym)
+void	draw_loop(t_mlx *c)
 {
-	double x;
-	double y;
+	t_coord	p;
+	t_coord	d;
 
-	x = cube->player.pos.x;
-	y = cube->player.pos.y;
-	if (keysym == MOVE_UP)
+	p.x = (c->p.pos.x * (TILE_SIZE / 2));
+	p.y = (c->p.pos.y * (TILE_SIZE / 2));
+	d.x = p.x + c->p.dirx * 5;
+	d.y = p.y + c->p.diry * 5;
+	blackout(c);
+	draw_bg(c);
+	if (c->show_minimap)
 	{
-		cube->player.pos.y += cube->player.diry / TILE_SIZE;
-		cube->player.pos.x += cube->player.dirx / TILE_SIZE;
+		draw_rays_2d(c);
+		draw_map_2d(c);
+		draw_player_2d(c);
+		draw_line(c, p, d, RED);
 	}
-	if (keysym == MOVE_DOWN)
-	{
-		cube->player.pos.y -= cube->player.diry / TILE_SIZE;
-		cube->player.pos.x -= cube->player.dirx / TILE_SIZE;
-	}
-	if (keysym == MOVE_LEFT)
-		cube->player.pos.x -= 0.1;
-	if (keysym == MOVE_RIGHT)
-		cube->player.pos.x += 0.1;
-	if (cube->map.map[(int)cube->player.pos.y][(int)cube->player.pos.x] == '1')
-	{
-		cube->player.pos.x = x;
-		cube->player.pos.y = y;
-	}
-}
-
-void draw_loop(t_mlx *cube)
-{
-	blackout(cube);
-	draw_bg(cube);
-	// draw_map_2D(cube);
-	// draw_player_2D(cube);
-	draw_rays_2d(cube);
-	mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->frame.img, 0, 0);
+	else
+		draw_rays_2d(c);
+	mlx_put_image_to_window(c->mlx_ptr, c->win_ptr, c->frame.img, 0, 0);
+	//mlx_put_image_to_window(c->mlx_ptr, c->win_ptr, c->img_no.img, 0, 0);
 }
 
 void	player(t_mlx *cube, int keysym)
 {
-	if (keysym == MOVE_UP || keysym == MOVE_DOWN
-		|| keysym == MOVE_LEFT || keysym == MOVE_RIGHT)
-		move_player(cube, keysym);
+	move_player(cube, keysym);
 	if (keysym == LOOK_LEFT)
-		cube->player.angle -= 0.1;
+		cube->p.angle -= 0.0174533 * 5;
 	if (keysym == LOOK_RIGHT)
-		cube->player.angle += 0.1;
-	fix_angle(&cube->player.angle);
-	cube->player.dirx = cos(cube->player.angle) * 5;
-	cube->player.diry = sin(cube->player.angle) * 5;
+		cube->p.angle += 0.0174533 * 5;
+	if (keysym == M_KEY)
+	{
+		if (cube->show_minimap)
+			cube->show_minimap = 0;
+		else
+			cube->show_minimap = 1;
+	}
+	fix_angle(&cube->p.angle);
+	cube->p.dirx = cos(cube->p.angle) * 5;
+	cube->p.diry = sin(cube->p.angle) * 5;
 	draw_loop(cube);
 }
 
@@ -113,27 +76,43 @@ int	keypress(int keysym, t_mlx *cube)
 {
 	if (keysym == ESC)
 		quit(cube);
-	//printf("%d\n", keysym);
 	player(cube, keysym);
-	// if (cube->map.player_escape == TRUE)
-	// 	return (0);
-	// else if (keysym == MOVE_UP|| keysym == MOVE_DOWN
-	// 	|| keysym == MOVE_LEFT || keysym == MOVE_RIGHT)
-	// move(data, keysym);
 	return (0);
 }
 
+int get_pixel_from_image(t_img * img, int x, int y) {
+	if (!img)
+		return 0xff000000;
+	if (x < 0 || y < 0 || x >= img->img_width || y >= img->img_height)
+		return 0xff000000;
+	return ((int)(*(img->data + (y * img->img_width)) + x));
+}
 
 int	draw_frame(t_mlx *cube)
 {
-	cube->frame.img_width = WIDTH;
-	cube->frame.img_height = HEIGHT;
-	cube->frame.img = mlx_new_image(cube->mlx_ptr, WIDTH, HEIGHT);
-	cube->frame.data = (int *)mlx_get_data_addr(cube->frame.img, &cube->frame.bpp, &cube->frame.size_l, &cube->frame.endian);
-	//draw_bg(cube);
-	//draw_wall(cube, 500, 500, 100);
+	// testing textures here
+	cube->img_no.img = mlx_xpm_file_to_image(cube->mlx_ptr, "./assets/rock.xpm", &cube->img_no.img_width, &cube->img_no.img_height);
+	cube->img_no.data = (int *)mlx_get_data_addr(cube->img_no.img, &cube->img_no.bpp, &cube->img_no.size_l, &cube->img_no.endian);
+	cube->img_we.img = mlx_xpm_file_to_image(cube->mlx_ptr, "./assets/bricks.xpm", &cube->img_we.img_width, &cube->img_we.img_height);
+	cube->img_we.data = (int *)mlx_get_data_addr(cube->img_we.img, &cube->img_we.bpp, &cube->img_we.size_l, &cube->img_we.endian);
+	cube->img_ea.img = mlx_xpm_file_to_image(cube->mlx_ptr, "./assets/window.xpm", &cube->img_ea.img_width, &cube->img_ea.img_height);
+	cube->img_ea.data = (int *)mlx_get_data_addr(cube->img_ea.img, &cube->img_ea.bpp, &cube->img_ea.size_l, &cube->img_ea.endian);
+	cube->img_so.img = mlx_xpm_file_to_image(cube->mlx_ptr, "./assets/door.xpm", &cube->img_so.img_width, &cube->img_so.img_height);
+	cube->img_so.data = (int *)mlx_get_data_addr(cube->img_so.img, &cube->img_so.bpp, &cube->img_so.size_l, &cube->img_so.endian);
+	
+
+	// end of testing textures
+
+	
+	cube->frame.img_width = WIN_WIDTH;
+	cube->frame.img_height = WIN_HEIGHT;
+	cube->frame.img = mlx_new_image(cube->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+	cube->frame.data = (int *)mlx_get_data_addr(cube->frame.img,
+			&cube->frame.bpp, &cube->frame.size_l, &cube->frame.endian);
 	draw_loop(cube);
-	// draw_map_2D(cube);
+	// mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->img_no.img, 0, 0);
+	// mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->img_we.img, 100, 0);
+	// mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->img_ea.img, 200, 0);
+	// mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->img_so.img, 300, 0);
 	return (0);
 }
-

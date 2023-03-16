@@ -1,9 +1,7 @@
 /* XPM */
 static char *pixil_layer_Background_1_1671718602[] = {
-/* columns rows colors chars-per-pixel */
 "128 128 1 1 ",
 "  c #FF7F7F",
-/* pixels */
 "                                                                                                                                ",
 "                                                                                                                                ",
 "                                                                                                                                ",
@@ -131,5 +129,4 @@ static char *pixil_layer_Background_1_1671718602[] = {
 "                                                                                                                                ",
 "                                                                                                                                ",
 "                                                                                                                                ",
-"                                                                                                                                "
-};
+"                                                                                                                                "};

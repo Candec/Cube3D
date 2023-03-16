@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/02/08 18:10:41 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/03/16 18:01:15 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,40 +103,60 @@
 #  define BLACK 0x000000
 # endif
 
+# ifndef MAROON
+#  define MAROON 0x800000
+# endif
+
+/*
+**	=============
+**	 PI MACROS
+**	=============
+*/
+
+# ifndef PI
+#  define PI  3.141592999999999857863031138549558818340301513671875
+# endif
+
+# ifndef PII
+#  define PII 6.283184999999999575948095298372209072113037109375
+# endif
+
+# ifndef PI3
+#  define PI3 4.7123889923095703125
+# endif
+
+# ifndef PI2
+#  define PI2 1.570796000000000081087137004942633211612701416015625
+# endif
+
 /*
 **	=============
 **	 Structures
 **	=============
 */
-
 typedef struct s_player
 {
 	t_coord	pos;
-	float	posx;
-	float	posy;
 	float	dirx;
 	float	diry;
 	float	angle;
-	float	planex;
-	float	planey;
 	float	height;
 	float	fov;
 	float	position;
-
-	bool	e;
+	int		e;
 }				t_player;
 
 typedef struct s_img
 {
 	void	*img;
 	int		*data;
-
-	int		size_l;
+	int		**cols;
 	int		bpp;
+	int		size_l;
 	int		endian;
 	int		img_width;
 	int		img_height;
-}				t_img;
+} t_img;
 
 typedef struct s_map
 {
@@ -153,42 +173,44 @@ typedef struct s_map
 	t_rgb	c_rgb;
 }				t_map;
 
+typedef struct s_raycast
+{
+	int		col;
+	t_coord	pos;
+	t_coord	step;
+	float	angle;
+	float	dist;
+	bool	hit;
+	int		color;
+	float	offset;
+	t_img	texture;
+}				t_raycast;
+
+typedef struct s_mouse
+{
+	int		x;
+	int		y;
+	int		pressed;
+}			t_mouse;
+
 typedef struct s_mlx
 {
 	t_map		map;
 	t_img		frame;
-	t_player	player;
+	t_player	p;
+	t_mouse		mouse;
 
+	bool		show_minimap;
 	bool		win;
 	void		*mlx_ptr;
 	void		*win_ptr;
-	void		*img_no;
-	void		*img_so;
-	void		*img_we;
-	void		*img_ea;
+	t_img		img_no;
+	t_img		img_so;
+	t_img		img_we;
+	t_img		img_ea;
+	void		*img_f;
+	void		*img_c;
 }				t_mlx;
-
-typedef struct s_game
-{
-	t_mlx		cube;
-}				t_game;
-
-typedef struct s_raycast
-{
-	t_coord	pos;
-	t_coord	stp;
-	double	ang;
-	bool	hit;
-}				t_raycast;
-
-typedef struct s_wall
-{
-	int	height;
-	int	top;
-	int	bottom;
-	int	color;
-}				t_wall;
-
 
 /*
 **	=============
@@ -227,25 +249,29 @@ bool	check_v(t_mlx *cube, size_t i, size_t j);
 */
 void	start_mlx_and_window(t_mlx *cube);
 void	load_img(t_mlx *cube);
-int		xpm_to_image_wrapper(t_mlx *data, void *img, char *filename);
+int		xpm_to_image_wrapper(t_mlx *c, t_img *img, char *filename);
 int		keypress(int keysym, t_mlx *cube);
+int		mouse_move(t_mlx *cube);
 int		draw_frame(t_mlx *cube);
+
+/*
+**	Play_utils.c
+*/
+void	move_player(t_mlx *c, int keysym);
 
 /*
 **	Draw.c
 */
 void	add_pixel(t_img *frame, int rgb, int x, int y);
 void	draw_bg(t_mlx *cube);
-void	draw_wall(t_mlx *cube, int x, int y, int height);
-void	draw_player(t_mlx *cube, int x, int y, int height);
-void	draw_square(t_mlx *cube, int x, int y, int height, int color);
+void	draw_square(t_mlx *cube, t_coord pos, int height, int color);
 void	blackout(t_mlx *cube);
-void	draw_line(t_mlx *cube, double x1, double y1, double x2, double y2, int color);
-void	draw_circle(t_mlx *cube, int x, int y, int radius, int color);
-void	bresenham(t_mlx *cube, float x1, float y1, int color);
-void	draw_fov(t_mlx *cube);
-void	draw_rays_2d(t_mlx *c);
-double	distance(t_coord a, t_coord b);
+void	draw_line(t_mlx *cube, t_coord a, t_coord b, int color);
+void	draw_rays_2d(t_mlx *cube);
+double	distance(t_mlx *c, t_raycast *ray);
+void	fix_fisheye(float p_angle, t_raycast *ray);
+float	horizontal_hit(t_raycast *ray, t_mlx *c);
+float	vertical_hit(t_raycast *ray, t_mlx *c);
 
 /*
 **	error_handling.c
@@ -259,18 +285,18 @@ int		quit(t_mlx *cube);
 */
 void	init_player_dir(t_mlx *cube, char c);
 void	init_player(t_mlx *cube);
-void	draw_player_2D(t_mlx *cube);
+void	draw_player_2d(t_mlx *cube);
 
 /*
 **	map.c
 */
-void	draw_map_2D(t_mlx *game);
+void	draw_map_2d(t_mlx *cube);
 
 /*
 **	Math.c
 */
 float	deg_to_rad(float deg);
-int		fix_angle(float *angle);
+void	fix_angle(float *angle);
 
 /*
 **	dda.c

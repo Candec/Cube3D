@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:08:49 by tpereira          #+#    #+#             */
-/*   Updated: 2023/02/02 18:49:44 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/03/16 18:02:49 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,65 +31,51 @@ void	print_map(t_mlx *cube)
 	}
 }
 
-void	draw_map_2D(t_mlx *cube)
+void	draw_map_2d(t_mlx *cube)
 {
-	int	x;
-	int	y;
-	int xo;
-	int yo;
+	int		x;
+	int		y;
+	t_coord	o;
 
 	y = 0;
-	//print_map(cube);
 	while (y != (int)cube->map.height)
 	{
-		yo = y * TILE_SIZE;
+		o.y = y * (TILE_SIZE / 2);
 		x = 0;
 		while (cube->map.map[y][x] != '\0' && x != (int)cube->map.width)
 		{
-			xo = x * TILE_SIZE;
+			o.x = x * (TILE_SIZE / 2);
+			draw_square(cube, o, (TILE_SIZE / 2), BLACK);
 			if (cube->map.map[y][x] == '1')
-				draw_square(cube, (xo), (yo), TILE_SIZE - 1, WHITE);
+				draw_square(cube, o, (TILE_SIZE / 2) - 1, WHITE);
 			else if (cube->map.map[y][x] == '0')
-				draw_square(cube, (xo), (yo), TILE_SIZE - 1, BLUE);
+				draw_square(cube, o, (TILE_SIZE / 2) - 1, BLUE);
 			else if (ft_strchr("NSEW", cube->map.map[y][x]))
-				draw_square(cube, (xo), (yo), TILE_SIZE - 1, BLUE);
+				draw_square(cube, o, (TILE_SIZE / 2) - 1, BLUE);
 			else
-				draw_square(cube, (xo), (yo), TILE_SIZE - 1, GREEN);
+				draw_square(cube, o, (TILE_SIZE / 2) - 1, GREEN);
 			x++;
 		}
 		y++;
 	}
 }
 
-void	draw_player_2D(t_mlx *cube)
+void	draw_player_2d(t_mlx *cube)
 {
-	int	x;
-	int	y;
-	double xo;
-	double yo;
+	int		x;
+	int		y;
+	t_coord	o;
 
 	y = -1;
 	while (++y != (int)cube->map.height)
 	{
 		x = -1;
-		yo = cube->player.pos.y * TILE_SIZE;
+		o.y = (cube->p.pos.y - 1) * (TILE_SIZE / 2) + (TILE_SIZE / 2);
 		while (++x != (int)cube->map.width)
 		{
-			xo = cube->player.pos.x * TILE_SIZE;
+			o.x = (cube->p.pos.x - 1) * (TILE_SIZE / 2) + (TILE_SIZE / 2);
 			if (cube->map.map[y][x] == '0')
-				draw_square(cube, xo, yo, TILE_SIZE / 4, YELLOW);
+				draw_square(cube, o, (TILE_SIZE / 2) / 8, YELLOW);
 		}
 	}
 }
-
-// void	draw_wall_3d(t_mlx *cube)
-// {
-// 	int	y;
-
-// 	y = 0;
-// 	while (y++ < HEIGHT)
-// 	{
-
-// 	}
-// }
-

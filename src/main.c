@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:09 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/31 02:04:55 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/03/12 20:09:50 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,14 @@ void	init(t_mlx *cube)
 	cube->map.so = NULL;
 	cube->map.we = NULL;
 	cube->map.ea = NULL;
+	cube->img_f = NULL;
+	cube->img_c = NULL;
 	cube->map.map = ft_calloc(sizeof(char **), 0);
 	cube->win = FALSE;
+	cube->show_minimap = FALSE;
+	cube->mouse.x = 0;
+	cube->mouse.y = 0;
+	cube->mouse.pressed = FALSE;
 }
 
 void	parse(t_mlx *cube, char *map)
@@ -43,6 +49,7 @@ void	parse(t_mlx *cube, char *map)
 	validate_map(cube);
 	ft_square_array(&cube->map.map, ' ');
 	init_player(cube);
+	load_img(cube);
 }
 
 void	play(t_mlx *cube)
@@ -51,7 +58,6 @@ void	play(t_mlx *cube)
 	mlx_hook(cube->win_ptr, KeyPress, KeyPressMask, keypress, cube);
 	mlx_hook(cube->win_ptr, DestroyNotify, StructureNotifyMask, quit, cube);
 	draw_frame(cube);
-	// mlx_loop_hook(cube->win_ptr, draw_frame, cube);
 	mlx_loop(cube->mlx_ptr);
 }
 
@@ -68,6 +74,5 @@ int	main(int argc, char *argv[])
 	parse(&cube, argv[1]);
 	play(&cube);
 	quit(&cube);
-
 	return (0);
 }
