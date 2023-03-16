@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/16 14:54:21 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/16 17:58:30 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,23 @@
 #  define SQ_S 128
 # endif
 
-// # ifndef WIN_WIDTH
-// #  define WIN_WIDTH 1366
-// # endif
-
-// # ifndef WIN_HEIGHT
-// #  define WIN_HEIGHT 768
-// # endif
-
-// TIAGO WIDESCREEN RESOLUTION SETTINGS
-
 # ifndef WIN_WIDTH
-#  define WIN_WIDTH 2560
+#  define WIN_WIDTH 1366
 # endif
 
 # ifndef WIN_HEIGHT
-#  define WIN_HEIGHT 1440
+#  define WIN_HEIGHT 768
 # endif
+
+// TIAGO WIDESCREEN RESOLUTION SETTINGS
+
+// # ifndef WIN_WIDTH
+// #  define WIN_WIDTH 2560
+// # endif
+
+// # ifndef WIN_HEIGHT
+// #  define WIN_HEIGHT 1440
+// # endif
 
 # ifndef WIDTH
 #  define WIDTH 640
@@ -66,7 +66,7 @@
 # endif
 
 # ifndef TILE_SIZE
-#  define TILE_SIZE 64
+#  define TILE_SIZE 32
 # endif
 
 # ifndef WALL_HEIGHT

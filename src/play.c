@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/16 16:09:04 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/16 17:58:09 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,13 @@ int get_pixel_from_image(t_img * img, int x, int y) {
 int	draw_frame(t_mlx *cube)
 {
 	// testing textures here
-	cube->img_no.img = mlx_xpm_file_to_image(cube->mlx_ptr, "./assets/brick.xpm", &cube->img_no.img_width, &cube->img_no.img_height);
+	cube->img_no.img = mlx_xpm_file_to_image(cube->mlx_ptr, "./assets/rock.xpm", &cube->img_no.img_width, &cube->img_no.img_height);
 	cube->img_no.data = (int *)mlx_get_data_addr(cube->img_no.img, &cube->img_no.bpp, &cube->img_no.size_l, &cube->img_no.endian);
-	cube->img_we.img = mlx_xpm_file_to_image(cube->mlx_ptr, "./assets/brick.xpm", &cube->img_we.img_width, &cube->img_we.img_height);
+	cube->img_we.img = mlx_xpm_file_to_image(cube->mlx_ptr, "./assets/bricks.xpm", &cube->img_we.img_width, &cube->img_we.img_height);
 	cube->img_we.data = (int *)mlx_get_data_addr(cube->img_we.img, &cube->img_we.bpp, &cube->img_we.size_l, &cube->img_we.endian);
-	cube->img_ea.img = mlx_xpm_file_to_image(cube->mlx_ptr, "./assets/brick.xpm", &cube->img_ea.img_width, &cube->img_ea.img_height);
+	cube->img_ea.img = mlx_xpm_file_to_image(cube->mlx_ptr, "./assets/window.xpm", &cube->img_ea.img_width, &cube->img_ea.img_height);
 	cube->img_ea.data = (int *)mlx_get_data_addr(cube->img_ea.img, &cube->img_ea.bpp, &cube->img_ea.size_l, &cube->img_ea.endian);
-	cube->img_so.img = mlx_xpm_file_to_image(cube->mlx_ptr, "./assets/brick.xpm", &cube->img_so.img_width, &cube->img_so.img_height);
+	cube->img_so.img = mlx_xpm_file_to_image(cube->mlx_ptr, "./assets/door.xpm", &cube->img_so.img_width, &cube->img_so.img_height);
 	cube->img_so.data = (int *)mlx_get_data_addr(cube->img_so.img, &cube->img_so.bpp, &cube->img_so.size_l, &cube->img_so.endian);
 	
 
