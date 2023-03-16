@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:10:54 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/16 09:48:31 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/16 12:07:03 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	raycaster_3d(t_mlx *cube, t_raycast *ray)
 	w_bottom.x = ray->col;
 	w_bottom.y = ((WIN_HEIGHT) + (wall_height)) / 2;
 
+	int hold = w_top.y;
+
 	// printf("[%d] offset: %f\n", ray->col, ray->offset);
 	while (w_top.y++ < w_bottom.y)
 	{
@@ -76,17 +78,24 @@ void	raycaster_3d(t_mlx *cube, t_raycast *ray)
 		// // calculate the value of the texture coordinate
 
 		// // get the color value of the texture at the coordinate
-		// int pixel = ((int)w_top.y) + ((int)ray->offset * TILE_SIZE);
-		// add_pixel(&cube->frame, ray->texture.data[pixel * 64], w_top.x, w_top.y);
-		
+		// printf("topy %d\n", (int)w_top.y);
+		// printf("hold %d\n", hold);
+		// printf("height %d\n", wall_height);
+		// printf("ray->offset %d\n", (int)ray->offset);
+		// printf("calc %f\n", ((w_top.y - hold) / wall_height * 64));
+		int pixel = ((w_top.y - hold) / wall_height * 64) + (int)ray->offset * 64;
+		// printf("pixel %d\n", pixel);
+		add_pixel(&cube->frame, ray->texture.data[pixel], w_top.x, w_top.y);
+		//Y*width +x
+
 		// printf("color -> [%d] \n", *(int *)ray->texture.data + ((int)w_top.y % 64) + ((int)ray->offset * 64));
 		// int	*tex_ptr = (int *)ray->texture.data + (((int)w_top.y)) + ((int)ray->offset * 64);
 		// ray->color = *tex_ptr;
 		// add_pixel(&cube->frame, ray->color, w_top.x, w_top.y);
 
 		// ray->color = (wall_height * w_top.y) + (ray->offset * (ray->texture.bpp / 8));
-		ray->color = *(ray->texture.data + (int)((int)w_top.y % TILE_SIZE) + (int)ray->offset * 64);
-		add_pixel(&cube->frame, ray->color, w_top.x, w_top.y);
+		// ray->color = *(ray->texture.data + (int)((int)w_top.y % TILE_SIZE) + (int)ray->offset);
+		// add_pixel(&cube->frame, ray->color, w_top.x, w_top.y);
 
 		// printf("coordinates [%d][%d] = [%d]\n", (int)w_top.y % 64, (int)ray->offset * 64, ((int)w_top.y % 64 + (int)ray->offset * 64));
 		// int pixel = (int)w_top.y % 64 + (int)ray->offset * 64;
@@ -157,21 +166,21 @@ void	draw_rays_2d(t_mlx *c)
 		printf("ray->offset: %f\n", ray[0].offset);
 		raycaster_3d(c, &ray[0]);
 	}
-	printf("tex_ptr 			-> %p\n", ray[0].texture.img);
-	printf("tex_bpp				-> %d\n", ray[0].texture.bpp);
-	printf("tex_sizel			-> %d\n", ray[0].texture.size_l);
-	printf("tex_endian			-> %d\n", ray[0].texture.endian);
-	printf("sizeof(tex_addr)		-> %lu\n", sizeof(&ray[0].texture.data));
-	// int i = 0;
-	// while (i < ray[0].texture.img_width)
-	// {
-	// 	int j = 0;
-	// 	while (j < ray[0].texture.img_height)
-	// 	{
-	// 		//printf("ray->texture.data[%d + %d(%d)] -> %d\n",i, j,  i + (j * 64), ray->texture.data[i + j]);
-	// 		add_pixel(&c->frame, ray[0].texture.data[(j * 64) + i], i + 100, j + 100);
-	// 		j++;
-	// 	}
-	// 	i++;
-	// }
+	// printf("tex_ptr 			-> %p\n", ray[0].texture.img);
+	// printf("tex_bpp				-> %d\n", ray[0].texture.bpp);
+	// printf("tex_sizel			-> %d\n", ray[0].texture.size_l);
+	// printf("tex_endian			-> %d\n", ray[0].texture.endian);
+	// printf("sizeof(tex_addr)		-> %lu\n", sizeof(&ray[0].texture.data));
+	int i = 0;
+	while (i < ray[0].texture.img_width * 2)
+	{
+		int j = 0;
+		while (j < ray[0].texture.img_height * 2)
+		{
+			//printf("ray->texture.data[%d + %d(%d)] -> %d\n",i, j,  i + (j * 64), ray->texture.data[i + j]);
+			add_pixel(&c->frame, ray[0].texture.data[(j / 2 * 64) + i / 2], i + 100, j + 100);
+			j++;
+		}
+		i++;
+	}
 }
