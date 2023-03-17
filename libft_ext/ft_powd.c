@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_powd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 18:11:10 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/30 18:13:31 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/03/17 10:22:14 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "libft.h"
 
 double	ft_powd(double n, double p)
 {
-	return (log(p)/log(n));
+	return (log(p) / log(n));
 }

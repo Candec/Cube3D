@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 21:34:23 by tpereira          #+#    #+#             */
-/*   Updated: 2023/01/26 21:43:22 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/17 10:21:17 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_float_swap(float *a, float *b)
 {
-	float *c;
+	float	*c;
 
 	c = a;
 	*a = *b;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_coord.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 00:37:58 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/31 11:13:14 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/03/17 10:22:49 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_coord	ft_coord(double x, double y)
 {
-	t_coord coord;
+	t_coord	coord;
 
 	coord.x = x;
 	coord.y = y;
