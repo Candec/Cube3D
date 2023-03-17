@@ -6,11 +6,11 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 17:51:05 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/19 14:41:28 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/17 10:07:20 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 void	info(t_mlx *cube, char *map)
 {
@@ -55,7 +55,7 @@ void	scan_file(t_mlx *cube, char *line)
 	else if (!ft_strncmp(line, "WE", 2))
 	{
 		cube->map.we = malloc(sizeof(char *) * ft_strlen(line + 3));
-		save_path(cube, cube->map.so, line + 3);
+		save_path(cube, cube->map.we, line + 3);
 	}
 	else if (!ft_strncmp(line, "EA", 2))
 	{

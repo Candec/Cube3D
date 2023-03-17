@@ -6,11 +6,11 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/16 18:27:38 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/17 10:16:21 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 void	start_mlx_and_window(t_mlx *c)
 {
@@ -81,22 +81,22 @@ int	keypress(int keysym, t_mlx *cube)
 
 int	draw_frame(t_mlx *c)
 {
-	c->img_no.img = mlx_xpm_file_to_image(c->mlx_ptr, "./assets/brick.xpm",
-			&c->img_no.img_width, &c->img_no.img_height);
-	c->img_no.data = (int *)mlx_get_data_addr(c->img_no.img, &c->img_no.bpp,
-			&c->img_no.size_l, &c->img_no.endian);
-	c->img_we.img = mlx_xpm_file_to_image(c->mlx_ptr, "./assets/bricks.xpm",
-			&c->img_we.img_width, &c->img_we.img_height);
-	c->img_we.data = (int *)mlx_get_data_addr(c->img_we.img, &c->img_we.bpp,
-			&c->img_we.size_l, &c->img_we.endian);
-	c->img_ea.img = mlx_xpm_file_to_image(c->mlx_ptr, "./assets/window.xpm",
-			&c->img_ea.img_width, &c->img_ea.img_height);
-	c->img_ea.data = (int *)mlx_get_data_addr(c->img_ea.img, &c->img_ea.bpp,
-			&c->img_ea.size_l, &c->img_ea.endian);
-	c->img_so.img = mlx_xpm_file_to_image(c->mlx_ptr, "./assets/door.xpm",
-			&c->img_so.img_width, &c->img_so.img_height);
-	c->img_so.data = (int *)mlx_get_data_addr(c->img_so.img, &c->img_so.bpp,
-			&c->img_so.size_l, &c->img_so.endian);
+	// c->img_no.img = mlx_xpm_file_to_image(c->mlx_ptr, c->map.no,
+	// 		&c->img_no.img_width, &c->img_no.img_height);
+	// c->img_no.data = (int *)mlx_get_data_addr(c->img_no.img, &c->img_no.bpp,
+	// 		&c->img_no.size_l, &c->img_no.endian);
+	// c->img_we.img = mlx_xpm_file_to_image(c->mlx_ptr, c->map.we,
+	// 		&c->img_we.img_width, &c->img_we.img_height);
+	// c->img_we.data = (int *)mlx_get_data_addr(c->img_we.img, &c->img_we.bpp,
+	// 		&c->img_we.size_l, &c->img_we.endian);
+	// c->img_ea.img = mlx_xpm_file_to_image(c->mlx_ptr, c->map.ea,
+	// 		&c->img_ea.img_width, &c->img_ea.img_height);
+	// c->img_ea.data = (int *)mlx_get_data_addr(c->img_ea.img, &c->img_ea.bpp,
+	// 		&c->img_ea.size_l, &c->img_ea.endian);
+	// c->img_so.img = mlx_xpm_file_to_image(c->mlx_ptr, c->map.so,
+	// 		&c->img_so.img_width, &c->img_so.img_height);
+	// c->img_so.data = (int *)mlx_get_data_addr(c->img_so.img, &c->img_so.bpp,
+	// 		&c->img_so.size_l, &c->img_so.endian);
 	c->frame.img_width = WIN_WIDTH;
 	c->frame.img_height = WIN_HEIGHT;
 	c->frame.img = mlx_new_image(c->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);

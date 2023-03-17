@@ -6,11 +6,11 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:27:04 by tpereira          #+#    #+#             */
-/*   Updated: 2023/03/16 18:15:35 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/17 10:13:37 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 int	xpm_to_image_wrapper(t_mlx *cube, t_img *img, char *filename)
 {
@@ -23,21 +23,21 @@ int	xpm_to_image_wrapper(t_mlx *cube, t_img *img, char *filename)
 	return (1);
 }
 
-void	load_img(t_mlx *cube)
+void	load_img(t_mlx *c)
 {
 	bool	err;
 
 	err = FALSE;
-	if (!xpm_to_image_wrapper(cube, &cube->img_no, "./assets/brick.xpm"))
+	if (!xpm_to_image_wrapper(c, &c->img_no, c->map.no))
 		err = TRUE;
-	if (!xpm_to_image_wrapper(cube, &cube->img_so, "./assets/brick.xpm"))
+	if (!xpm_to_image_wrapper(c, &c->img_so, c->map.so))
 		err = TRUE;
-	if (!xpm_to_image_wrapper(cube, &cube->img_ea, "./assets/brick.xpm"))
+	if (!xpm_to_image_wrapper(c, &c->img_ea, c->map.ea))
 		err = TRUE;
-	if (!xpm_to_image_wrapper(cube, &cube->img_we, "./assets/brick.xpm"))
+	if (!xpm_to_image_wrapper(c, &c->img_we, c->map.we))
 		err = TRUE;
 	if (err)
-		error("COULDN'T LOAD IMG\n", cube);
+		error("COULDN'T LOAD IMG\n", c);
 }
 
 void	strafe_left(t_mlx *c, int keysym)

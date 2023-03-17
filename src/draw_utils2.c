@@ -6,11 +6,11 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 18:53:27 by tpereira          #+#    #+#             */
-/*   Updated: 2023/03/16 18:57:29 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/17 08:26:57 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 void	get_shortest_ray(t_raycast *ray)
 {

@@ -6,13 +6,13 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 16:42:40 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/13 08:53:16 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/17 08:26:57 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VARIABLES_H
 # define VARIABLES_H
-# include "cube3d.h"
+# include "cub3d.h"
 # if defined(__linux__)
 #  define ESC			65307	// ESQ
 #  define MOVE_UP		119		// W

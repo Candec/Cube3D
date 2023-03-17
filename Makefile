@@ -1,4 +1,4 @@
-NAME = cub3D
+NAME = cub3d
 
 MAKEFLAGS	+= --quiet
 
@@ -19,7 +19,7 @@ OBJ_DIR = obj
 SRC_DIR = src
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 
-HEADER =	cube3d.h\
+HEADER =	cub3d.h\
 			mlx.h\
 
 SRC =		main.c\
