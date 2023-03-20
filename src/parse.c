@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 17:51:05 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/17 10:07:20 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:52:30 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,22 @@ void	scan_file(t_mlx *cube, char *line)
 {
 	if (!ft_strncmp(line, "NO", 2))
 	{
-		cube->map.no = malloc(sizeof(char *) * ft_strlen(line + 3));
+		cube->map.no = calloc(ft_strlen(line + 3), sizeof(char *));
 		save_path(cube, cube->map.no, line + 3);
 	}
 	else if (!ft_strncmp(line, "SO", 2))
 	{
-		cube->map.so = malloc(sizeof(char *) * ft_strlen(line + 3));
+		cube->map.so = calloc(ft_strlen(line + 3), sizeof(char *));
 		save_path(cube, cube->map.so, line + 3);
 	}
 	else if (!ft_strncmp(line, "WE", 2))
 	{
-		cube->map.we = malloc(sizeof(char *) * ft_strlen(line + 3));
+		cube->map.we = calloc(ft_strlen(line + 3), sizeof(char *));
 		save_path(cube, cube->map.we, line + 3);
 	}
 	else if (!ft_strncmp(line, "EA", 2))
 	{
-		cube->map.ea = malloc(sizeof(char *) * ft_strlen(line + 3));
+		cube->map.ea = calloc(ft_strlen(line + 3), sizeof(char *));
 		save_path(cube, cube->map.ea, line + 3);
 	}
 	else if (!ft_strncmp(line, "F", 1))
