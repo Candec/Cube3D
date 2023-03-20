@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 17:51:05 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/20 18:58:36 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/03/20 21:41:16 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	info(t_mlx *cube, char *map)
 
 	fd = open(map, O_RDONLY);
 	if (fd == ERROR)
-		error("CAN'T OPEN THE FILE\n", cube);
+		error("CAN'T OPEN THE FILE", cube);
 	ret = 1;
 	flag = FALSE;
 	while (ret > 0)
@@ -69,8 +69,13 @@ void	scan_file(t_mlx *cube, char *line)
 
 void	save_path(t_mlx *cube, char *dir, char *path)
 {
+	int	fd;
+
 	if (!dir)
-		error("MEMORY ALLOCATION ERROR\n", cube);
+		error("MEMORY ALLOCATION ERROR", cube);
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		error("IMAGE(s) NOT FOUND", cube);
 	ft_strncpy(dir, path, ft_strlen(path));
 }
 
@@ -79,7 +84,7 @@ void	scan_map(t_mlx *cube, char *line)
 	if (cube->map.width < ft_strlen(line))
 		cube->map.width = ft_strlen(line);
 	if (ft_add_str_to_arr(line, &cube->map.map))
-		error("COULDN'T ALLOCATE MAP LINE\n", cube);
+		error("COULDN'T ALLOCATE MAP LINE", cube);
 }
 
 int	info_complete(t_mlx *cube)
@@ -90,6 +95,9 @@ int	info_complete(t_mlx *cube)
 		&& cube->map.ea
 		&& cube->map.f_rgb.fill
 		&& cube->map.c_rgb.fill)
+	{
+		cube->map.valid = TRUE;
 		return (1);
+	}
 	return (0);
 }

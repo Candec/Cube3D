@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   play.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/17 10:17:21 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/20 21:01:12 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	player(t_mlx *cube, int keysym)
 int	keypress(int keysym, t_mlx *cube)
 {
 	if (keysym == ESC)
-		quit(cube);
+		leave(cube);
 	player(cube, keysym);
 	return (0);
 }

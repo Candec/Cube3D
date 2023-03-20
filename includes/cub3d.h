@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/17 08:52:14 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/20 21:43:53 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,7 @@ typedef struct s_map
 	char	*ea;
 	t_rgb	f_rgb;
 	t_rgb	c_rgb;
+	bool	valid;
 }				t_map;
 
 typedef struct s_raycast
@@ -251,7 +252,6 @@ void	start_mlx_and_window(t_mlx *cube);
 void	load_img(t_mlx *cube);
 int		xpm_to_image_wrapper(t_mlx *c, t_img *img, char *filename);
 int		keypress(int keysym, t_mlx *cube);
-int		mouse_move(t_mlx *cube);
 int		draw_frame(t_mlx *cube);
 
 /*
@@ -280,6 +280,7 @@ void	get_shortest_ray(t_raycast *ray);
 void	error(char *msg, t_mlx *cube);
 void	unload(t_mlx *cube);
 int		quit(t_mlx *cube);
+int		leave(t_mlx *cube);
 
 /*
 **	player.c
@@ -298,10 +299,5 @@ void	draw_map_2d(t_mlx *cube);
 */
 float	deg_to_rad(float deg);
 void	fix_angle(float *angle);
-
-/*
-**	dda.c
-*/
-t_coord	dda(t_mlx *cube, double x, double y);
 
 #endif

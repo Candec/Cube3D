@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_square_array.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:08:14 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/01/27 10:40:41 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/20 22:34:54 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ char	*ft_charstr(char c, size_t size)
 	while (++i < size)
 	{
 		tmp = ft_strjoin(str, c_str);
-		if (str && *str)
-			free(str);
+		ft_free(str);
 		str = tmp;
 	}
+	ft_free(c_str);
 	return (str);
 }
 
@@ -69,7 +69,8 @@ void	ft_square_array(char ***arr, char c)
 	size_t	w;
 	size_t	s;
 	size_t	i;
-	char	*str;
+	char	*stra;
+	char	*strb;
 
 	if (!arr)
 		return ;
@@ -81,9 +82,11 @@ void	ft_square_array(char ***arr, char c)
 		s = ft_strlen(arr[0][i]);
 		if (s < w)
 		{
-			str = ft_strjoin(arr[0][i], ft_charstr(c, w - s));
-			free (arr[0][i]);
-			arr[0][i] = str;
+			strb = ft_charstr(c, w - s);
+			stra = ft_strjoin(arr[0][i], strb);
+			ft_free(arr[0][i]);
+			arr[0][i] = stra;
+			ft_free(strb);
 		}
 	}
 }

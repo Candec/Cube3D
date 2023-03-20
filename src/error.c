@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 16:09:33 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/20 18:02:32 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/03/20 20:55:55 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,21 @@ int	quit(t_mlx *cube)
 		mlx_destroy_window(cube->mlx_ptr, cube->win_ptr);
 	}
 	exit(EXIT_FAILURE);
+	return (TRUE);
+}
+
+int	leave(t_mlx *cube)
+{
+	ft_clean_arr(cube->map.map);
+	ft_free(cube->map.no);
+	ft_free(cube->map.so);
+	ft_free(cube->map.ea);
+	ft_free(cube->map.we);
+	if (cube->win)
+	{
+		mlx_clear_window(cube->mlx_ptr, cube->win_ptr);
+		mlx_destroy_window(cube->mlx_ptr, cube->win_ptr);
+	}
+	exit(EXIT_SUCCESS);
 	return (TRUE);
 }
