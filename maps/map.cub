@@ -1,7 +1,7 @@
-NO assets/r.xpm
-SO assets/g.xpm
-WE assets/b.xpm
-EA assets/y.xpm
+NO assets/rock.xpm
+SO assets/window.xpm
+WE assets/brick.xpm
+EA assets/wood.xpm
 
 F 208,171,147
 C 155,202,243
