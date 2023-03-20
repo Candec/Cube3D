@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:28:13 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/20 21:01:12 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/03/20 22:39:55 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	start_mlx_and_window(t_mlx *c)
 	if (!c->win_ptr)
 		err = FALSE;
 	if (!err)
-		error("COULDN'T CREATE WINDOW\n", c);
+		error("COULDN'T CREATE WINDOW", c);
 	c->win = TRUE;
 }
 

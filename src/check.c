@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 01:03:26 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/20 22:36:18 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/03/20 22:39:01 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	validate_chr(t_mlx *cube)
 		while (cube->map.map[++j])
 		{
 			if (!ft_strchr("01NSEW ", cube->map.map[i][j]))
-				error("INVALID CHARACTER\n", cube);
+				error("INVALID CHARACTER", cube);
 		}
 	}
 	cube->map.height = i;

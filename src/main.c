@@ -6,7 +6,7 @@
 /*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:09 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/20 22:36:34 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/03/20 22:38:43 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 static void	validation(t_mlx *c)
 {
 	if (!c->map.map || !*c->map.map || !c->map.map[0])
-		error("invalid map", c);
+		error("INVALID MAP", c);
 	if (c->p.e == FALSE)
-		error("player missing or too many players", c);
+		error("PLAYER MISSING OR TOO MANY PLAYERS", c);
 	if (c->map.valid == FALSE)
-		error("missing information", c);
+		error("MISSING INFORMATION", c);
 }
 
 void	init(t_mlx *cube)
@@ -53,7 +53,7 @@ void	init(t_mlx *cube)
 void	parse(t_mlx *cube, char *map)
 {
 	if (ft_file_format(map, ".cub"))
-		error("INCORRECT FILE FORMAT\n", cube);
+		error("INCORRECT FILE FORMAT", cube);
 	info(cube, map);
 	validate_chr(cube);
 	ft_square_array(&cube->map.map, '.');
@@ -78,7 +78,7 @@ int	main(int argc, char *argv[])
 
 	if (argc != 2)
 	{
-		write(1, "INVALID NUMBER OF ARGUMENTS\n", 29);
+		write(1, "INVALID NUMBER OF ARGUMENTS", 29);
 		return (1);
 	}
 	init(&cube);

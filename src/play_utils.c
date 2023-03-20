@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   play_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 14:27:04 by tpereira          #+#    #+#             */
-/*   Updated: 2023/03/17 10:13:37 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/20 22:39:45 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	load_img(t_mlx *c)
 	if (!xpm_to_image_wrapper(c, &c->img_we, c->map.we))
 		err = TRUE;
 	if (err)
-		error("COULDN'T LOAD IMG\n", c);
+		error("COULDN'T LOAD IMG", c);
 }
 
 void	strafe_left(t_mlx *c, int keysym)
