@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 17:51:05 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/17 10:07:20 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:53:16 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ void	info(t_mlx *cube, char *map)
 				scan_map(cube, line);
 			flag = TRUE;
 		}
-		free(line);
-		line = NULL;
+		ft_free(line);
 	}
 	close(fd);
 }

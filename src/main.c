@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
+/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:09 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/17 10:16:31 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:36:28 by jibanez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	parse(t_mlx *cube, char *map)
 		error("INCORRECT FILE FORMAT\n", cube);
 	info(cube, map);
 	validate_chr(cube);
+	ft_square_array(&cube->map.map, '.');
 	validate_map(cube);
-	ft_square_array(&cube->map.map, ' ');
 	init_player(cube);
 }
 
