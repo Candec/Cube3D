@@ -47,7 +47,7 @@ void	parse(t_mlx *cube, char *map)
 	info(cube, map);
 	validate_chr(cube);
 	validate_map(cube);
-	ft_square_array(&cube->map.map, ' ');
+	// ft_square_array(&cube->map.map, ' ');
 	init_player(cube);
 	load_img(cube);
 }

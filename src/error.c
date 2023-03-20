@@ -39,7 +39,6 @@ int	quit(t_mlx *cube)
 	ft_free(cube->map.we);
 	if (cube->win)
 		mlx_destroy_window(cube->mlx_ptr, cube->win_ptr);
-	(void)cube;
 	exit(EXIT_FAILURE);
 	return (TRUE);
 }

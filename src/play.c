@@ -49,7 +49,6 @@ void	draw_loop(t_mlx *c)
 	else
 		draw_rays_2d(c);
 	mlx_put_image_to_window(c->mlx_ptr, c->win_ptr, c->frame.img, 0, 0);
-	//mlx_put_image_to_window(c->mlx_ptr, c->win_ptr, c->img_no.img, 0, 0);
 }
 
 void	player(t_mlx *cube, int keysym)
@@ -99,20 +98,16 @@ int	draw_frame(t_mlx *cube)
 	cube->img_ea.data = (int *)mlx_get_data_addr(cube->img_ea.img, &cube->img_ea.bpp, &cube->img_ea.size_l, &cube->img_ea.endian);
 	cube->img_so.img = mlx_xpm_file_to_image(cube->mlx_ptr, "./assets/door.xpm", &cube->img_so.img_width, &cube->img_so.img_height);
 	cube->img_so.data = (int *)mlx_get_data_addr(cube->img_so.img, &cube->img_so.bpp, &cube->img_so.size_l, &cube->img_so.endian);
-	
+
 
 	// end of testing textures
 
-	
+
 	cube->frame.img_width = WIN_WIDTH;
 	cube->frame.img_height = WIN_HEIGHT;
 	cube->frame.img = mlx_new_image(cube->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	cube->frame.data = (int *)mlx_get_data_addr(cube->frame.img,
 			&cube->frame.bpp, &cube->frame.size_l, &cube->frame.endian);
 	draw_loop(cube);
-	// mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->img_no.img, 0, 0);
-	// mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->img_we.img, 100, 0);
-	// mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->img_ea.img, 200, 0);
-	// mlx_put_image_to_window(cube->mlx_ptr, cube->win_ptr, cube->img_so.img, 300, 0);
 	return (0);
 }

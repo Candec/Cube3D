@@ -20,7 +20,6 @@ int	ft_add_str_to_arr(char *str, char ***arr)
 	char	*n_str;
 
 	i = 0;
-	j = -1;
 	n_str = ft_malloc(sizeof(char) * ft_strlen(str) + 1);
 	if (!n_str)
 		return (1);
@@ -30,6 +29,7 @@ int	ft_add_str_to_arr(char *str, char ***arr)
 	new_arr = ft_malloc(sizeof(char *) * (i + 2));
 	if (!new_arr)
 		return (1);
+	j = -1;
 	while (++j < i)
 		new_arr[j] = ft_strdup(arr[0][j]);
 	new_arr[i] = n_str;
