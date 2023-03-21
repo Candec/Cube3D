@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 17:51:05 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/20 21:41:16 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/03/21 21:34:38 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	scan_map(t_mlx *cube, char *line)
 {
 	if (cube->map.width < ft_strlen(line))
 		cube->map.width = ft_strlen(line);
-	if (ft_add_str_to_arr(line, &cube->map.map))
+	if (ft_add_str_to_arr(line, cube))
 		error("COULDN'T ALLOCATE MAP LINE", cube);
 }
 

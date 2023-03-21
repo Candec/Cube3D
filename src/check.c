@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 01:03:26 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/20 22:39:01 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/03/21 21:48:13 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ bool	check_h(t_mlx *cube, size_t i, size_t j)
 	left = FALSE;
 	right = FALSE;
 	k = j;
-	while (cube->map.map[i][--k] && right == FALSE)
+	while (right == FALSE && cube->map.map[i][--k] )
 	{
 		if (ft_strchr(".", cube->map.map[i][k]))
 			error("MAP NOT CLOSED", cube);
@@ -83,7 +83,7 @@ bool	check_h(t_mlx *cube, size_t i, size_t j)
 			right = TRUE;
 	}
 	k = j;
-	while (cube->map.map[i][++k] && left == FALSE)
+	while (left == FALSE && cube->map.map[i][++k])
 	{
 		if (ft_strchr(".", cube->map.map[i][k]))
 			error("MAP NOT CLOSED", cube);
@@ -102,7 +102,7 @@ bool	check_v(t_mlx *cube, size_t i, size_t j)
 	up = FALSE;
 	down = FALSE;
 	k = i;
-	while (cube->map.map[--k] && up == FALSE)
+	while (up == FALSE && cube->map.map[--k])
 	{
 		if (ft_strchr(".", cube->map.map[k][j]))
 			error("MAP NOT CLOSED", cube);
@@ -110,7 +110,7 @@ bool	check_v(t_mlx *cube, size_t i, size_t j)
 			up = TRUE;
 	}
 	k = i;
-	while (cube->map.map[++k] && down == FALSE)
+	while (down == FALSE && cube->map.map[++k] )
 	{
 		if (ft_strchr(".", cube->map.map[k][j]))
 			error("MAP NOT CLOSED", cube);
