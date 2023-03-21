@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jibanez- <jibanez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:09 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/20 22:38:43 by jibanez-         ###   ########.fr       */
+/*   Updated: 2023/03/21 21:12:34 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	init(t_mlx *cube)
 	cube->map.ea = NULL;
 	cube->img_f = NULL;
 	cube->img_c = NULL;
-	cube->map.map = ft_calloc(sizeof(char **), 0);
+	// cube->map.map = ft_malloc(sizeof(char **), 0);
 	cube->win = FALSE;
 	cube->show_minimap = FALSE;
 	cube->mouse.x = 0;
