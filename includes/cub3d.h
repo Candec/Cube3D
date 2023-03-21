@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/21 21:22:49 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/21 21:53:36 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,6 +300,6 @@ void	draw_map_2d(t_mlx *cube);
 float	deg_to_rad(float deg);
 void	fix_angle(float *angle);
 
-int ft_add_str_to_arr(char *str, t_mlx *c);
+int		ft_add_str_to_arr(char *str, t_mlx *c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 01:03:26 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/21 21:48:13 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/21 21:53:17 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ bool	check_h(t_mlx *cube, size_t i, size_t j)
 	left = FALSE;
 	right = FALSE;
 	k = j;
-	while (right == FALSE && cube->map.map[i][--k] )
+	while (right == FALSE && cube->map.map[i][--k])
 	{
 		if (ft_strchr(".", cube->map.map[i][k]))
 			error("MAP NOT CLOSED", cube);
@@ -110,7 +110,7 @@ bool	check_v(t_mlx *cube, size_t i, size_t j)
 			up = TRUE;
 	}
 	k = i;
-	while (down == FALSE && cube->map.map[++k] )
+	while (down == FALSE && cube->map.map[++k])
 	{
 		if (ft_strchr(".", cube->map.map[k][j]))
 			error("MAP NOT CLOSED", cube);
