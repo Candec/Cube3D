@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/21 21:53:36 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/21 23:05:20 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,8 @@ typedef struct s_map
 	t_rgb	f_rgb;
 	t_rgb	c_rgb;
 	bool	valid;
-}				t_map;
+	bool 	line_f;
+} 				t_map;
 
 typedef struct s_raycast
 {

@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 01:03:26 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/21 21:53:17 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/21 22:08:05 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	validate_chr(t_mlx *cube)
 	size_t	j;
 
 	i = -1;
+	if (!cube->map.valid)
+		error("INFO NOT VALID OR INVALID MAP", cube);
 	while (cube->map.map[++i])
 	{
 		j = -1;

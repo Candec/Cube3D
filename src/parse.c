@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 17:51:05 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/21 21:34:38 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/21 23:07:47 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ void	info(t_mlx *cube, char *map)
 	flag = FALSE;
 	while (ret > 0)
 	{
+		printf("info -> line: %p\n", &line);
 		ret = ft_get_next_line(fd, &line);
+		printf("info -> line: %p\n", &line);
 		scan_file(cube, line);
 		if (info_complete(cube))
 		{
@@ -35,31 +37,36 @@ void	info(t_mlx *cube, char *map)
 			flag = TRUE;
 		}
 		ft_free(line);
+		if (cube->map.line_f == TRUE)
+			error("CATASTROFE", cube);
 	}
 	close(fd);
 }
 
 void	scan_file(t_mlx *cube, char *line)
 {
+	cube->map.line_f = FALSE;
+	printf("scan -> line: %p\n", &line);
 	if (!ft_strncmp(line, "NO", 2))
 	{
-		cube->map.no = calloc(ft_strlen(line + 3), sizeof(char *));
-		save_path(cube, cube->map.no, line + 3);
+		cube->map.no = ft_calloc(ft_strlen(line + 3), sizeof(char *));
+		printf("if -> line: %p\n", &line);
+		save_path(cube, cube->map.no, line);
 	}
 	else if (!ft_strncmp(line, "SO", 2))
 	{
-		cube->map.so = calloc(ft_strlen(line + 3), sizeof(char *));
-		save_path(cube, cube->map.so, line + 3);
+		cube->map.so = ft_calloc(ft_strlen(line + 3), sizeof(char *));
+		save_path(cube, cube->map.so, line);
 	}
 	else if (!ft_strncmp(line, "WE", 2))
 	{
-		cube->map.we = calloc(ft_strlen(line + 3), sizeof(char *));
-		save_path(cube, cube->map.we, line + 3);
+		cube->map.we = ft_calloc(ft_strlen(line + 3), sizeof(char *));
+		save_path(cube, cube->map.we, line);
 	}
 	else if (!ft_strncmp(line, "EA", 2))
 	{
-		cube->map.ea = calloc(ft_strlen(line + 3), sizeof(char *));
-		save_path(cube, cube->map.ea, line + 3);
+		cube->map.ea = ft_calloc(ft_strlen(line + 3), sizeof(char *));
+		save_path(cube, cube->map.ea, line);
 	}
 	else if (!ft_strncmp(line, "F", 1))
 		ft_save_rgb(&cube->map.f_rgb, line + 2);
@@ -70,13 +77,19 @@ void	scan_file(t_mlx *cube, char *line)
 void	save_path(t_mlx *cube, char *dir, char *path)
 {
 	int	fd;
+	char *tmp;
 
-	if (!dir)
-		error("MEMORY ALLOCATION ERROR", cube);
-	fd = open(path, O_RDONLY);
+	tmp = path + 3;
+	fd = open(tmp, O_RDONLY);
+	close(fd);
 	if (fd == -1)
-		error("IMAGE(s) NOT FOUND", cube);
-	ft_strncpy(dir, path, ft_strlen(path));
+		cube->map.line_f = TRUE;
+	ft_strncpy(dir, path + 3, ft_strlen(path + 3));
+	if (!dir)
+	{
+		ft_free(path);
+		error("MEMORY ALLOCATION ERROR", cube);
+	}
 }
 
 void	scan_map(t_mlx *cube, char *line)
@@ -84,7 +97,10 @@ void	scan_map(t_mlx *cube, char *line)
 	if (cube->map.width < ft_strlen(line))
 		cube->map.width = ft_strlen(line);
 	if (ft_add_str_to_arr(line, cube))
+	{
+		ft_free(line);
 		error("COULDN'T ALLOCATE MAP LINE", cube);
+	}
 }
 
 int	info_complete(t_mlx *cube)
