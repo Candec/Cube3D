@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 16:50:38 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/21 23:05:20 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/21 23:25:50 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,7 @@ typedef struct s_mlx
 	t_img		img_ea;
 	void		*img_f;
 	void		*img_c;
+	char		*line;
 }				t_mlx;
 
 /*
@@ -232,8 +233,8 @@ void	play(t_mlx *cube);
 **	Parse.c
 */
 void	info(t_mlx *cube, char *map);
-void	scan_file(t_mlx *cube, char *line);
-void	save_path(t_mlx *cube, char *dir, char *path);
+void	scan_file(t_mlx *cube);
+void	save_path(t_mlx *cube, int i);
 void	scan_map(t_mlx *cube, char *line);
 int		info_complete(t_mlx *cube);
 
