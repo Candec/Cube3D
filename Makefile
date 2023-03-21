@@ -6,7 +6,7 @@ OS			= $(shell uname -s)
 
 LIBFT 		= libft_ext/libft.a
 LIBMLX 		= libraries/minilibx-linux/libmlx.a
-CFLAGS 		= -g -Wall -Wextra -Werror -O3 -fsanitize=address
+CFLAGS 		= -g -Wall -Wextra -Werror -O3 #-fsanitize=address
 # CFLAGS 		= -I/usr/include -Imlx_linux -O3 -g
 IFLAGS		= -I libraries/minilibx-linux -Ilmlx -I/includes -Imath
 LFLAGS		= -L libraries/minilibx-linux -lmlx -lXext -lX11 -lm

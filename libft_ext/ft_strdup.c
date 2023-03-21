@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 17:14:30 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/21 18:31:19 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:17:57 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strdup(const char *src)
 {
-	int		size;
+	size_t	size;
 	char	*dest;
 
 	size = ft_strlen(src);
