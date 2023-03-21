@@ -6,7 +6,7 @@
 /*   By: tpereira <tpereira@42Lisboa.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 15:48:17 by jibanez-          #+#    #+#             */
-/*   Updated: 2023/03/17 10:23:00 by tpereira         ###   ########.fr       */
+/*   Updated: 2023/03/21 18:37:13 by tpereira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ int				ft_get_next_line(int fd, char **line);
 char			*ft_strrev(char *s);
 ssize_t			ft_ispositive(int n);
 int				ft_isspace(char a);
-char			*ft_strcpy(char *dest, char const *src, int start, int last);
+char			*ft_strcpy(char *dest, char *src);
 int				ft_numlen(int_fast64_t value, int base);
 int				ft_abs(int n);
 int				ft_strcmp(char *s1, char *s2);
