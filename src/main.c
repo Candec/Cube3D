@@ -51,16 +51,19 @@ void	init(t_mlx *cube)
 	cube->mouse.pressed = FALSE;
 }
 
-void	parse(t_mlx *cube, char *map)
+void	parse(t_mlx *c, char *map)
 {
 	if (ft_file_format(map, ".cub"))
-		error("INCORRECT FILE FORMAT", cube);
-	info(cube, map);
-	validate_chr(cube);
-	ft_square_array(&cube->map.map, '.');
-	validate_map(cube);
-	init_player(cube);
-	validation(cube);
+		error("INCORRECT FILE FORMAT", c);
+	c->map.line_f = FALSE;
+	info(c, map);
+	if (c->map.line_f == TRUE)
+		error("INCORRECT FILE FORMAT", c);
+	validate_chr(c);
+	ft_square_array(&c->map.map, '.');
+	validate_map(c);
+	init_player(c);
+	validation(c);
 }
 
 void	play(t_mlx *cube)
@@ -79,7 +82,7 @@ int	main(int argc, char *argv[])
 
 	if (argc != 2)
 	{
-		write(1, "INVALID NUMBER OF ARGUMENTS", 29);
+		write(1, "INVALID NUMBER OF ARGUMENTS", 28);
 		return (1);
 	}
 	init(&cube);

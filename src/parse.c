@@ -12,84 +12,74 @@
 
 #include "cub3d.h"
 
-void	info(t_mlx *cube, char *map)
+void	info(t_mlx *c, char *map)
 {
 	int		fd;
 	int		ret;
 	int		flag;
-	char	*line;
 
 	fd = open(map, O_RDONLY);
 	if (fd == ERROR)
-		error("CAN'T OPEN THE FILE", cube);
+		error("CAN'T OPEN THE FILE", c);
 	ret = 1;
 	flag = FALSE;
 	while (ret > 0)
 	{
-		printf("info -> line: %p\n", &line);
-		ret = ft_get_next_line(fd, &line);
-		printf("info -> line: %p\n", &line);
-		scan_file(cube, line);
-		if (info_complete(cube))
+		ret = ft_get_next_line(fd, &c->line);
+		scan_file(c);
+		if (info_complete(c))
 		{
-			if (ft_strchr(line, '1') && flag)
-				scan_map(cube, line);
+			if (ft_strchr(c->line, '1') && flag)
+				scan_map(c, c->line);
 			flag = TRUE;
 		}
-		ft_free(line);
-		if (cube->map.line_f == TRUE)
-			error("CATASTROFE", cube);
+		ft_free(c->line);
 	}
 	close(fd);
 }
 
-void	scan_file(t_mlx *cube, char *line)
+void	scan_file(t_mlx *c)
 {
-	cube->map.line_f = FALSE;
-	printf("scan -> line: %p\n", &line);
-	if (!ft_strncmp(line, "NO", 2))
+	if (!ft_strncmp(c->line, "NO", 2))
 	{
-		cube->map.no = ft_calloc(ft_strlen(line + 3), sizeof(char *));
-		printf("if -> line: %p\n", &line);
-		save_path(cube, cube->map.no, line);
+		c->map.no = ft_calloc(ft_strlen(c->line + 3), sizeof(char *));
+		save_path(c, c->map.no);
 	}
-	else if (!ft_strncmp(line, "SO", 2))
+	else if (!ft_strncmp(c->line, "SO", 2))
 	{
-		cube->map.so = ft_calloc(ft_strlen(line + 3), sizeof(char *));
-		save_path(cube, cube->map.so, line);
+		c->map.so = ft_calloc(ft_strlen(c->line + 3), sizeof(char *));
+		save_path(c, c->map.so);
 	}
-	else if (!ft_strncmp(line, "WE", 2))
+	else if (!ft_strncmp(c->line, "WE", 2))
 	{
-		cube->map.we = ft_calloc(ft_strlen(line + 3), sizeof(char *));
-		save_path(cube, cube->map.we, line);
+		c->map.we = ft_calloc(ft_strlen(c->line + 3), sizeof(char *));
+		save_path(c, c->map.we);
 	}
-	else if (!ft_strncmp(line, "EA", 2))
+	else if (!ft_strncmp(c->line, "EA", 2))
 	{
-		cube->map.ea = ft_calloc(ft_strlen(line + 3), sizeof(char *));
-		save_path(cube, cube->map.ea, line);
+		c->map.ea = ft_calloc(ft_strlen(c->line + 3), sizeof(char *));
+		save_path(c, c->map.ea);
 	}
-	else if (!ft_strncmp(line, "F", 1))
-		ft_save_rgb(&cube->map.f_rgb, line + 2);
-	else if (!ft_strncmp(line, "C", 1))
-		ft_save_rgb(&cube->map.c_rgb, line + 2);
+	else if (!ft_strncmp(c->line, "F", 1))
+		ft_save_rgb(&c->map.f_rgb, c->line + 2);
+	else if (!ft_strncmp(c->line, "C", 1))
+		ft_save_rgb(&c->map.c_rgb, c->line + 2);
 }
 
-void	save_path(t_mlx *cube, char *dir, char *path)
+void	save_path(t_mlx *c, char *dir)
 {
-	int	fd;
-	char *tmp;
+	int		fd;
+	char	*tmp;
 
-	tmp = path + 3;
+	tmp = c->line + 3;
 	fd = open(tmp, O_RDONLY);
 	close(fd);
 	if (fd == -1)
-		cube->map.line_f = TRUE;
-	ft_strncpy(dir, path + 3, ft_strlen(path + 3));
+		c->map.line_f = TRUE;
+	else
+		ft_strncpy(dir, tmp, ft_strlen(tmp));
 	if (!dir)
-	{
-		ft_free(path);
-		error("MEMORY ALLOCATION ERROR", cube);
-	}
+		error("MEMORY ALLOCATION ERROR", c);
 }
 
 void	scan_map(t_mlx *cube, char *line)

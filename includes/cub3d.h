@@ -171,8 +171,8 @@ typedef struct s_map
 	t_rgb	f_rgb;
 	t_rgb	c_rgb;
 	bool	valid;
-	bool 	line_f;
-} 				t_map;
+	bool	line_f;
+}				t_map;
 
 typedef struct s_raycast
 {
@@ -212,6 +212,7 @@ typedef struct s_mlx
 	t_img		img_ea;
 	void		*img_f;
 	void		*img_c;
+	char		*line;
 }				t_mlx;
 
 /*
@@ -232,8 +233,8 @@ void	play(t_mlx *cube);
 **	Parse.c
 */
 void	info(t_mlx *cube, char *map);
-void	scan_file(t_mlx *cube, char *line);
-void	save_path(t_mlx *cube, char *dir, char *path);
+void	scan_file(t_mlx *cube);
+void	save_path(t_mlx *cube, char *dir);
 void	scan_map(t_mlx *cube, char *line);
 int		info_complete(t_mlx *cube);
 
