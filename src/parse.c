@@ -71,15 +71,16 @@ void	save_path(t_mlx *c, char *dir)
 	int		fd;
 	char	*tmp;
 
-	tmp = c->line + 3;
+	if (!dir)
+		error("MEMORY ALLOCATION ERROR", c);
+	if (c->line + 3)
+		tmp = c->line + 3;
 	fd = open(tmp, O_RDONLY);
 	close(fd);
 	if (fd == -1)
 		c->map.line_f = TRUE;
 	else
 		ft_strncpy(dir, tmp, ft_strlen(tmp));
-	if (!dir)
-		error("MEMORY ALLOCATION ERROR", c);
 }
 
 void	scan_map(t_mlx *cube, char *line)

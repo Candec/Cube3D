@@ -17,9 +17,12 @@ void	ft_save_rgb(t_rgb *rgb, char *rgb_code)
 	char	**rgb_decoded;
 
 	rgb_decoded = ft_split(rgb_code, ',');
-	rgb->r = ft_atoi(rgb_decoded[0]);
-	rgb->g = ft_atoi(rgb_decoded[1]);
-	rgb->b = ft_atoi(rgb_decoded[2]);
+	if (rgb_decoded[0] && rgb_decoded[1] && rgb_decoded[2])
+	{
+		rgb->r = ft_atoi(rgb_decoded[0]);
+		rgb->g = ft_atoi(rgb_decoded[1]);
+		rgb->b = ft_atoi(rgb_decoded[2]);
+	}
 	if ((rgb->r < 0 || rgb->r > 255)
 		|| (rgb->g < 0 || rgb->g > 255)
 		|| (rgb->b < 0 || rgb->b > 255))
@@ -31,6 +34,6 @@ void	ft_save_rgb(t_rgb *rgb, char *rgb_code)
 	}
 	ft_clean_arr(rgb_decoded);
 	rgb_decoded = NULL;
-	rgb->fill = TRUE;
 	rgb->int_rgb = ft_encode_rgb(rgb->r, rgb->g, rgb->b);
+	rgb->fill = TRUE;
 }
